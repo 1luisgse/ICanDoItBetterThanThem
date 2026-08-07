@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- verificacion google -->
     <meta name="google-site-verification" content="YvlBoqkR35-GFkVl5UpkPOl77Dy7S_0K268ER0zwgZE" />
-    <title>GeoTimeline - El reto diario de ordenar el tiempo</title>
+    <!-- seguridad -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta property="og:title" content="WhenWasTimeLine - El juego de orden cronológico">
+    <meta property="og:description" content="Juega y pon a prueba tus conocimientos históricos y tecnológicos.">
+    <meta property="og:url" content="https://whenwastimeline.vercel.app">
+    <title>WhenWasTimeLine - El reto diario de ordenar el tiempo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes shake {
@@ -78,7 +85,7 @@
                     </select>
                 </div>
 
-                <h1 class="text-2xl font-semibold tracking-tight text-white pt-1">GeoTimeline</h1>
+                <h1 class="text-2xl font-semibold tracking-tight text-white pt-1">WhenWasTimeLine</h1>
                 <p id="txt-subtitulo" class="text-xs text-[#94a3b8] mt-1 font-medium">El reto diario de ordenar la historia. Una categoría, un reto al día.</p>
                 <div id="fecha-diaria" class="mt-2.5 text-[11px] bg-[#252836] text-[#c084fc] py-1 px-3.5 rounded-full inline-block font-medium shadow-sm border border-[#2a2f42]"></div>
             </header>
@@ -92,15 +99,8 @@
 
             <div id="categorias-container" class="space-y-3 mb-4"></div>
 
-            <!-- BOTÓN EXPERIMENTAL PARA SIMULAR NUEVO DÍA -->
-            <div class="mb-3 pt-2 border-t border-[#2a2f42]/60">
-                <button id="txt-dev-btn" onclick="simularNuevoDia()" class="w-full bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-medium py-2 px-3 rounded-xl border border-amber-500/30 transition duration-200 text-xs cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
-                    🧪 [DEV] Simular siguiente día (+1 fecha)
-                </button>
-            </div>
-
             <!-- BOTÓN VER TUTORIAL -->
-            <div class="text-center">
+            <div class="text-center mb-2">
                 <button onclick="abrirTutorial()" class="text-[11px] text-[#94a3b8] hover:text-[#cbd5e1] underline cursor-pointer">
                     <span id="txt-ver-tutorial">¿Cómo se juega? (Ver tutorial)</span>
                 </button>
@@ -156,7 +156,7 @@
     <!-- MODAL DE TUTORIAL -->
     <div id="modal-tutorial" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-[#1b1e2b] border border-[#2a2f42] rounded-3xl max-w-sm w-full p-5 shadow-2xl text-center relative">
-            <h3 id="tut-titulo" class="text-base font-bold text-white mb-3">🌍 ¿Cómo jugar a GeoTimeline?</h3>
+            <h3 id="tut-titulo" class="text-base font-bold text-white mb-3">🌍 ¿Cómo jugar a WhenWasTimeLine?</h3>
             <div class="space-y-3 text-xs text-[#94a3b8] text-left mb-5">
                 <div class="flex items-start gap-2.5 bg-[#252836]/60 p-2.5 rounded-xl border border-[#2a2f42]">
                     <span class="text-base">👆</span>
@@ -183,7 +183,6 @@
             es: {
                 subtitulo: "El reto diario de ordenar la historia. Una categoría, un reto al día.",
                 modoAleatorio: "Modo Aleatorio Ilimitado",
-                devBtn: "🧪 [DEV] Simular siguiente día (+1 fecha)",
                 footer: "Se actualiza cada día a las 00:00 UTC",
                 verTutorial: "¿Cómo se juega? (Ver tutorial)",
                 volver: "← Volver al menú",
@@ -199,8 +198,8 @@
                 resultadoFallo: "❌ ¡Se acabaron los intentos! Aquí tienes el orden cronológico correcto.",
                 revisionExito: (t) => `🎉 ¡Reto superado previamente en ${t}! (Modo revisión)`,
                 revisionFallo: "❌ Intento anterior finalizado sin superar. (Modo revisión)",
-                compartirTexto: (fecha, cat, mins, secs, vidas) => `GeoTimeline 🌍⏱️ (${fecha}) - ${cat}\n✨ ¡Reto completado en ${mins}:${secs} con ${vidas}/5 vidas!\n#GeoTimeline #Historia #RetoDiario`,
-                tutTitulo: "🌍 ¿Cómo jugar a GeoTimeline?",
+                compartirTexto: (fecha, cat, mins, secs, vidas) => `WhenWasTimeLine 🌍⏱️ (${fecha}) - ${cat}\n✨ ¡Reto completado en ${mins}:${secs} con ${vidas}/5 vidas!\n#WhenWasTimeLine #Historia #RetoDiario`,
+                tutTitulo: "🌍 ¿Cómo jugar a WhenWasTimeLine?",
                 tutP1: "Ordena las tarjetas: Arrastra y suelta los hitos históricos para colocarlos desde el más antiguo (arriba) hasta el más moderno (abajo).",
                 tutP2: "Comprueba: Pulsa el botón de comprobar. Se marcarán en verde los correctos, amarillo si estás a 1 posición de error, o rojo si fallas.",
                 tutP3: "Vidas limitadas: Tienes 5 intentos generales para conseguir ordenar toda la cronología correctamente.",
@@ -209,7 +208,6 @@
             en: {
                 subtitulo: "The daily challenge of ordering history. One category, one challenge a day.",
                 modoAleatorio: "Unlimited Random Mode",
-                devBtn: "🧪 [DEV] Simulate next day (+1 date)",
                 footer: "Updates daily at 00:00 UTC",
                 verTutorial: "How to play? (View tutorial)",
                 volver: "← Back to menu",
@@ -225,8 +223,8 @@
                 resultadoFallo: "❌ Out of attempts! Here is the correct chronological order.",
                 revisionExito: (t) => `🎉 Challenge previously completed in ${t}! (Review mode)`,
                 revisionFallo: "❌ Previous attempt failed. (Review mode)",
-                compartirTexto: (fecha, cat, mins, secs, vidas) => `GeoTimeline 🌍⏱️ (${fecha}) - ${cat}\n✨ Challenge completed in ${mins}:${secs} with ${vidas}/5 lives!\n#GeoTimeline #History #DailyChallenge`,
-                tutTitulo: "🌍 How to play GeoTimeline?",
+                compartirTexto: (fecha, cat, mins, secs, vidas) => `WhenWasTimeLine 🌍⏱️ (${fecha}) - ${cat}\n✨ Challenge completed in ${mins}:${secs} with ${vidas}/5 lives!\n#WhenWasTimeLine #History #DailyChallenge`,
+                tutTitulo: "🌍 How to play WhenWasTimeLine?",
                 tutP1: "Order the cards: Drag and drop historical milestones from oldest (top) to newest (bottom).",
                 tutP2: "Check order: Press check. Correct ones turn green, close ones yellow, errors red.",
                 tutP3: "Limited lives: You have 5 overall attempts to sort the entire timeline correctly.",
@@ -235,7 +233,6 @@
             fr: {
                 subtitulo: "Le défi quotidien de classer l'histoire. Une catégorie, un défi par jour.",
                 modoAleatorio: "Mode Aléatoire Illimité",
-                devBtn: "🧪 [DEV] Simuler le jour suivant (+1 date)",
                 footer: "Mis à jour chaque jour à 00:00 UTC",
                 verTutorial: "Comment jouer ? (Voir le tutoriel)",
                 volver: "← Retour au menu",
@@ -251,8 +248,8 @@
                 resultadoFallo: "❌ Plus d'essais ! Voici l'ordre chronologique correct.",
                 revisionExito: (t) => `🎉 Défi déjà réussi en ${t} ! (Mode révision)`,
                 revisionFallo: "❌ Tentative précédente échouée. (Mode révision)",
-                compartirTexto: (fecha, cat, mins, secs, vidas) => `GeoTimeline 🌍⏱️ (${fecha}) - ${cat}\n✨ Défi réussi en ${mins}:${secs} avec ${vidas}/5 vies !\n#GeoTimeline #Histoire #DefiQuotidien`,
-                tutTitulo: "🌍 Comment jouer à GeoTimeline?",
+                compartirTexto: (fecha, cat, mins, secs, vidas) => `WhenWasTimeLine 🌍⏱️ (${fecha}) - ${cat}\n✨ Défi réussi en ${mins}:${secs} avec ${vidas}/5 vies !\n#WhenWasTimeLine #Histoire #DefiQuotidien`,
+                tutTitulo: "🌍 Comment jouer à WhenWasTimeLine?",
                 tutP1: "Classez les cartes : Glissez-déposez les jalons du plus ancien (haut) au plus récent (bas).",
                 tutP2: "Vérifiez : Appuyez sur vérifier. Vert = correct, jaune = proche, rouge = faux.",
                 tutP3: "Vies limitées : Vous avez 5 essais pour trier toute la chronologie.",
@@ -261,7 +258,6 @@
             de: {
                 subtitulo: "Die tägliche Herausforderung, die Geschichte zu ordnen. Eine Kategorie, ein Rätsel täglich.",
                 modoAleatorio: "Unbegrenzter Zufallsmodus",
-                devBtn: "🧪 [DEV] Nächsten Tag simulieren (+1 Datum)",
                 footer: "Aktualisiert täglich um 00:00 UTC",
                 verTutorial: "Spielanleitung (Tutorial ansehen)",
                 volver: "← Zurück zum Menü",
@@ -277,8 +273,8 @@
                 resultadoFallo: "❌ Keine Versuche mehr! Hier ist die korrekte Reihenfolge.",
                 revisionExito: (t) => `🎉 Bereits früher in ${t} gelöst! (Ansichtsmodus)`,
                 revisionFallo: "❌ Vorheriger Versuch nicht bestanden. (Ansichtsmodus)",
-                compartirTexto: (fecha, cat, mins, secs, vidas) => `GeoTimeline 🌍⏱️ (${fecha}) - ${cat}\n✨ Herausforderung gelöst in ${mins}:${secs} mit ${vidas}/5 Leben!\n#GeoTimeline #Geschichte #TaeglicheHerausforderung`,
-                tutTitulo: "🌍 Wie spiele ich GeoTimeline?",
+                compartirTexto: (fecha, cat, mins, secs, vidas) => `WhenWasTimeLine 🌍⏱️ (${fecha}) - ${cat}\n✨ Herausforderung gelöst in ${mins}:${secs} mit ${vidas}/5 Leben!\n#WhenWasTimeLine #Geschichte #TaeglicheHerausforderung`,
+                tutTitulo: "🌍 Wie spiele ich WhenWasTimeLine?",
                 tutP1: "Karten ordnen: Ziehe Meilensteine vom ältesten (oben) zum neuesten (unten).",
                 tutP2: "Prüfen: Drücke Prüfen. Grün = richtig, Gelb = nah dran, Rot = falsch.",
                 tutP3: "Begrenzte Leben: Du hast 5 Versuche, die Zeitleiste zu sortieren.",
@@ -287,11 +283,11 @@
         };
 
         function obtenerIdiomaActual() {
-            return localStorage.getItem('geotimeline_idioma') || 'es';
+            return localStorage.getItem('whenwastimeline_idioma') || 'es';
         }
 
         function cambiarIdioma(lang) {
-            localStorage.setItem('geotimeline_idioma', lang);
+            localStorage.setItem('whenwastimeline_idioma', lang);
             actualizarTextosUI();
             inicializarMenu();
         }
@@ -303,7 +299,6 @@
             document.getElementById('select-idioma').value = lang;
             document.getElementById('txt-subtitulo').textContent = t.subtitulo;
             document.getElementById('txt-modo-aleatorio').textContent = t.modoAleatorio;
-            document.getElementById('txt-dev-btn').textContent = t.devBtn;
             document.getElementById('txt-ver-tutorial').textContent = t.verTutorial;
             document.getElementById('txt-footer').textContent = t.footer;
             document.getElementById('txt-volver').textContent = t.volver;
@@ -311,7 +306,6 @@
             document.getElementById('btn-compartir').textContent = t.compartir;
             document.getElementById('txt-volver-menu').textContent = t.volverMenu;
 
-            // Tutorial modal texts
             document.getElementById('tut-titulo').textContent = t.tutTitulo;
             document.getElementById('tut-p1').innerHTML = `<strong class="text-white">${t.tutP1.split(':')[0]}:</strong>${t.tutP1.split(':')[1]}`;
             document.getElementById('tut-p2').innerHTML = `<strong class="text-white">${t.tutP2.split(':')[0]}:</strong>${t.tutP2.split(':')[1]}`;
@@ -605,22 +599,12 @@
             }
         };
 
-        // Sistema de fecha virtual para pruebas (dev mode)
         function obtenerFechaSemilla() {
-            let offsetDias = parseInt(localStorage.getItem('geotimeline_dev_offset') || '0', 10);
             const ahora = new Date();
-            ahora.setUTCDate(ahora.getUTCDate() + offsetDias);
-
             const anio = ahora.getUTCFullYear();
             const mes = String(ahora.getUTCMonth() + 1).padStart(2, '0');
             const dia = String(ahora.getUTCDate()).padStart(2, '0');
             return `${anio}-${mes}-${dia}`;
-        }
-
-        function simularNuevoDia() {
-            let offsetActual = parseInt(localStorage.getItem('geotimeline_dev_offset') || '0', 10);
-            localStorage.setItem('geotimeline_dev_offset', offsetActual + 1);
-            inicializarMenu();
         }
 
         function crearGeneradorSemilla(str) {
@@ -676,7 +660,6 @@
 
         function obtenerRetoAleatorio(categoriaKey) {
             const pool = [...bancosDatos[categoriaKey]];
-            // Mezcla aleatoria real usando Math.random()
             for (let i = pool.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [pool[i], pool[j]] = [pool[j], pool[i]];
@@ -697,7 +680,7 @@
 
         function obtenerProgresoLocalStorage() {
             const fecha = obtenerFechaSemilla();
-            const guardado = localStorage.getItem('geotimeline_progreso_apple_dark');
+            const guardado = localStorage.getItem('whenwastimeline_progreso');
             if (guardado) {
                 try {
                     const datos = JSON.parse(guardado);
@@ -711,7 +694,7 @@
 
         function guardarProgresoLocalStorage(categoriaKey, estadoObj) {
             const fecha = obtenerFechaSemilla();
-            const guardado = localStorage.getItem('geotimeline_progreso_apple_dark');
+            const guardado = localStorage.getItem('whenwastimeline_progreso');
             let datosGlobales = { fecha: fecha, estados: {} };
             if (guardado) {
                 try {
@@ -722,17 +705,16 @@
                 } catch(e) {}
             }
             datosGlobales.estados[categoriaKey] = estadoObj;
-            localStorage.setItem('geotimeline_progreso_apple_dark', JSON.stringify(datosGlobales));
+            localStorage.setItem('whenwastimeline_progreso', JSON.stringify(datosGlobales));
             
-            // Actualizar racha si se completa con éxito cualquier reto diario
             if (estadoObj.ganado) {
                 actualizarRacha(fecha);
             }
         }
 
         function actualizarRacha(fechaActual) {
-            let rachaData = JSON.parse(localStorage.getItem('geotimeline_racha_data') || '{"racha": 0, "ultimaFecha": ""}');
-            if (rachaData.ultimaFecha === fechaActual) return; // Ya sumado hoy
+            let rachaData = JSON.parse(localStorage.getItem('whenwastimeline_racha') || '{"racha": 0, "ultimaFecha": ""}');
+            if (rachaData.ultimaFecha === fechaActual) return;
 
             const fechaHoyObj = new Date(fechaActual);
             if (rachaData.ultimaFecha) {
@@ -742,32 +724,32 @@
                 if (diferenciaDias === 1) {
                     rachaData.racha += 1;
                 } else if (diferenciaDias > 1) {
-                    rachaData.racha = 1; // Racha rota, reinicia a 1
+                    rachaData.racha = 1;
                 }
             } else {
-                rachaData.racha = 1; // Primera vez
+                rachaData.racha = 1;
             }
 
             rachaData.ultimaFecha = fechaActual;
-            localStorage.setItem('geotimeline_racha_data', JSON.stringify(rachaData));
+            localStorage.setItem('whenwastimeline_racha', JSON.stringify(rachaData));
             renderizarRachaUI();
         }
 
         function renderizarRachaUI() {
-            const rachaData = JSON.parse(localStorage.getItem('geotimeline_racha_data') || '{"racha": 0, "ultimaFecha": ""}');
+            const rachaData = JSON.parse(localStorage.getItem('whenwastimeline_racha') || '{"racha": 0, "ultimaFecha": ""}');
             document.getElementById('current-streak-num').textContent = rachaData.racha;
         }
 
         function comprobarRachaExpirada() {
             const fechaActual = obtenerFechaSemilla();
-            let rachaData = JSON.parse(localStorage.getItem('geotimeline_racha_data') || '{"racha": 0, "ultimaFecha": ""}');
+            let rachaData = JSON.parse(localStorage.getItem('whenwastimeline_racha') || '{"racha": 0, "ultimaFecha": ""}');
             if (rachaData.ultimaFecha) {
                 const fechaHoyObj = new Date(fechaActual);
                 const ultimaFechaObj = new Date(rachaData.ultimaFecha);
                 const diferenciaDias = Math.round((fechaHoyObj - ultimaFechaObj) / (1000 * 60 * 60 * 24));
                 if (diferenciaDias > 1) {
                     rachaData.racha = 0;
-                    localStorage.setItem('geotimeline_racha_data', JSON.stringify(rachaData));
+                    localStorage.setItem('whenwastimeline_racha', JSON.stringify(rachaData));
                 }
             }
             renderizarRachaUI();
@@ -899,7 +881,6 @@
                 btnComprobar.classList.remove('hidden');
                 iniciarCronometro();
 
-                // Comprobar si es la primera vez que juega para mostrar tutorial
                 verificarPrimeraVezTutorial();
             }
 
@@ -908,10 +889,10 @@
         }
 
         function verificarPrimeraVezTutorial() {
-            const visto = localStorage.getItem('geotimeline_tutorial_visto');
+            const visto = localStorage.getItem('whenwastimeline_tutorial_visto');
             if (!visto) {
                 abrirTutorial();
-                localStorage.setItem('geotimeline_tutorial_visto', 'true');
+                localStorage.setItem('whenwastimeline_tutorial_visto', 'true');
             }
         }
 
@@ -1133,7 +1114,6 @@
                 eventosAGuardar = [...ordenadosCorrectamente].map(e => ({ ...e, estadoVisual: 'correcto' }));
             }
 
-            // Solo guardamos progreso diario oficial si no es modo aleatorio
             if (!esModoAleatorio) {
                 guardarProgresoLocalStorage(categoriaActual, { 
                     completado: true, 
@@ -1181,5 +1161,15 @@
             inicializarMenu();
         };
     </script>
+
+    <!-- Pie de página (Footer) con los enlaces legales -->
+    <footer class="mt-12 py-6 text-center text-xs text-slate-400 border-t border-slate-800">
+        <p class="mb-2">WhenWasTimeLine &copy; 2026 - Todos los derechos reservados.</p>
+        <div class="flex justify-center gap-4">
+            <a href="aviso-legal.html" class="hover:text-indigo-400 transition-colors">Aviso Legal</a>
+            <span>-</span>
+            <a href="privacidad.html" class="hover:text-indigo-400 transition-colors">Política de Privacidad</a>
+        </div>
+    </footer>
 </body>
 </html>
