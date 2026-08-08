@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- verificacion google -->
     <meta name="google-site-verification" content="YvlBoqkR35-GFkVl5UpkPOl77Dy7S_0K268ER0zwgZE" />
-    <!-- adsense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1627189663364841"crossorigin="anonymous"></script>
     <!-- seguridad -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
@@ -43,7 +41,7 @@
         }
     </style>
 </head>
-<body class="bg-[#12141c] text-[#e2e8f0] min-h-screen flex flex-col items-center justify-center p-3 select-none font-sans relative overflow-hidden">
+<body class="bg-[#12141c] text-[#e2e8f0] min-h-screen flex flex-col items-center justify-center py-6 p-3 select-none font-sans relative overflow-y-auto">
 
     <!-- Siluetas decorativas de relojes de fondo -->
     <div class="reloj-bg text-8xl top-[2%] left-[3%] rotate-[-15deg]">⏳</div>
@@ -67,7 +65,7 @@
     <div class="reloj-bg text-8xl top-[93%] left-[45%] rotate-[40deg]">🕰️</div>
     <div class="reloj-bg text-7xl top-[91%] right-[42%] rotate-[-35deg]">⏳</div>
 
-    <div class="max-w-md w-full bg-[#1b1e2b]/90 backdrop-blur-xl rounded-3xl shadow-2xl p-5 border border-[#2a2f42]/80 relative z-10">
+    <div class="max-w-md w-full bg-[#1b1e2b]/90 backdrop-blur-xl rounded-3xl shadow-2xl p-5 border border-[#2a2f42]/80 relative z-10 my-auto">
         
         <!-- VISTA: MENÚ PRINCIPAL -->
         <div id="vista-menu">
@@ -198,7 +196,7 @@
                 copiadoExito: "✅ ¡Copiado al portapapeles!",
                 resultadoExito: (t, v) => `🎉 ¡Reto superado en ${t} con ${v} vidas restantes!`,
                 resultadoFallo: "❌ ¡Se acabaron los intentos! Aquí tienes el orden cronológico correcto.",
-                revisionExito: (t) => `🎉 ¡Reto superado previamente en ${t}! (Modo revisión)`,
+                revisionExito: (t) => `🎉 ¡Reto superado previamente en ${t}! (Mode revisión)`,
                 revisionFallo: "❌ Intento anterior finalizado sin superar. (Modo revisión)",
                 compartirTexto: (fecha, cat, mins, secs, vidas) => `WhenWasTimeLine 🌍⏱️ (${fecha}) - ${cat}\n✨ ¡Reto completado en ${mins}:${secs} con ${vidas}/5 vidas!\n#WhenWasTimeLine #Historia #RetoDiario`,
                 tutTitulo: "🌍 ¿Cómo jugar a WhenWasTimeLine?",
@@ -973,11 +971,17 @@
                     card.draggable = true;
                     card.dataset.index = index;
 
+                    // Eventos de ratón (Escritorio)
                     card.addEventListener('dragstart', handleDragStart);
                     card.addEventListener('dragend', handleDragEnd);
                     card.addEventListener('dragover', handleDragOver);
                     card.addEventListener('dragleave', handleDragLeave);
                     card.addEventListener('drop', handleDrop);
+
+                    // Eventos táctiles (Móviles / Tablets)
+                    card.addEventListener('touchstart', handleTouchStart, { passive: true });
+                    card.addEventListener('touchmove', handleTouchMove, { passive: false });
+                    card.addEventListener('touchend', handleTouchEnd);
                 }
 
                 card.innerHTML = `
@@ -990,6 +994,7 @@
         }
 
         let draggedIndex = null;
+        let touchSrcIndex = null;
 
         function limpiarColoresVisuales() {
             let modificado = false;
@@ -1004,6 +1009,7 @@
             }
         }
 
+        // Lógica de Escritorio (Drag and Drop)
         function handleDragStart(e) {
             if (juegoTerminado) return;
             limpiarColoresVisuales();
@@ -1044,13 +1050,54 @@
 
             if (draggedIndex !== null && draggedIndex !== targetIndex) {
                 limpiarColoresVisuales();
-                
                 const temp = eventosJuego[draggedIndex];
                 eventosJuego[draggedIndex] = eventosJuego[targetIndex];
                 eventosJuego[targetIndex] = temp;
-
                 renderizarTarjetas();
             }
+        }
+
+        // Lógica Táctil (Móviles)
+        function handleTouchStart(e) {
+            if (juegoTerminado) return;
+            limpiarColoresVisuales();
+            touchSrcIndex = parseInt(this.dataset.index);
+            this.classList.add('dragging');
+        }
+
+        function handleTouchMove(e) {
+            if (juegoTerminado) return;
+            e.preventDefault();
+            const touch = e.touches[0];
+            const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+            const targetCard = targetElement ? targetElement.closest('div[data-index]') : null;
+
+            document.querySelectorAll('#cards-container > div').forEach(c => c.classList.remove('drag-over'));
+            if (targetCard) {
+                targetCard.classList.add('drag-over');
+            }
+        }
+
+        function handleTouchEnd(e) {
+            if (juegoTerminado) return;
+            this.classList.remove('dragging');
+            document.querySelectorAll('#cards-container > div').forEach(c => c.classList.remove('drag-over'));
+
+            const touch = e.changedTouches[0];
+            const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+            const targetCard = targetElement ? targetElement.closest('div[data-index]') : null;
+
+            if (targetCard) {
+                const targetIndex = parseInt(targetCard.dataset.index);
+                if (touchSrcIndex !== null && touchSrcIndex !== targetIndex) {
+                    limpiarColoresVisuales();
+                    const temp = eventosJuego[touchSrcIndex];
+                    eventosJuego[touchSrcIndex] = eventosJuego[targetIndex];
+                    eventosJuego[targetIndex] = temp;
+                    renderizarTarjetas();
+                }
+            }
+            touchSrcIndex = null;
         }
 
         function verificarOrden() {
