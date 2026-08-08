@@ -31,6 +31,18 @@
             background: rgba(244, 114, 182, 0.15) !important;
             transform: scale(1.02);
         }
+        /* Estilo para la tarjeta flotante en móvil */
+        .mobile-dragging-clone {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.95;
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 10px 10px -5px rgba(0, 0, 0, 0.4);
+            border-color: #f472b6 !important;
+            background: #252836 !important;
+            transition: none !important;
+        }
         /* Siluetas de fondo */
         .reloj-bg {
             position: absolute;
@@ -965,7 +977,7 @@
                 if (juegoTerminado) {
                     card.className = `p-2.5 rounded-xl bg-[#252836] border flex items-center justify-between select-none cursor-default ${estiloVisualExtra}`;
                 } else {
-                    card.className = `p-2.5 rounded-xl bg-[#252836] border border-[#2a2f42] flex items-center justify-between cursor-grab active:cursor-grabbing transition transform duration-150 select-none ${estiloVisualExtra}`;
+                    card.className = `p-2.5 rounded-xl bg-[#252836] border border-[#2a2f42] flex items-center justify-between cursor-grab active:cursor-grabbing transition transform duration-150 select-none touch-none ${estiloVisualExtra}`;
                     card.draggable = true;
                     card.dataset.index = index;
 
@@ -976,10 +988,8 @@
                     card.addEventListener('dragleave', handleDragLeave);
                     card.addEventListener('drop', handleDrop);
 
-                    // Eventos táctiles (Móviles / Tablets)
-                    card.addEventListener('touchstart', handleTouchStart, { passive: true });
-                    card.addEventListener('touchmove', handleTouchMove, { passive: false });
-                    card.addEventListener('touchend', handleTouchEnd);
+                    // Eventos de puntero unificados (Móviles y Táctiles con tarjeta flotante dinámica)
+                    card.addEventListener('pointerdown', handlePointerDown);
                 }
 
                 card.innerHTML = `
@@ -992,7 +1002,6 @@
         }
 
         let draggedIndex = null;
-        let touchSrcIndex = null;
 
         function limpiarColoresVisuales() {
             let modificado = false;
@@ -1055,47 +1064,88 @@
             }
         }
 
-        // Lógica Táctil (Móviles)
-        function handleTouchStart(e) {
-            if (juegoTerminado) return;
+        // Lógica Táctil Dinámica con Pointer Events y Tarjeta Flotante
+        let activePointerClone = null;
+        let pointerSrcIndex = null;
+        let pointerInitialY = 0;
+        let cloneOffsetX = 0;
+        let cloneOffsetY = 0;
+
+        function handlePointerDown(e) {
+            if (juegoTerminado || e.pointerType === 'mouse') return; // El ratón usa HTML5 Drag and Drop nativo
             limpiarColoresVisuales();
-            touchSrcIndex = parseInt(this.dataset.index);
+            
+            pointerSrcIndex = parseInt(this.dataset.index);
+            const rect = this.getBoundingClientRect();
+            
+            cloneOffsetX = e.clientX - rect.left;
+            cloneOffsetY = e.clientY - rect.top;
+
             this.classList.add('dragging');
+
+            // Crear elemento clon flotante que sigue el dedo
+            activePointerClone = this.cloneNode(true);
+            activePointerClone.className = `p-2.5 rounded-xl bg-[#252836] border border-[#f472b6] flex items-center justify-between mobile-dragging-clone`;
+            activePointerClone.style.width = `${rect.width}px`;
+            activePointerClone.style.left = `${rect.left}px`;
+            activePointerClone.style.top = `${rect.top}px`;
+            document.body.appendChild(activePointerClone);
+
+            this.setPointerCapture(e.pointerId);
+
+            this.addEventListener('pointermove', handlePointerMove);
+            this.addEventListener('pointerup', handlePointerUp);
+            this.addEventListener('pointercancel', handlePointerUp);
         }
 
-        function handleTouchMove(e) {
-            if (juegoTerminado) return;
+        function handlePointerMove(e) {
+            if (!activePointerClone) return;
             e.preventDefault();
-            const touch = e.touches[0];
-            const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
-            const targetCard = targetElement ? targetElement.closest('div[data-index]') : null;
 
+            // Mover el clon con la posición actual del dedo
+            const x = e.clientX - cloneOffsetX;
+            const y = e.clientY - cloneOffsetY;
+            activePointerClone.style.left = `${x}px`;
+            activePointerClone.style.top = `${y}px`;
+
+            // Detectar sobre qué tarjeta está pasando el dedo para realzarla visualmente
+            activePointerClone.style.display = 'none';
+            const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
+            activePointerClone.style.display = 'flex';
+
+            const targetCard = elementBelow ? elementBelow.closest('div[data-index]') : null;
             document.querySelectorAll('#cards-container > div').forEach(c => c.classList.remove('drag-over'));
             if (targetCard) {
                 targetCard.classList.add('drag-over');
             }
         }
 
-        function handleTouchEnd(e) {
-            if (juegoTerminado) return;
-            this.classList.remove('dragging');
-            document.querySelectorAll('#cards-container > div').forEach(c => c.classList.remove('drag-over'));
+        function handlePointerUp(e) {
+            if (!activePointerClone) return;
 
-            const touch = e.changedTouches[0];
-            const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
-            const targetCard = targetElement ? targetElement.closest('div[data-index]') : null;
+            activePointerClone.style.display = 'none';
+            const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
+            const targetCard = elementBelow ? elementBelow.closest('div[data-index]') : null;
 
             if (targetCard) {
                 const targetIndex = parseInt(targetCard.dataset.index);
-                if (touchSrcIndex !== null && touchSrcIndex !== targetIndex) {
+                if (pointerSrcIndex !== null && pointerSrcIndex !== targetIndex) {
                     limpiarColoresVisuales();
-                    const temp = eventosJuego[touchSrcIndex];
-                    eventosJuego[touchSrcIndex] = eventosJuego[targetIndex];
+                    const temp = eventosJuego[pointerSrcIndex];
+                    eventosJuego[pointerSrcIndex] = eventosJuego[targetIndex];
                     eventosJuego[targetIndex] = temp;
-                    renderizarTarjetas();
                 }
             }
-            touchSrcIndex = null;
+
+            activePointerClone.remove();
+            activePointerClone = null;
+            pointerSrcIndex = null;
+
+            document.querySelectorAll('#cards-container > div').forEach(c => {
+                c.classList.remove('dragging', 'drag-over');
+            });
+
+            renderizarTarjetas();
         }
 
         function verificarOrden() {
