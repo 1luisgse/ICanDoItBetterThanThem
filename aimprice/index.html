@@ -150,7 +150,6 @@
     </footer>
 
     <script>
-        // CATÁLOGO REVISADO Y CORREGIDO CON FOTOS 100% FIABLES Y EXACTAS
         const catalogoProductos = [
             { nombre:{en:"PlayStation 5 Console",es:"Consola PlayStation 5",fr:"Console PlayStation 5",de:"PlayStation 5 Konsole"}, precio:550, img:"https://commons.wikimedia.org/wiki/Special:FilePath/PlayStation_5.jpg" },
             { nombre:{en:"iPhone 15 Pro Max",es:"iPhone 15 Pro Max",fr:"iPhone 15 Pro Max",de:"iPhone 15 Pro Max"}, precio:1479, img:"https://commons.wikimedia.org/wiki/Special:FilePath/iPhone_15_pro_max.png" },
@@ -213,7 +212,7 @@
         const i18nAim = {
             en: {
                 volver: "← Back to Menu",
-                instruccion: "Precise logarithmic fader and perfectly verified product catalog!",
+                instruccion: "Precise logarithmic fader and strictly restricted scoring!",
                 ronda: "Round",
                 intentos: "Attempts",
                 comprobar: "Check Price!",
@@ -225,7 +224,7 @@
             },
             es: {
                 volver: "← Volver al Menú",
-                instruccion: "¡Fader logarítmico preciso y catálogo de productos totalmente verificado!",
+                instruccion: "¡Fader logarítmico preciso y puntuación final ultra estricta!",
                 ronda: "Ronda",
                 intentos: "Intentos",
                 comprobar: "¡Comprobar Precio!",
@@ -237,7 +236,7 @@
             },
             fr: {
                 volver: "← Retour au menu",
-                instruccion: "Curseur logarithmique précis et catalogue de produits vérifié !",
+                instruccion: "Curseur logarithmique précis et notation très stricte !",
                 ronda: "Manche",
                 intentos: "Essais",
                 comprobar: "Vérifier le prix !",
@@ -249,7 +248,7 @@
             },
             de: {
                 volver: "← Zurück zum Menü",
-                instruccion: "Präziser logarithmischer Regler und vollständig verifizierter Produktkatalog!",
+                instruccion: "Präziser logarithmischer Regler und strenges Bewertungssystem!",
                 ronda: "Runde",
                 intentos: "Versuche",
                 comprobar: "Preis prüfen!",
@@ -453,12 +452,21 @@
             document.getElementById('victoria-container').classList.add('hidden');
             document.getElementById('header-juego').classList.add('hidden');
 
-            let totalIntentos = historialPartida.reduce((acc, curr) => acc + curr.intentos, 0);
-            let mediaIntentos = totalIntentos / 5;
-            
-            let nota = 10 - Math.floor((mediaIntentos - 3) / 4);
-            if (nota < 1) nota = 1;
-            if (nota > 10) nota = 10;
+            // REGLA RESTRICTIVA: Comprobamos si todas las rondas tienen 5 intentos o menos (Medalla de Oro 🥇)
+            let todasOro = historialPartida.every(h => h.intentos <= 5);
+            let nota = 0;
+
+            if (todasOro) {
+                nota = 10;
+            } else {
+                // Si no son todas de oro, calculamos una nota estricta basada en el promedio de intentos de las rondas
+                let totalIntentos = historialPartida.reduce((acc, curr) => acc + curr.intentos, 0);
+                let mediaIntentos = totalIntentos / 5;
+                
+                // Escala estricta: bajamos drásticamente por cada intento extra de media
+                nota = 9 - Math.floor((mediaIntentos - 5.01) / 3);
+                if (nota < 1) nota = 1;
+            }
 
             const lang = localStorage.getItem('whenwastimeline_idioma') || 'en';
             const listaEl = document.getElementById('lista-resumen-rondas');
@@ -475,14 +483,14 @@
             document.getElementById('nota-final-display').textContent = `Final Score: ${nota} / 10`;
             
             let veredicto = "";
-            if (nota >= 9) {
-                veredicto = (lang === 'es') ? "🏆 ¡Excepcional! Estás listo para dejar el sofá y arrasar en la televisión." : "🏆 Exceptional! Ready to conquer the TV show.";
-            } else if (nota >= 6) {
-                veredicto = (lang === 'es') ? "📺 ¡Muy buen trabajo! Tienes buena intuición desde el salón." : "📺 Very good job! Great sofa intuition.";
+            if (nota === 10) {
+                veredicto = (lang === 'es') ? "🏆 ¡Impecable! 5 medallas de oro consecutivas. Estás listo para arrasar en la televisión." : "🏆 Flawless! 5 consecutive gold medals. Ready to conquer television.";
+            } else if (nota >= 7) {
+                veredicto = (lang === 'es') ? "📺 ¡Muy buen trabajo, pero se te escapó algún oro! Tienes gran intuición." : "📺 Very good job, but missed some gold!";
             } else if (nota >= 4) {
-                veredicto = (lang === 'es') ? "🛋️ Regular... Te pegas demasiado al sofá sin afinar el precio." : "🛋️ Mediocre... Need more practice from the sofa.";
+                veredicto = (lang === 'es') ? "🛋️ Regular... Demasiados intentos para conseguir las medallas máximas." : "🛋️ Mediocre... Too many attempts for top medals.";
             } else {
-                veredicto = (lang === 'es') ? "💩 Una auténtica caca desde el sofá. ¡Vuelve a intentarlo!" : "💩 Total disaster from the sofa. Try again!";
+                veredicto = (lang === 'es') ? "💩 Una auténtica caca desde el sofá. ¡Necesitas entrenar mucho más!" : "💩 Total disaster from the sofa. Train harder!";
             }
 
             document.getElementById('veredicto-final-texto').textContent = veredicto;
