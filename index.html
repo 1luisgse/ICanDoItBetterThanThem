@@ -43,7 +43,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between py-10 px-4 select-none relative">
+<body class="min-h-screen flex flex-col items-center justify-between py-12 px-4 select-none relative">
 
     <!-- SELECTOR DE IDIOMA GLOBAL (ARRIBA A LA DERECHA) -->
     <div class="absolute top-6 right-6 z-20">
@@ -55,49 +55,46 @@
         </select>
     </div>
 
-    <!-- CABECERA INSTITUCIONAL PERFECTAMENTE EQUILIBRADA Y ESPACIADA -->
-    <header class="w-full max-w-2xl mx-auto text-center relative z-10 mb-12 mt-2 flex flex-col items-center justify-center">
+    <!-- CABECERA INSTITUCIONAL PERFECTAMENTE EQUILIBRADA -->
+    <header class="w-full max-w-2xl mx-auto text-center relative z-10 mb-12 mt-4 flex flex-col items-center justify-center">
         
-        <!-- Insignia superior -->
-        <div class="inline-block classic-badge text-xs font-semibold py-1.5 px-5 rounded-full uppercase tracking-widest mb-6">
-            📺 TV Show Sofa Arena
-        </div>
-        
-        <!-- NUBE DE PENSAMIENTO INTEGRADA (SVG + TEXTO RESPONSIVO) -->
-        <div class="relative w-full max-w-xl mx-auto my-4 px-10 py-12 flex flex-col items-center justify-center" style="filter: drop-shadow(0 14px 28px rgba(44, 40, 37, 0.08));">
-            
-            <!-- SVG vectorial orgánico de la nube -->
-            <svg class="absolute inset-0 w-full h-full z-0 pointer-events-none" viewBox="0 0 640 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M140,210 
-                         C60,210 15,160 25,105 
-                         C35,50  90,20  150,30 
-                         C185,-5  250,-10 310,15 
-                         C370,-5  435,15  475,60 
-                         C540,50  600,95  590,150 
-                         C620,195 570,230 510,225 
-                         C470,260 405,270 350,250 
-                         C300,275 235,265 190,240 
-                         C150,260 150,230 140,210 Z" 
+        <!-- NUBE DE PENSAMIENTO CON TÍTULO VECTORIAL DE GRAN IMPACTO Y CENTRADO ABSOLUTO -->
+        <div class="relative w-full max-w-xl mx-auto my-2" style="filter: drop-shadow(0 14px 28px rgba(44, 40, 37, 0.08));">
+            <svg class="w-full h-auto z-0 overflow-visible" viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cuerpo principal de la nube -->
+                <path d="M140,240 
+                         C50,240 10,180 20,115 
+                         C30,50  90,20  160,35 
+                         C200,-5  270,-10 330,20 
+                         C395,0   460,25  500,75 
+                         C570,65  640,110 630,175 
+                         C660,220 600,265 530,255 
+                         C490,295 415,305 355,285 
+                         C305,310 235,300 190,270 
+                         C155,290 150,265 140,240 Z" 
                       fill="#ffffff" 
                       stroke="#2c2825" 
                       stroke-width="4.5" 
                       stroke-linejoin="round" />
+                
+                <!-- Burbuja de pensamiento mediana integrada -->
+                <circle cx="170" cy="315" r="15" fill="#ffffff" stroke="#2c2825" stroke-width="4" />
+                
+                <!-- Burbuja de pensamiento pequeña integrada -->
+                <circle cx="145" cy="348" r="8" fill="#ffffff" stroke="#2c2825" stroke-width="3.5" />
+
+                <!-- Título vectorial con tamaño grande, legible y proporción óptima -->
+                <text x="330" y="128" text-anchor="middle" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="46" font-weight="bold" fill="#3a3228" letter-spacing="1.5">
+                    <tspan id="svg-titulo-1">I CAN DO IT</tspan>
+                </text>
+                <text x="330" y="185" text-anchor="middle" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="42" font-style="italic" fill="#9c7c51" letter-spacing="1">
+                    <tspan id="svg-titulo-2">BETTER THAN THEM</tspan>
+                </text>
             </svg>
-
-            <!-- Burbujas de pensamiento de cómic flotando en la esquina inferior izquierda -->
-            <div class="absolute -bottom-4 left-14 w-5 h-5 bg-white border-[3.5px] border-[#2c2825] rounded-full z-10 shadow-sm"></div>
-            <div class="absolute -bottom-10 left-8 w-3.5 h-3.5 bg-white border-[3px] border-[#2c2825] rounded-full z-10 shadow-sm"></div>
-
-            <!-- Título perfectamente integrado y centrado en el corazón de la nube -->
-            <div class="relative z-10 text-center w-full px-6">
-                <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold tracking-wide text-[#3a3228] uppercase leading-snug">
-                    I Can Do It <span class="text-[#9c7c51] italic font-normal block sm:inline">Better Than Them</span>
-                </h1>
-            </div>
         </div>
         
-        <!-- Subtítulo descriptivo con separación limpia y elegante -->
-        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#6b6257] font-serif max-w-lg mx-auto leading-relaxed mt-6">
+        <!-- Subtítulo descriptivo con separación limpia -->
+        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#6b6257] font-serif max-w-lg mx-auto leading-relaxed mt-4">
             How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.
         </p>
     </header>
@@ -198,9 +195,11 @@
     </div>
 
     <script>
-        // Diccionario multilingüe para el menú principal y los modales
+        // Diccionario multilingüe para el menú principal y los modales (incluyendo líneas del SVG)
         const menuI18n = {
             en: {
+                t1: "I CAN DO IT",
+                t2: "BETTER THAN THEM",
                 subtitulo: "How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.",
                 badge1: "Ready to play",
                 desc1: "Order historical, technological, and pop-culture milestones correctly under pressure before your time or lives run out.",
@@ -218,6 +217,8 @@
                 privacidadText: "We respect your privacy. This site uses local storage (localStorage) exclusively to remember your language preferences and game progress on your device. We also utilize third-party services like Google AdSense, which may use cookies to serve personalized or non-personalized ads according to your browser settings and consent."
             },
             es: {
+                t1: "I CAN DO IT",
+                t2: "BETTER THAN THEM",
                 subtitulo: "¿Cuántas veces le has gritado a la tele desde el sofá pensando que podrías ganar el gran premio? Sal del salón y demuéstralo con minijuegos inspirados en programas legendarios de televisión.",
                 badge1: "Listo para jugar",
                 desc1: "Ordena hitos históricos, tecnológicos y de la cultura pop correctamente bajo presión antes de que se acaben tus vidas.",
@@ -235,6 +236,8 @@
                 privacidadText: "Respetamos tu privacidad. Este sitio utiliza almacenamiento local (localStorage) únicamente para recordar tus preferencias de idioma y progresos en tu propio dispositivo. Asimismo, empleamos servicios de terceros como Google AdSense, que puede utilizar cookies para mostrar anuncios adaptados según la normativa de privacidad y tu consentimiento."
             },
             fr: {
+                t1: "I CAN DO IT",
+                t2: "BETTER THAN THEM",
                 subtitulo: "Combien de fois avez-vous crié sur la télé depuis votre canapé en pensant pouvoir gagner le grand prix ? Sortez du salon et prouvez-le.",
                 badge1: "Prêt à jouer",
                 desc1: "Classez des jalons historiques, technologiques et de pop-culture sous pression avant que vos vies ne s'épuisent.",
@@ -252,6 +255,8 @@
                 privacidadText: "Nous respectons votre vie privée. Ce site utilise le stockage local uniquement pour vos préférences de langue et intègre Google AdSense pour la gestion des annonces publicitaires."
             },
             de: {
+                t1: "I CAN DO IT",
+                t2: "BETTER THAN THEM",
                 subtitulo: "Wie oft hast du vom Sofa aus den Fernseher angeschrien und gedacht, du könntest den Hauptgewinn gewinnen? Raus aus dem Wohnzimmer und beweise es.",
                 badge1: "Spielbereit",
                 desc1: "Ordne historische, technologische und Popkultur-Meilensteine unter Druck richtig an, bevor deine Leben ablaufen.",
@@ -283,6 +288,8 @@
         function aplicarTextosMenu(lang) {
             const t = menuI18n[lang] || menuI18n.en;
             document.getElementById('select-idioma').value = lang;
+            document.getElementById('svg-titulo-1').textContent = t.t1;
+            document.getElementById('svg-titulo-2').textContent = t.t2;
             document.getElementById('txt-subtitulo').textContent = t.subtitulo;
             document.getElementById('badge-juego1').textContent = t.badge1;
             document.getElementById('txt-desc-juego1').textContent = t.desc1;
