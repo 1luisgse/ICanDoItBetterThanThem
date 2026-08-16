@@ -102,31 +102,32 @@
             </div>
         </a>
 
-        <!-- TARJETA JUEGO 2: PRÓXIMAMENTE -->
-        <div class="classic-card rounded-2xl p-6 flex flex-col justify-between opacity-60 bg-[#faf8f5]">
+        <!-- TARJETA JUEGO 2: AIMPRICE -->
+        <a href="aimprice/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#f0ebe1] rounded-xl border border-[#e6dfd5]">
-                        🎙️
+                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
+                        🏷️
                     </span>
-                    <span id="badge-juego2" class="text-[10px] font-semibold bg-[#f0ebe1] text-[#7a7062] border border-[#e0d5c1] py-1 px-3 rounded-full uppercase tracking-wider">
-                        Coming Soon
+                    <span id="badge-juego2" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
+                        Ready to play
                     </span>
                 </div>
 
-                <h2 id="txt-titulo-juego2" class="text-lg font-bold text-[#5e5549]">
-                    Next TV Challenge
+                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
+                    AimPrice
                 </h2>
                 
-                <p id="txt-desc-juego2" class="text-xs text-[#8c8275] mt-2 leading-relaxed font-sans">
-                    More legendary game show formats (vocabulary, prices, and fast trivia) are currently being built for the platform.
+                <p id="txt-desc-juego2" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
+                    Guess the exact price of bizarre, historic, or everyday items using the precision fader before your budget runs out.
                 </p>
             </div>
 
-            <div id="txt-footer-juego2" class="mt-6 pt-4 border-t border-[#f0ebe1] text-xs font-medium text-[#9c9082] uppercase tracking-widest text-[11px]">
-                In Production...
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
+                <span id="txt-btn-juego2" class="uppercase tracking-widest text-[11px]">Prove it now</span>
+                <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
             </div>
-        </div>
+        </a>
 
     </main>
 
@@ -152,7 +153,7 @@
             <!-- Título del Modal -->
             <h3 id="modal-titulo" class="text-xl font-bold text-[#3a3228] uppercase tracking-wide mb-4 pr-8">Título</h3>
             
-            <!-- Contenido dinámico del Modal (con scroll si es largo) -->
+            <!-- Contenido dinámico del Modal -->
             <div id="modal-cuerpo" class="text-xs sm:text-sm text-[#6b6257] font-sans leading-relaxed overflow-y-auto pr-2 space-y-3">
                 Texto informativo...
             </div>
@@ -174,10 +175,9 @@
                 badge1: "Ready to play",
                 desc1: "Order historical, technological, and pop-culture milestones correctly under pressure before your time or lives run out.",
                 btn1: "Prove it now",
-                badge2: "Coming Soon",
-                titulo2: "Next TV Challenge",
-                desc2: "More legendary game show formats (vocabulary, prices, and fast trivia) are currently being built for the platform.",
-                footer2: "In Production...",
+                badge2: "Ready to play",
+                desc2: "Guess the exact price of bizarre, historic, or everyday items using the precision fader before your budget runs out.",
+                btn2: "Prove it now",
                 legal: "Legal Notice",
                 privacidad: "Privacy Policy",
                 rights: "© 2026 I Can Do It Better Than Them. All rights reserved.",
@@ -192,10 +192,9 @@
                 badge1: "Listo para jugar",
                 desc1: "Ordena hitos históricos, tecnológicos y de la cultura pop correctamente bajo presión antes de que se acaben tus vidas.",
                 btn1: "Demuéstralo ahora",
-                badge2: "Próximamente",
-                titulo2: "Siguiente Reto TV",
-                desc2: "Más formatos legendarios de concursos (vocabulario, precios y trivia rápida) se están construyendo para la plataforma.",
-                footer2: "En producción...",
+                badge2: "Listo para jugar",
+                desc2: "Adivina el precio exacto de objetos insólitos, históricos o cotidianos usando el fader de precisión antes de que se agote tu presupuesto.",
+                btn2: "Demuéstralo ahora",
                 legal: "Aviso Legal",
                 privacidad: "Política de Privacidad",
                 rights: "© 2026 I Can Do It Better Than Them. Todos los derechos reservados.",
@@ -210,10 +209,9 @@
                 badge1: "Prêt à jouer",
                 desc1: "Classez des jalons historiques, technologiques et de pop-culture sous pression avant que vos vies ne s'épuisent.",
                 btn1: "Prouvez-le maintenant",
-                badge2: "Bientôt disponible",
-                titulo2: "Prochain Défi TV",
-                desc2: "D'autres formats de jeux télévisés légendaires sont en cours de développement pour la plateforme.",
-                footer2: "En production...",
+                badge2: "Prêt à jouer",
+                desc2: "Devinez le prix exact d'objets insolites ou du quotidien en utilisant le curseur de précision.",
+                btn2: "Prouvez-le maintenant",
                 legal: "Mentions Légales",
                 privacidad: "Politique de Confidentialité",
                 rights: "© 2026 I Can Do It Better Than Them. Tous droits réservés.",
@@ -228,10 +226,9 @@
                 badge1: "Spielbereit",
                 desc1: "Ordne historische, technologische und Popkultur-Meilensteine unter Druck richtig an, bevor deine Leben ablaufen.",
                 btn1: "Jetzt beweisen",
-                badge2: "Demnächst",
-                titulo2: "Nächste TV-Herausforderung",
-                desc2: "Weitere legendäre Quizshow-Formate werden derzeit für die Plattform entwickelt.",
-                footer2: "In Produktion...",
+                badge2: "Spielbereit",
+                desc2: "Errate den genauen Preis von skurrilen oder alltäglichen Gegenständen mit dem Präzisionsregler.",
+                btn2: "Jetzt beweisen",
                 legal: "Impressum",
                 privacidad: "Datenschutz",
                 rights: "© 2026 I Can Do It Better Than Them. Alle Rechte vorbehalten.",
@@ -248,7 +245,6 @@
         function cambiarIdiomaGlobal(lang) {
             localStorage.setItem('whenwastimeline_idioma', lang);
             aplicarTextosMenu(lang);
-            // Si hay un modal abierto, actualizar su contenido al idioma nuevo al instante
             if (!document.getElementById('modal-container').classList.contains('hidden')) {
                 abrirModal(modalActual);
             }
@@ -262,9 +258,8 @@
             document.getElementById('txt-desc-juego1').textContent = t.desc1;
             document.getElementById('txt-btn-juego1').textContent = t.btn1;
             document.getElementById('badge-juego2').textContent = t.badge2;
-            document.getElementById('txt-titulo-juego2').textContent = t.titulo2;
             document.getElementById('txt-desc-juego2').textContent = t.desc2;
-            document.getElementById('txt-footer-juego2').textContent = t.footer2;
+            document.getElementById('txt-btn-juego2').textContent = t.btn2;
             document.getElementById('txt-legal').textContent = t.legal;
             document.getElementById('txt-privacidad').textContent = t.privacidad;
             document.getElementById('txt-rights').textContent = t.rights;
@@ -294,14 +289,12 @@
             document.getElementById('modal-container').classList.add('hidden');
         }
 
-        // Cerrar modal al hacer clic fuera de la tarjeta
         document.getElementById('modal-container').addEventListener('click', (e) => {
             if (e.target.id === 'modal-container') {
                 cerrarModal();
             }
         });
 
-        // Cargar el idioma guardado al iniciar la página del menú
         window.onload = () => {
             const langGuardado = localStorage.getItem('whenwastimeline_idioma') || 'en';
             aplicarTextosMenu(langGuardado);
