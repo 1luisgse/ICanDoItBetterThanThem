@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Stake20 | TV Sofa Challenge</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -11,6 +11,7 @@
             color: #2c2825;
             font-family: Georgia, Cambria, "Times New Roman", Times, serif;
             overflow-x: hidden;
+            touch-action: manipulation;
         }
         .classic-card {
             background: #ffffff;
@@ -936,6 +937,7 @@
 
         function cambiarIdioma(lang) {
             idiomaActual = lang;
+            localStorage.getItem('whenwastimeline_idioma') || 'en';
             localStorage.setItem('whenwastimeline_idioma', lang);
             document.getElementById('select-idioma').value = lang;
             actualizarTextosUI();
