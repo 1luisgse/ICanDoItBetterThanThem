@@ -129,7 +129,7 @@
             <p id="txt-inicio-desc" class="text-xs sm:text-sm text-[#6b6257] font-sans mb-6 leading-relaxed">
                 You start with 20 chips. In each round, you must distribute your current chips across the 3 options. What you lose is gone forever!
             </p>
-            <button onclick="comenzarPartida()" id="btn-comenzar" class="classic-badge text-xs font-bold py-3 px-8 rounded-xl uppercase tracking-widest hover:bg-[#eae2d5] transition cursor-pointer">
+            <button onpointerdown="comenzarPartida()" id="btn-comenzar" class="classic-badge text-xs font-bold py-3 px-8 rounded-xl uppercase tracking-widest hover:bg-[#eae2d5] transition cursor-pointer">
                 Start Game (20 Chips)
             </button>
         </div>
@@ -160,10 +160,10 @@
                     <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
                         <div id="monedas-visual-A" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
                         <div class="flex items-center gap-2">
-                            <button onclick="modificarApuesta('A', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
+                            <button onpointerdown="modificarApuesta('A', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
                             <span id="apuesta-a" class="w-6 text-center text-xs font-bold">0</span>
-                            <button onclick="modificarApuesta('A', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
-                            <button onclick="ponerTodas('A')" id="btn-max-a" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                            <button onpointerdown="modificarApuesta('A', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
+                            <button onpointerdown="ponerTodas('A')" id="btn-max-a" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
                         </div>
                     </div>
                 </div>
@@ -176,10 +176,10 @@
                     <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
                         <div id="monedas-visual-B" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
                         <div class="flex items-center gap-2">
-                            <button onclick="modificarApuesta('B', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
+                            <button onpointerdown="modificarApuesta('B', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
                             <span id="apuesta-b" class="w-6 text-center text-xs font-bold">0</span>
-                            <button onclick="modificarApuesta('B', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
-                            <button onclick="ponerTodas('B')" id="btn-max-b" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                            <button onpointerdown="modificarApuesta('B', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
+                            <button onpointerdown="ponerTodas('B')" id="btn-max-b" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
                         </div>
                     </div>
                 </div>
@@ -192,10 +192,10 @@
                     <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
                         <div id="monedas-visual-C" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
                         <div class="flex items-center gap-2">
-                            <button onclick="modificarApuesta('C', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
+                            <button onpointerdown="modificarApuesta('C', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
                             <span id="apuesta-c" class="w-6 text-center text-xs font-bold">0</span>
-                            <button onclick="modificarApuesta('C', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
-                            <button onclick="ponerTodas('C')" id="btn-max-c" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                            <button onpointerdown="modificarApuesta('C', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
+                            <button onpointerdown="ponerTodas('C')" id="btn-max-c" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                 ⚠️ <span id="txt-aviso-reparto">Debes repartir todas tus fichas disponibles antes de confirmar.</span>
             </div>
 
-            <button onclick="manejarBotonPrincipal()" id="btn-confirmar" disabled class="w-full classic-badge text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest opacity-50 cursor-not-allowed transition">
+            <button onpointerdown="manejarBotonPrincipal()" id="btn-confirmar" disabled class="w-full classic-badge text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest opacity-50 cursor-not-allowed transition">
                 Confirm Distribution
             </button>
         </div>
@@ -238,7 +238,7 @@
             </div>
 
             <div class="space-y-2.5">
-                <button onclick="reiniciarJuego()" id="btn-reiniciar" class="w-full bg-[#3a3228] text-white hover:bg-[#52473a] text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest transition cursor-pointer shadow-md">
+                <button onpointerdown="reiniciarJuego()" id="btn-reiniciar" class="w-full bg-[#3a3228] text-white hover:bg-[#52473a] text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest transition cursor-pointer shadow-md">
                     Play Again & Beat Score
                 </button>
                 <a href="../" id="btn-volver-menu" class="w-full inline-block classic-badge text-xs font-bold py-3 rounded-xl uppercase tracking-widest hover:bg-[#eae2d5] transition no-underline">
@@ -254,7 +254,6 @@
     </footer>
 
     <script>
-        // Bloqueo global JS contra doble tap zoom en móviles agresivos
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function (event) {
             let now = (new Date()).getTime();
