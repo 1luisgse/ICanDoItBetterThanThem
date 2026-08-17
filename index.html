@@ -2,23 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="YvlBoqkR35-GFkVl5UpkPOl77Dy7S_0K268ER0zwgZE" />
-    <meta name="description" content="I can do it better than them - TV Game Show Arena from your sofa. Put your skills to the test with classic challenges.">
-    <title>I can do it better than them | TV Sofa Challenge</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stake20 | TV Sofa Challenge</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1627189663364841" crossorigin="anonymous"></script>
-    <script>
-        // Establecer inglés por defecto si no hay idioma guardado
-        if (!localStorage.getItem('whenwastimeline_idioma')) {
-            localStorage.setItem('whenwastimeline_idioma', 'en');
-        }
-    </script>
     <style>
         body {
             background-color: #fcfbf9;
             color: #2c2825;
             font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+        button, a, select {
+            touch-action: manipulation;
         }
         .classic-card {
             background: #ffffff;
@@ -26,28 +22,89 @@
             box-shadow: 0 10px 30px -10px rgba(80, 70, 60, 0.08);
             transition: all 0.3s ease;
         }
-        .classic-card:hover {
-            border-color: #bfa181;
-            box-shadow: 0 15px 35px -10px rgba(181, 148, 114, 0.2);
-            transform: translateY(-2px);
-        }
         .classic-badge {
             background-color: #f4efe6;
             color: #735d43;
             border: 1px solid #e0d5c1;
         }
-        /* Estilo para el fondo oscuro del modal */
-        .modal-overlay {
-            background-color: rgba(44, 40, 37, 0.4);
-            backdrop-filter: blur(4px);
+        .coin-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            border: 1px solid #d4af37;
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: bold;
+            color: #744210;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        @keyframes flyCoin {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--deltaX), var(--deltaY)) scale(0.9); opacity: 1; }
+        }
+        .flying-coin {
+            position: fixed;
+            z-index: 9999;
+            pointer-events: none;
+            animation: flyCoin 0.4s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes fallCoin {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(220px) rotate(540deg); opacity: 0; }
+        }
+        .falling-coin-item {
+            animation: fallCoin 0.7s ease-in forwards;
+            display: inline-block;
+        }
+        @keyframes pulseGreen {
+            0%, 100% { border-color: #22c55e; background-color: #f0fdf4; }
+            50% { border-color: #16a34a; background-color: #dcfce7; }
+        }
+        @keyframes pulseRed {
+            0%, 100% { border-color: #ef4444; background-color: #fef2f2; }
+            50% { border-color: #dc2626; background-color: #fee2e2; }
+        }
+        .resaltar-verde {
+            animation: pulseGreen 0.8s ease infinite;
+            border-color: #22c55e !important;
+            background-color: #f0fdf4 !important;
+        }
+        .resaltar-rojo {
+            animation: pulseRed 0.8s ease infinite;
+            border-color: #ef4444 !important;
+            background-color: #fee2e2 !important;
+        }
+        .card-resultado-exito {
+            border: 2px solid #22c55e !important;
+            background: linear-gradient(to bottom, #ffffff, #f0fdf4);
+            box-shadow: 0 15px 35px -10px rgba(34, 197, 94, 0.2);
+        }
+        .card-resultado-perfecto {
+            border: 2px solid #1e3a8a !important;
+            background: linear-gradient(to bottom, #ffffff, #eff6ff);
+            box-shadow: 0 15px 35px -10px rgba(30, 58, 138, 0.35);
+        }
+        .card-resultado-fallo {
+            border: 2px solid #ef4444 !important;
+            background: linear-gradient(to bottom, #ffffff, #fef2f2);
+            box-shadow: 0 15px 35px -10px rgba(239, 68, 68, 0.2);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between py-12 px-4 select-none relative">
+<body class="min-h-screen flex flex-col items-center justify-between py-10 px-4 select-none relative">
 
-    <!-- SELECTOR DE IDIOMA GLOBAL (ARRIBA A LA DERECHA) -->
-    <div class="absolute top-6 right-6 z-20">
-        <select id="select-idioma" onchange="cambiarIdiomaGlobal(this.value)" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] focus:outline-none cursor-pointer shadow-sm">
+    <div class="absolute top-6 left-6 z-20">
+        <a href="../" id="btn-volver" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] hover:bg-[#eae2d5] transition shadow-sm no-underline">
+            ← Home
+        </a>
+    </div>
+
+    <div class="absolute top-6 right-6 z-25">
+        <select id="select-idioma" onchange="cambiarIdioma(this.value)" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] focus:outline-none cursor-pointer shadow-sm">
             <option value="en">🇬🇧 EN</option>
             <option value="es">🇪🇸 ES</option>
             <option value="fr">🇫🇷 FR</option>
@@ -55,328 +112,1191 @@
         </select>
     </div>
 
-    <!-- CABECERA INSTITUCIONAL PERFECTAMENTE EQUILIBRADA -->
-    <header class="w-full max-w-2xl mx-auto text-center relative z-10 mb-12 mt-4 flex flex-col items-center justify-center">
-        
-        <!-- NUBE DE PENSAMIENTO CON TÍTULO VECTORIAL DE GRAN IMPACTO Y CENTRADO ABSOLUTO -->
-        <div class="relative w-full max-w-xl mx-auto my-2" style="filter: drop-shadow(0 14px 28px rgba(44, 40, 37, 0.08));">
-            <svg class="w-full h-auto z-0 overflow-visible" viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg">
-                <!-- Cuerpo principal de la nube -->
-                <path d="M140,240 
-                         C50,240 10,180 20,115 
-                         C30,50  90,20  160,35 
-                         C200,-5  270,-10 330,20 
-                         C395,0   460,25  500,75 
-                         C570,65  640,110 630,175 
-                         C660,220 600,265 530,255 
-                         C490,295 415,305 355,285 
-                         C305,310 235,300 190,270 
-                         C155,290 150,265 140,240 Z" 
-                      fill="#ffffff" 
-                      stroke="#2c2825" 
-                      stroke-width="4.5" 
-                      stroke-linejoin="round" />
-                
-                <!-- Burbuja de pensamiento mediana integrada -->
-                <circle cx="170" cy="315" r="15" fill="#ffffff" stroke="#2c2825" stroke-width="4" />
-                
-                <!-- Burbuja de pensamiento pequeña integrada -->
-                <circle cx="145" cy="348" r="8" fill="#ffffff" stroke="#2c2825" stroke-width="3.5" />
-
-                <!-- Título vectorial con tamaño grande, legible y proporción óptima -->
-                <text x="330" y="128" text-anchor="middle" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="46" font-weight="bold" fill="#3a3228" letter-spacing="1.5">
-                    <tspan id="svg-titulo-1">I CAN DO IT</tspan>
-                </text>
-                <text x="330" y="185" text-anchor="middle" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="42" font-style="italic" fill="#9c7c51" letter-spacing="1">
-                    <tspan id="svg-titulo-2">BETTER THAN THEM</tspan>
-                </text>
-            </svg>
-        </div>
-        
-        <!-- Subtítulo descriptivo con separación limpia -->
-        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#6b6257] font-serif max-w-lg mx-auto leading-relaxed mt-4">
-            How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.
+    <header class="w-full max-w-xl mx-auto text-center relative z-10 mb-6 mt-4">
+        <h1 class="text-2xl sm:text-3xl font-bold tracking-wide text-[#3a3228] uppercase">
+            Stake<span class="text-[#9c7c51] italic font-normal">20</span>
+        </h1>
+        <p id="txt-sub" class="text-xs sm:text-sm text-[#6b6257] font-serif mt-2">
+            Distribute all your available chips across the options. No chips left behind!
         </p>
     </header>
 
-    <!-- CONTENEDOR DE JUEGOS -->
-    <main class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 my-auto">
+    <main id="main-container" class="max-w-xl w-full classic-card rounded-2xl p-6 sm:p-8 relative z-10 my-auto shadow-xl">
         
-        <!-- TARJETA JUEGO 1: WHENWAS -->
-        <a href="whenwas/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
-            <div>
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
-                        ⏳
-                    </span>
-                    <span id="badge-juego1" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
-                        Ready to play
-                    </span>
+        <div id="pantalla-inicio" class="text-center py-6">
+            <div class="text-4xl mb-4">🪙</div>
+            <h2 id="txt-inicio-titulo" class="text-lg font-bold text-[#2c2825] uppercase tracking-wide mb-2">Are you ready to risk it all?</h2>
+            <p id="txt-inicio-desc" class="text-xs sm:text-sm text-[#6b6257] font-sans mb-6 leading-relaxed">
+                You start with 20 chips. In each round, you must distribute your current chips across the 3 options. What you lose is gone forever!
+            </p>
+            <button onclick="comenzarPartida()" id="btn-comenzar" class="classic-badge text-xs font-bold py-3 px-8 rounded-xl uppercase tracking-widest hover:bg-[#eae2d5] transition cursor-pointer">
+                Start Game (20 Chips)
+            </button>
+        </div>
+
+        <div id="pantalla-juego" class="hidden">
+            <div class="flex justify-between items-center pb-4 border-b border-[#f0ebe1] text-xs font-semibold mb-6">
+                <span id="label-pregunta-num" class="text-[#735d43] uppercase tracking-wider">Question 1 / 10</span>
+                <span id="contador-fichas-header" class="classic-badge px-3 py-1 rounded-full uppercase tracking-wider text-[11px] flex items-center gap-1.5 font-bold">
+                    🪙 <span id="val-fichas-disp">20</span> <span id="txt-chips-label">Fichas disponibles</span>
+                </span>
+            </div>
+
+            <div class="flex justify-between items-center mb-3">
+                <span id="badge-categoria" class="text-[10px] uppercase font-bold tracking-widest text-[#9c7c51] bg-[#f9f7f2] px-2.5 py-1 rounded-md border border-[#e6dfd5]">Category</span>
+                <span id="badge-dificultad" class="text-[10px] uppercase font-bold tracking-widest text-[#6b6257]">Normal</span>
+            </div>
+
+            <h3 id="texto-pregunta" class="text-sm sm:text-base font-bold text-[#2c2825] mb-6 leading-relaxed">
+                Pregunta...
+            </h3>
+
+            <div class="space-y-4 mb-6">
+                <div id="box-opcion-A" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
+                    <div class="flex items-center gap-3 w-full sm:w-1/2">
+                        <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">A</span>
+                        <span id="texto-opcion-a" class="text-xs sm:text-sm text-[#2c2825] font-sans">Respuesta A</span>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
+                        <div id="monedas-visual-A" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="modificarApuesta('A', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
+                            <span id="apuesta-a" class="w-6 text-center text-xs font-bold">0</span>
+                            <button onclick="modificarApuesta('A', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
+                            <button onclick="ponerTodas('A')" id="btn-max-a" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                        </div>
+                    </div>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
-                    WhenWasTimeLine
-                </h2>
-                
-                <p id="txt-desc-juego1" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
-                    Order historical, technological, and pop-culture milestones correctly under pressure before your time or lives run out.
-                </p>
-            </div>
-
-            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
-                <span id="txt-btn-juego1" class="uppercase tracking-widest text-[11px]">Prove it now</span>
-                <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
-            </div>
-        </a>
-
-        <!-- TARJETA JUEGO 2: AIMPRICE -->
-        <a href="aimprice/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
-            <div>
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
-                        🏷️
-                    </span>
-                    <span id="badge-juego2" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
-                        Ready to play
-                    </span>
+                <div id="box-opcion-B" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
+                    <div class="flex items-center gap-3 w-full sm:w-1/2">
+                        <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">B</span>
+                        <span id="texto-opcion-b" class="text-xs sm:text-sm text-[#2c2825] font-sans">Respuesta B</span>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
+                        <div id="monedas-visual-B" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="modificarApuesta('B', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
+                            <span id="apuesta-b" class="w-6 text-center text-xs font-bold">0</span>
+                            <button onclick="modificarApuesta('B', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
+                            <button onclick="ponerTodas('B')" id="btn-max-b" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                        </div>
+                    </div>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
-                    AimPrice
-                </h2>
-                
-                <p id="txt-desc-juego2" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
-                    Guess the exact price of bizarre, historic, or everyday items using the precision fader before your budget runs out.
-                </p>
-            </div>
-
-            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
-                <span id="txt-btn-juego2" class="uppercase tracking-widest text-[11px]">Prove it now</span>
-                <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
-            </div>
-        </a>
-
-        <!-- TARJETA JUEGO 3: STAKE20 -->
-        <a href="stake20/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
-            <div>
-                <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
-                        🎯
-                    </span>
-                    <span id="badge-juego3" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
-                        Ready to play
-                    </span>
+                <div id="box-opcion-C" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
+                    <div class="flex items-center gap-3 w-full sm:w-1/2">
+                        <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">C</span>
+                        <span id="texto-opcion-c" class="text-xs sm:text-sm text-[#2c2825] font-sans">Respuesta C</span>
+                    </div>
+                    <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
+                        <div id="monedas-visual-C" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="modificarApuesta('C', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
+                            <span id="apuesta-c" class="w-6 text-center text-xs font-bold">0</span>
+                            <button onclick="modificarApuesta('C', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
+                            <button onclick="ponerTodas('C')" id="btn-max-c" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                        </div>
+                    </div>
                 </div>
-
-                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
-                    Stake20
-                </h2>
-                
-                <p id="txt-desc-juego3" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
-                    Manage your stakes and strategy wisely to conquer the board and reach the ultimate objective without losing control.
-                </p>
             </div>
 
-            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
-                <span id="txt-btn-juego3" class="uppercase tracking-widest text-[11px]">Prove it now</span>
-                <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
+            <div id="aviso-reparto" class="text-center text-xs text-[#9c7c51] mb-6 font-bold font-sans">
+                ⚠️ <span id="txt-aviso-reparto">Debes repartir todas tus fichas disponibles antes de confirmar.</span>
             </div>
-        </a>
+
+            <button onclick="manejarBotonPrincipal()" id="btn-confirmar" disabled class="w-full classic-badge text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest opacity-50 cursor-not-allowed transition">
+                Confirm Distribution
+            </button>
+        </div>
+
+        <div id="pantalla-fin" class="hidden text-center py-2">
+            <div id="fin-icono-trofeo" class="text-5xl mb-2 animate-bounce">🏆</div>
+            <h3 id="txt-fin-titulo" class="text-xl font-bold uppercase tracking-wider text-[#3a3228] mb-1">Game Over</h3>
+            
+            <div id="contenedor-calificacion" class="my-3 py-2 px-4 rounded-xl border inline-block shadow-sm">
+                <p id="txt-calificacion" class="text-xs sm:text-sm font-bold uppercase tracking-wider m-0">Resultado</p>
+            </div>
+
+            <div id="tarjeta-desglose-fin" class="bg-[#f9f7f2] border border-[#e6dfd5] rounded-2xl p-5 mb-6 space-y-3 font-sans text-xs shadow-inner">
+                <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
+                    <span id="txt-fin-finalchips" class="text-[#6b6257] font-semibold">Final Chips:</span>
+                    <strong id="fin-fichas-totales" class="text-sm font-bold px-2.5 py-0.5 rounded-md">13 / 20</strong>
+                </div>
+                <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
+                    <span id="txt-fin-lostchips" class="text-[#6b6257] font-semibold">Chips Lost:</span>
+                    <strong id="fin-fichas-perdidas" class="text-xs font-bold text-[#ef4444] px-2 py-0.5 bg-[#fee2e2] rounded-md">-7 🪙</strong>
+                </div>
+                <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
+                    <span id="txt-fin-streak" class="text-[#6b6257] font-semibold">Best Streak:</span>
+                    <strong id="fin-mejor-racha" class="text-xs font-bold text-[#22c55e] px-2 py-0.5 bg-[#f0fdf4] rounded-md">3 consecutive</strong>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span id="txt-fin-accuracy" class="text-[#6b6257] font-semibold">Success Rate:</span>
+                    <strong id="fin-precision-porcentaje" class="text-xs font-bold px-2 py-0.5 rounded-md">65%</strong>
+                </div>
+            </div>
+
+            <div class="space-y-2.5">
+                <button onclick="reiniciarJuego()" id="btn-reiniciar" class="w-full bg-[#3a3228] text-white hover:bg-[#52473a] text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest transition cursor-pointer shadow-md">
+                    Play Again & Beat Score
+                </button>
+                <a href="../" id="btn-volver-menu" class="w-full inline-block classic-badge text-xs font-bold py-3 rounded-xl uppercase tracking-widest hover:bg-[#eae2d5] transition no-underline">
+                    Back to Game Arena
+                </a>
+            </div>
+        </div>
 
     </main>
 
-    <!-- PIE DE PÁGINA CLÁSICO -->
-    <footer class="mt-16 text-center text-xs text-[#7c7265] flex flex-col sm:flex-row items-center gap-4 relative z-10 font-sans">
-        <div class="flex gap-5 font-medium">
-            <button onclick="abrirModal('legal')" id="txt-legal" class="hover:text-[#3a3228] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#7c7265]">Legal Notice</button>
-            <span class="text-[#d9cebc]">•</span>
-            <button onclick="abrirModal('privacidad')" id="txt-privacidad" class="hover:text-[#3a3228] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#7c7265]">Privacy Policy</button>
-        </div>
-        <span class="hidden sm:inline text-[#d9cebc]">|</span>
-        <p id="txt-rights" class="text-[11px] text-[#8c8275]">© 2026 I Can Do It Better Than Them. All rights reserved.</p>
+    <footer class="mt-8 text-center text-xs text-[#7c7265] font-sans">
+        <p>© 2026 icandoit. All rights reserved.</p>
     </footer>
 
-    <!-- MODAL POP-UP (OCULTO POR DEFECTO) -->
-    <div id="modal-container" class="fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4 hidden">
-        <div class="classic-card bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl max-h-[85vh] flex flex-col">
-            <!-- Botón de cerrar -->
-            <button onclick="cerrarModal()" class="absolute top-4 right-4 text-[#735d43] hover:text-[#2c2825] text-xl font-bold px-2 py-1 bg-[#f4efe6] rounded-lg border border-[#e0d5c1] transition">
-                &times;
-            </button>
-            
-            <!-- Título del Modal -->
-            <h3 id="modal-titulo" class="text-xl font-bold text-[#3a3228] uppercase tracking-wide mb-4 pr-8">Título</h3>
-            
-            <!-- Contenido dinámico del Modal -->
-            <div id="modal-cuerpo" class="text-xs sm:text-sm text-[#6b6257] font-sans leading-relaxed overflow-y-auto pr-2 space-y-3">
-                Texto informativo...
-            </div>
-
-            <!-- Botón inferior para cerrar -->
-            <div class="mt-6 pt-4 border-t border-[#f0ebe1] text-right">
-                <button onclick="cerrarModal()" id="txt-btn-cerrar" class="classic-badge text-xs font-semibold py-2 px-6 rounded-xl uppercase tracking-wider hover:bg-[#eae2d5] transition">
-                    Close
-                </button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Diccionario multilingüe para el menú principal y los modales (incluyendo líneas del SVG)
-        const menuI18n = {
+        // Bloqueo global JS contra doble tap zoom en móviles agresivos
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            let now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+
+        const bancoPreguntas = [
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Medium", 
+                q: {
+                    en: "Which iconic plumber wears red overalls and a red cap with an 'M' logo?", 
+                    es: "¿Qué icónico fontanero viste peto rojo y gorra roja con el logotipo de la 'M'?", 
+                    fr: "Quel plombier iconique porte une salopette rouge et une casquette rouge avec un 'M' ?", 
+                    de: "Welcher ikonische Klempner trägt einen roten Latzanzug und eine rote Mütze mit 'M'-Logo?"
+                }, 
+                opts: [
+                    {en: "Mario", es: "Mario", fr: "Mario", de: "Mario"},
+                    {en: "Luigi", es: "Luigi", fr: "Luigi", de: "Luigi"},
+                    {en: "Wario", es: "Wario", fr: "Wario", de: "Wario"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Easy", 
+                q: {
+                    en: "What is the exact name of the green-capped brother of Mario?", 
+                    es: "¿Cómo se llama exactamente el hermano de Mario que viste de verde?", 
+                    fr: "Quel est le nom exact du frère de Mario habillé en vert ?", 
+                    de: "Wie heißt der grün gekleidete Bruder von Mario genau?"
+                }, 
+                opts: [
+                    {en: "Luigi", es: "Luigi", fr: "Luigi", de: "Luigi"},
+                    {en: "Yoshi", es: "Yoshi", fr: "Yoshi", de: "Yoshi"},
+                    {en: "Toad", es: "Toad", fr: "Toad", de: "Toad"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Medium", 
+                q: {
+                    en: "In The Legend of Zelda series, what is the exact name of the protagonist you control?", 
+                    es: "En la saga The Legend of Zelda, ¿cómo se llama exactamente el protagonista que controlas?", 
+                    fr: "Dans la série The Legend of Zelda, quel est le nom exact du protagoniste que vous contrôlez ?", 
+                    de: "Wie heißt der Protagonist, den man in der The Legend of Zelda-Reihe steuert, genau?"
+                }, 
+                opts: [
+                    {en: "Link", es: "Link", fr: "Link", de: "Link"},
+                    {en: "Zelda", es: "Zelda", fr: "Zelda", de: "Zelda"},
+                    {en: "Ganondorf", es: "Ganondorf", fr: "Ganondorf", de: "Ganondorf"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Hard", 
+                q: {
+                    en: "What is the specific name of the yellow electric mouse Pokémon that is the mascot of the franchise?", 
+                    es: "¿Cuál es el nombre específico del Pokémon ratón eléctrico amarillo que es mascota de la franquicia?", 
+                    fr: "Quel est le nom précis du Pokémon souris électrique jaune mascotte de la franchise ?", 
+                    de: "Wie heißt das gelbe Elektro-Maus-Pokémon, das als Maskottchen der Franchise dient, genau?"
+                }, 
+                opts: [
+                    {en: "Pikachu", es: "Pikachu", fr: "Pikachu", de: "Pikachu"},
+                    {en: "Raichu", es: "Raichu", fr: "Raichu", de: "Raichu"},
+                    {en: "Charmander", es: "Charmander", fr: "Charmander", de: "Charmander"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Medium", 
+                q: {
+                    en: "Which company developed and published the sandbox building game Minecraft?", 
+                    es: "¿Qué empresa desarrolló y publicó el videojuego de construcción de bloques Minecraft?", 
+                    fr: "Quelle entreprise a développé et édité le jeu de construction de type bac à sable Minecraft ?", 
+                    de: "Welches Unternehmen entwickelte und veröffentlichte das Sandbox-Aufbauspiel Minecraft?"
+                }, 
+                opts: [
+                    {en: "Mojang Studios", es: "Mojang Studios", fr: "Mojang Studios", de: "Mojang Studios"},
+                    {en: "Epic Games", es: "Epic Games", fr: "Epic Games", de: "Epic Games"},
+                    {en: "Valve", es: "Valve", fr: "Valve", de: "Valve"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Medium", 
+                q: {
+                    en: "What is the exact name of the Spartan supersoldier protagonist in the Halo series?", 
+                    es: "¿Cuál es el nombre exacto del supersoldado Spartan protagonista en la saga Halo?", 
+                    fr: "Quel est le nom exact du super-soldat Spartan protagoniste de la série Halo ?", 
+                    de: "Wie heißt der Spartan-Supersoldat und Protagonist der Halo-Reihe genau?"
+                }, 
+                opts: [
+                    {en: "Master Chief", es: "Master Chief", fr: "Master Chief", de: "Master Chief"},
+                    {en: "Doom Slayer", es: "Doom Slayer", fr: "Doom Slayer", de: "Doom Slayer"},
+                    {en: "Commander Shepard", es: "Commander Shepard", fr: "Commandant Shepard", de: "Commander Shepard"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which company created the console known as PlayStation?", 
+                    es: "¿Qué empresa creó la consola de videojuegos conocida como PlayStation?", 
+                    fr: "Quelle entreprise a créé la console de jeux vidéo connue sous le nom de PlayStation ?", 
+                    de: "Welches Unternehmen hat die als PlayStation bekannte Spielkonsole entwickelt?"
+                }, 
+                opts: [
+                    {en: "Sony", es: "Sony", fr: "Sony", de: "Sony"},
+                    {en: "Nintendo", es: "Nintendo", fr: "Nintendo", de: "Nintendo"},
+                    {en: "Microsoft", es: "Microsoft", fr: "Microsoft", de: "Microsoft"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which company created the Xbox console line?", 
+                    es: "¿Qué empresa creó la familia de consolas Xbox?", 
+                    fr: "Quelle entreprise a créé la gamme de consoles Xbox ?", 
+                    de: "Welches Unternehmen hat die Xbox-Konsolenreihe ins Leben gerufen?"
+                }, 
+                opts: [
+                    {en: "Microsoft", es: "Microsoft", fr: "Microsoft", de: "Microsoft"},
+                    {en: "Sega", es: "Sega", fr: "Sega", de: "Sega"},
+                    {en: "Atari", es: "Atari", fr: "Atari", de: "Atari"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "History", es: "Historia", fr: "Histoire", de: "Geschichte"}, 
+                diff: "Easy", 
+                q: {
+                    en: "In what exact year did the Berlin Wall fall?", 
+                    es: "¿En qué año exacto cayó el muro de Berlín?", 
+                    fr: "En quelle année exacte le mur de Berlin est-il tombé ?", 
+                    de: "In welchem genauen Jahr fiel die Berliner Mauer?"
+                }, 
+                opts: [
+                    {en: "1989", es: "1989", fr: "1989", de: "1989"},
+                    {en: "1975", es: "1975", fr: "1975", de: "1975"},
+                    {en: "1991", es: "1991", fr: "1991", de: "1991"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "History", es: "Historia", fr: "Histoire", de: "Geschichte"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Who was sworn in as the very first president of the United States?", 
+                    es: "¿Quién juró el cargo como el primer presidente de los Estados Unidos?", 
+                    fr: "Qui a prêté serment en tant que tout premier président des États-Unis ?", 
+                    de: "Wer wurde als allererster Präsident der Vereinigten Staaten vereidigt?"
+                }, 
+                opts: [
+                    {en: "George Washington", es: "George Washington", fr: "George Washington", de: "George Washington"},
+                    {en: "Abraham Lincoln", es: "Abraham Lincoln", fr: "Abraham Lincoln", de: "Abraham Lincoln"},
+                    {en: "Thomas Jefferson", es: "Thomas Jefferson", fr: "Thomas Jefferson", de: "Thomas Jefferson"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "History", es: "Historia", fr: "Histoire", de: "Geschichte"}, 
+                diff: "Medium", 
+                q: {
+                    en: "Who was named the very first official emperor of the Roman Empire?", 
+                    es: "¿Quién fue nombrado el primer emperador oficial del Imperio romano?", 
+                    fr: "Qui a été nommé tout premier empereur officiel de l'Empire romain ?", 
+                    de: "Wer wurde zum allerersten offiziellen Kaiser des Römischen Reiches ernannt?"
+                }, 
+                opts: [
+                    {en: "Augustus", es: "Augusto", fr: "Auguste", de: "Augustus"},
+                    {en: "Julius Caesar", es: "Julio César", fr: "Jules César", de: "Julius Cäsar"},
+                    {en: "Nero", es: "Nerón", fr: "Néron", de: "Nero"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "History", es: "Historia", fr: "Histoire", de: "Geschichte"}, 
+                diff: "Medium", 
+                q: {
+                    en: "Which scientist discovered penicillin in 1928?", 
+                    es: "¿Qué científico descubrió la penicilina en 1928?", 
+                    fr: "Quel scientifique a découvert la pénicilline en 1928 ?", 
+                    de: "Welcher Wissenschaftler entdeckte 1928 das Penicillin?"
+                }, 
+                opts: [
+                    {en: "Alexander Fleming", es: "Alexander Fleming", fr: "Alexander Fleming", de: "Alexander Fleming"},
+                    {en: "Louis Pasteur", es: "Louis Pasteur", fr: "Louis Pasteur", de: "Louis Pasteur"},
+                    {en: "Marie Curie", es: "Marie Curie", fr: "Marie Curie", de: "Marie Curie"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "History", es: "Historia", fr: "Histoire", de: "Geschichte"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which famous transatlantic ocean liner sank on its maiden voyage in April 1912?", 
+                    es: "¿Qué famoso transatlántico se hundió en su viaje inaugural en abril de 1912?", 
+                    fr: "Quel célèbre paquebot transatlantique a coulé lors de son voyage inaugural en avril 1912 ?", 
+                    de: "Welcher berühmte Ozeanriese sank im April 1912 auf seiner Jungfernfahrt?"
+                }, 
+                opts: [
+                    {en: "Titanic", es: "Titanic", fr: "Titanic", de: "Titanic"},
+                    {en: "Lusitania", es: "Lusitania", fr: "Lusitania", de: "Lusitania"},
+                    {en: "Britannic", es: "Britannic", fr: "Britannic", de: "Britannic"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Geography", es: "Geografía", fr: "Géographie", de: "Geographie"}, 
+                diff: "Easy", 
+                q: {
+                    en: "What is the officially designated capital city of Australia?", 
+                    es: "¿Cuál es la capital oficialmente designada de Australia?", 
+                    fr: "Quelle est la capitale officiellement désignée de l'Australie ?", 
+                    de: "Was ist die offiziell benannte Hauptstadt von Australien?"
+                }, 
+                opts: [
+                    {en: "Canberra", es: "Canberra", fr: "Canberra", de: "Canberra"},
+                    {en: "Sydney", es: "Sídney", fr: "Sydney", de: "Sydney"},
+                    {en: "Melbourne", es: "Melbourne", fr: "Melbourne", de: "Melbourne"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Geography", es: "Geografía", fr: "Géographie", de: "Geographie"}, 
+                diff: "Easy", 
+                q: {
+                    en: "What is the capital city of Japan?", 
+                    es: "¿Cuál es la ciudad capital de Japón?", 
+                    fr: "Quelle est la ville capitale du Japon ?", 
+                    de: "Was ist die Hauptstadt von Japan?"
+                }, 
+                opts: [
+                    {en: "Tokyo", es: "Tokio", fr: "Tokyo", de: "Tokio"},
+                    {en: "Kyoto", es: "Kioto", fr: "Kyoto", de: "Kyoto"},
+                    {en: "Osaka", es: "Osaka", fr: "Osaka", de: "Osaka"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Geography", es: "Geografía", fr: "Géographie", de: "Geographie"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which country has the largest total land area in the world?", 
+                    es: "¿Qué país posee la mayor superficie terrestre total del mundo?", 
+                    fr: "Quel pays possède la plus grande superficie terrestre totale au monde ?", 
+                    de: "Welches Land hat die größte Landfläche der Welt?"
+                }, 
+                opts: [
+                    {en: "Russia", es: "Rusia", fr: "Russie", de: "Russland"},
+                    {en: "Canada", es: "Canadá", fr: "Canada", de: "Kanada"},
+                    {en: "China", es: "China", fr: "Chine", de: "China"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Geography", es: "Geografía", fr: "Géographie", de: "Geographie"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which European country is geographically shaped like a high-heeled boot?", 
+                    es: "¿Qué país europeo tiene geográficamente forma de bota de tacón alto?", 
+                    fr: "Quel pays européen a la forme géographique d'une botte à talon haut ?", 
+                    de: "Welches europäische Land hat geografisch die Form eines Stiefels mit hohem Absatz?"
+                }, 
+                opts: [
+                    {en: "Italy", es: "Italia", fr: "Italie", de: "Italien"},
+                    {en: "Greece", es: "Grecia", fr: "Grèce", de: "Griechenland"},
+                    {en: "Spain", es: "España", fr: "Espagne", de: "Spanien"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Science", es: "Ciencia", fr: "Science", de: "Wissenschaft"}, 
+                diff: "Medium", 
+                q: {
+                    en: "What is the official two-letter chemical symbol for elemental gold?", 
+                    es: "¿Cuál es el símbolo químico oficial de dos letras para el oro elemental?", 
+                    fr: "Quel est le symbole chimique officiel à deux lettres de l'or élémentaire ?", 
+                    de: "Was ist das offizielle zweibuchstabige chemische Symbol für elementares Gold?"
+                }, 
+                opts: [
+                    {en: "Au", es: "Au", fr: "Au", de: "Au"},
+                    {en: "Ag", es: "Ag", fr: "Ag", de: "Ag"},
+                    {en: "Pb", es: "Pb", fr: "Pb", de: "Pb"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Science", es: "Ciencia", fr: "Science", de: "Wissenschaft"}, 
+                diff: "Easy", 
+                q: {
+                    en: "What is the single largest internal and external organ of the human body?", 
+                    es: "¿Cuál es el órgano individual más grande, tanto interno como externo, del cuerpo humano?", 
+                    fr: "Quel est le plus grand organe individuel, tant interne qu'externe, du corps humain ?", 
+                    de: "Was ist das größte einzelne innere und äußere Organ des menschlichen Körpers?"
+                }, 
+                opts: [
+                    {en: "Skin", es: "Piel", fr: "Peau", de: "Haut"},
+                    {en: "Liver", es: "Hígado", fr: "Foie", de: "Leber"},
+                    {en: "Lungs", es: "Pulmones", fr: "Poumons", de: "Lunge"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Science", es: "Ciencia", fr: "Science", de: "Wissenschaft"}, 
+                diff: "Medium", 
+                q: {
+                    en: "What is the hardest naturally occurring mineral substance found on Earth?", 
+                    es: "¿Cuál es la sustancia mineral natural más dura que se encuentra en la Tierra?", 
+                    fr: "Quelle est la substance minérale naturelle la plus dure trouvée sur Terre ?", 
+                    de: "Was ist die härteste, in der Natur vorkommende Mineralsubstanz auf der Erde?"
+                }, 
+                opts: [
+                    {en: "Diamond", es: "Diamante", fr: "Diamant", de: "Diamant"},
+                    {en: "Quartz", es: "Cuarzo", fr: "Quartz", de: "Quarz"},
+                    {en: "Iron", es: "Hierro", fr: "Fer", de: "Eisen"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Science", es: "Ciencia", fr: "Science", de: "Wissenschaft"}, 
+                diff: "Medium", 
+                q: {
+                    en: "What is the exact standard sea-level boiling point of pure water in Celsius degrees?", 
+                    es: "¿Cuál es el punto de ebullición exacto del agua pura a nivel del mar en grados Celsius?", 
+                    fr: "Quel est le point d'ébullition exact de l'eau pure au niveau de la mer en degrés Celsius ?", 
+                    de: "Was ist der genaue Siedepunkt von reinem Wasser auf Meereshöhe in Grad Celsius?"
+                }, 
+                opts: [
+                    {en: "100°C", es: "100°C", fr: "100°C", de: "100°C"},
+                    {en: "90°C", es: "90°C", fr: "90°C", de: "90°C"},
+                    {en: "120°C", es: "120°C", fr: "120°C", de: "120°C"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Technology", es: "Tecnología", fr: "Technologie", de: "Technologie"}, 
+                diff: "Easy", 
+                q: {
+                    en: "In what exact calendar year was the very first model of the Apple iPhone released?", 
+                    es: "¿En qué año del calendario exacto se lanzó el primer modelo del iPhone de Apple?", 
+                    fr: "En quelle année civile exacte le tout premier modèle d'iPhone d'Apple est-il sorti ?", 
+                    de: "In welchem genauen Kalenderjahr wurde das allererste Modell des Apple iPhones veröffentlicht?"
+                }, 
+                opts: [
+                    {en: "2007", es: "2007", fr: "2007", de: "2007"},
+                    {en: "2005", es: "2005", fr: "2005", de: "2005"},
+                    {en: "2010", es: "2010", fr: "2010", de: "2010"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Technology", es: "Tecnología", fr: "Technologie", de: "Technologie"}, 
+                diff: "Easy", 
+                q: {
+                    en: "What do the acronym letters CPU stand for in computer hardware architecture?", 
+                    es: "¿Qué significan las letras de la sigla CPU en la arquitectura de hardware informático?", 
+                    fr: "Que signifient les lettres de l'acronyme CPU dans l'architecture matérielle informatique ?", 
+                    de: "Wofür stehen die Buchstaben der Abkürzung CPU in der Computer-Hardware-Architektur?"
+                }, 
+                opts: [
+                    {en: "Central Processing Unit", es: "Unidad Central de Procesamiento", fr: "Unité Centrale de Traitement", de: "Zentrale Verarbeitungseinheit"},
+                    {en: "Computer Personal Unit", es: "Unidad Personal de Computadora", fr: "Unité Personnelle d'Ordinateur", de: "Computer-Personal-Einheit"},
+                    {en: "Central Program Utility", es: "Utilidad de Programa Central", fr: "Utilitaire de Programme Central", de: "Zentrales Programmdienstprogramm"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Technology", es: "Tecnología", fr: "Technologie", de: "Technologie"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which major global technology company created and developed the Android mobile operating system?", 
+                    es: "¿Qué gran empresa tecnológica global creó y desarrolló el sistema operativo móvil Android?", 
+                    fr: "Quelle grande entreprise technologique mondiale a créé et développé le système d'exploitation mobile Android ?", 
+                    de: "Welches große globale Technologieunternehmen hat das mobile Betriebssystem Android erschaffen und entwickelt?"
+                }, 
+                opts: [
+                    {en: "Google", es: "Google", fr: "Google", de: "Google"},
+                    {en: "Microsoft", es: "Microsoft", fr: "Microsoft", de: "Microsoft"},
+                    {en: "Apple", es: "Apple", fr: "Apple", de: "Apple"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Cinema", es: "Cine", fr: "Cinéma", de: "Kino"}, 
+                diff: "Medium", 
+                q: {
+                    en: "Who directed the 2010 sci-fi thriller movie 'Inception' starring Leonardo DiCaprio?", 
+                    es: "¿Quién dirigió la película de suspense y ciencia ficción de 2010 'Inception', protagonizada por Leonardo DiCaprio?", 
+                    fr: "Qui a réalisé le film de science-fiction de 2010 'Inception' avec Leonardo DiCaprio ?", 
+                    de: "Wer Regie führte bei dem Science-Fiction-Thriller 'Inception' aus dem Jahr 2010 mit Leonardo DiCaprio in der Hauptrolle?"
+                }, 
+                opts: [
+                    {en: "Christopher Nolan", es: "Christopher Nolan", fr: "Christopher Nolan", de: "Christopher Nolan"},
+                    {en: "Steven Spielberg", es: "Steven Spielberg", fr: "Steven Spielberg", de: "Steven Spielberg"},
+                    {en: "Quentin Tarantino", es: "Quentin Tarantino", fr: "Quentin Tarantino", de: "Quentin Tarantino"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Cinema", es: "Cine", fr: "Cinéma", de: "Kino"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which actor played the male lead character Jack Dawson in the 1997 film Titanic?", 
+                    es: "¿Qué actor interpretó al personaje protagonista masculino Jack Dawson en la película Titanic de 1997?", 
+                    fr: "Quel acteur a joué le rôle principal masculin de Jack Dawson dans le film Titanic de 1997 ?", 
+                    de: "Welcher Schauspieler spielte die männliche Hauptrolle des Jack Dawson im Film Titanic aus dem Jahr 1997?"
+                }, 
+                opts: [
+                    {en: "Leonardo DiCaprio", es: "Leonardo DiCaprio", fr: "Leonardo DiCaprio", de: "Leonardo DiCaprio"},
+                    {en: "Brad Pitt", es: "Brad Pitt", fr: "Brad Pitt", de: "Brad Pitt"},
+                    {en: "Tom Cruise", es: "Tom Cruise", fr: "Tom Cruise", de: "Tom Cruise"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Sports", es: "Deportes", fr: "Sports", de: "Sport"}, 
+                diff: "Easy", 
+                q: {
+                    en: "How many active players does a standard soccer team have on the field during a match?", 
+                    es: "¿Cuántos jugadores activos tiene un equipo de fútbol estándar en el terreno de juego durante un partido?", 
+                    fr: "Combien de joueurs actifs une équipe de football standard a-t-elle sur le terrain pendant un match ?", 
+                    de: "Wie viele aktive Spieler hat eine Standard-Fußballmannschaft während eines Spiels auf dem Feld?"
+                }, 
+                opts: [
+                    {en: "11", es: "11", fr: "11", de: "11"},
+                    {en: "10", es: "10", fr: "10", de: "10"},
+                    {en: "9", es: "9", fr: "9", de: "9"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Sports", es: "Deportes", fr: "Sports", de: "Sport"}, 
+                diff: "Easy", 
+                q: {
+                    en: "How many total points is a successful standard free throw worth in a game of basketball?", 
+                    es: "¿Cuántos puntos en total vale un tiro libre estándar encestado en un partido de baloncesto?", 
+                    fr: "Combien de points vaut au total un lancer franc réussi dans un match de basketball ?", 
+                    de: "Wie viele Punkte ist ein erfolgreicher Standard-Freiwurf beim Basketball wert?"
+                }, 
+                opts: [
+                    {en: "1", es: "1", fr: "1", de: "1"},
+                    {en: "2", es: "2", fr: "2", de: "2"},
+                    {en: "3", es: "3", fr: "3", de: "3"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Space", es: "Espacio", fr: "Espace", de: "Weltraum"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which individual planet in our solar system is located closest to the Sun?", 
+                    es: "¿Qué planeta individual de nuestro sistema solar se encuentra más cerca del Sol?", 
+                    fr: "Quelle planète individuelle de notre système solaire est située la plus proche du Soleil ?", 
+                    de: "Welcher einzelne Planet in unserem Sonnensystem befindet sich der Sonne am nächsten?"
+                }, 
+                opts: [
+                    {en: "Mercury", es: "Mercurio", fr: "Mercure", de: "Merkur"},
+                    {en: "Venus", es: "Venus", fr: "Vénus", de: "Venus"},
+                    {en: "Mars", es: "Marte", fr: "Mars", de: "Mars"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Space", es: "Espacio", fr: "Espace", de: "Weltraum"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which planet in our solar system is widely known and nicknamed as the Red Planet?", 
+                    es: "¿Qué planeta de nuestro sistema solar es ampliamente conocido y apodado como el Planeta Rojo?", 
+                    fr: "Quelle planète de notre système solaire est largement connue et surnommée la Planète rouge ?", 
+                    de: "Welcher Planet in unserem Sonnensystem wird gemeinhin als der Rote Planet bezeichnet?"
+                }, 
+                opts: [
+                    {en: "Mars", es: "Marte", fr: "Mars", de: "Mars"},
+                    {en: "Venus", es: "Venus", fr: "Vénus", de: "Venus"},
+                    {en: "Mercury", es: "Mercurio", fr: "Mercure", de: "Merkur"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Food", es: "Comida", fr: "Nourriture", de: "Essen"}, 
+                diff: "Easy", 
+                q: {
+                    en: "What is the primary core green fruit ingredient used to make traditional guacamole?", 
+                    es: "¿Cuál es el ingrediente principal de fruta verde utilizado para elaborar el guacamole tradicional?", 
+                    fr: "Quel est le principal ingrédient de fruit vert utilisé pour préparer le guacamole traditionnel ?", 
+                    de: "Was ist die Hauptzutat aus grünen Früchten zur Zubereitung von traditioneller Guacamole?"
+                }, 
+                opts: [
+                    {en: "Avocado", es: "Aguacate", fr: "Avocat", de: "Avocado"},
+                    {en: "Tomato", es: "Tomate", fr: "Tomate", de: "Tomate"},
+                    {en: "Green pepper", es: "Pimiento verde", fr: "Poivron vert", de: "Grüner Paprika"}
+                ], 
+                correct: 0 
+            },
+            { 
+                cat: {en: "Food", es: "Comida", fr: "Nourriture", de: "Essen"}, 
+                diff: "Easy", 
+                q: {
+                    en: "Which country is universally recognized as the traditional birthplace of sushi?", 
+                    es: "¿Qué país es universalmente reconocido como el lugar de origen tradicional del sushi?", 
+                    fr: "Quel pays est universellement reconnu comme le berceau traditionnel des sushis ?", 
+                    de: "Welches Land gilt allgemein als die traditionelle Heimat des Sushis?"
+                }, 
+                opts: [
+                    {en: "Japan", es: "Japón", fr: "Japon", de: "Japan"},
+                    {en: "China", es: "China", fr: "Chine", de: "China"},
+                    {en: "Thailand", es: "Tailandia", fr: "Thaïlande", de: "Thailand"}
+                ], 
+                correct: 0 
+            }
+        ];
+
+        let idiomaActual = localStorage.getItem('whenwastimeline_idioma') || 'en';
+        let totalFichasRonda = 20;
+        let preguntaActualIdx = 0;
+        let preguntasPartida = [];
+        let apuestas = { A: 0, B: 0, C: 0 };
+        let apuestasEnTransito = { A: 0, B: 0, C: 0 }; 
+        let opcionesActualesMezcladas = [];
+        let respuestaCorrectaLetra = 'A';
+        let rachaActual = 0;
+        let mejorRacha = 0;
+        let estadoFase = 'repartiendo'; 
+
+        const traducciones = {
             en: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
-                subtitulo: "How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.",
-                badge1: "Ready to play",
-                desc1: "Order historical, technological, and pop-culture milestones correctly under pressure before your time or lives run out.",
-                btn1: "Prove it now",
-                badge2: "Ready to play",
-                desc2: "Guess the exact price of bizarre, historic, or everyday items using the precision fader before your budget runs out.",
-                btn2: "Prove it now",
-                badge3: "Ready to play",
-                desc3: "Manage your stakes and strategy wisely to conquer the board and reach the ultimate objective without losing control.",
-                btn3: "Prove it now",
-                legal: "Legal Notice",
-                privacidad: "Privacy Policy",
-                rights: "© 2026 I Can Do It Better Than Them. All rights reserved.",
-                btnCerrar: "Close",
-                legalTitle: "Legal Notice",
-                legalText: "This website 'I Can Do It Better Than Them' is an independent platform offering entertainment and minigames inspired by TV game show formats for educational and recreational purposes. All registered trademarks, show formats, or names mentioned belong exclusively to their respective owners and are used strictly under citation and parody/reference rights.",
-                privacidadTitle: "Privacy Policy",
-                privacidadText: "We respect your privacy. This site uses local storage (localStorage) exclusively to remember your language preferences and game progress on your device. We also utilize third-party services like Google AdSense, which may use cookies to serve personalized or non-personalized ads according to your browser settings and consent."
+                home: "← Home",
+                sub: "Distribute all your available chips across the options. No chips left behind!",
+                startBtn: "Start Game (20 Chips)",
+                startTitle: "Are you ready to risk it all?",
+                startDesc: "You start with 20 chips. In each round, you must distribute your current chips across the 3 options. What you lose is gone forever!",
+                chipsLabel: "Chips available",
+                avisoReparto: "You must distribute all available chips before confirming.",
+                confirmBtn: "Confirm Distribution",
+                nextBtn: "Next Question",
+                gameOverTitle: "Game Over",
+                finalChipsLbl: "Final Chips:",
+                lostChipsLbl: "Chips Lost:",
+                bestStreakLbl: "Best Streak:",
+                accuracyLbl: "Success Rate:",
+                playAgainBtn: "Play Again & Beat Score",
+                backMenuBtn: "Back to Game Arena",
+                diffs: { Easy: "Easy", Medium: "Medium", Hard: "Hard" },
+                ratings: {
+                    perfect: { text: "Flawless Victory! Master of Risk.", icon: "👑" },
+                    excellent: { text: "Outstanding risk management!", icon: "🌟" },
+                    veryGood: { text: "Very solid game performance!", icon: "👏" },
+                    medium: { text: "Decent run, room to improve.", icon: "⚖️" },
+                    bad: { text: "Tough game! Time to try again.", icon: "⚠️" },
+                    eliminated: { text: "Bankrupt! Zero chips remaining.", icon: "💸" }
+                }
             },
             es: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
-                subtitulo: "¿Cuántas veces le has gritado a la tele desde el sofá pensando que podrías ganar el gran premio? Sal del salón y demuéstralo con minijuegos inspirados en programas legendarios de televisión.",
-                badge1: "Listo para jugar",
-                desc1: "Ordena hitos históricos, tecnológicos y de la cultura pop correctamente bajo presión antes de que se acaben tus vidas.",
-                btn1: "Demuéstralo ahora",
-                badge2: "Listo para jugar",
-                desc2: "Adivina el precio exacto de objetos insólitos, históricos o cotidianos usando el fader de precisión antes de que se agote tu presupuesto.",
-                btn2: "Demuéstralo ahora",
-                badge3: "Listo para jugar",
-                desc3: "Gestiona tus apuestas y estrategia con inteligencia para conquistar el tablero y alcanzar el objetivo final sin perder el control.",
-                btn3: "Demuéstralo ahora",
-                legal: "Aviso Legal",
-                privacidad: "Política de Privacidad",
-                rights: "© 2026 I Can Do It Better Than Them. Todos los derechos reservados.",
-                btnCerrar: "Cerrar",
-                legalTitle: "Aviso Legal",
-                legalText: "Este sitio web 'I Can Do It Better Than Them' es una plataforma independiente de entretenimiento con minijuegos inspirados en formatos de concursos de televisión con fines lúdicos y recreativos. Las marcas registradas, nombres de programas o formatos mencionados pertenecen exclusivamente a sus respectivos titulares y se utilizan únicamente con fines de referencia y parodia.",
-                privacidadTitle: "Política de Privacidad",
-                privacidadText: "Respetamos tu privacidad. Este sitio utiliza almacenamiento local (localStorage) únicamente para recordar tus preferencias de idioma y progresos en tu propio dispositivo. Asimismo, empleamos servicios de terceros como Google AdSense, que puede utilizar cookies para mostrar anuncios adaptados según la normativa de privacidad y tu consentimiento."
+                home: "← Inicio",
+                sub: "Distribuye todas tus fichas disponibles entre las opciones. ¡Lo que pierdas no vuelve!",
+                startBtn: "Comenzar Partida (20 Fichas)",
+                startTitle: "¿Estás listo para arriesgarlo todo?",
+                startDesc: "Empiezas con 20 fichas. En cada ronda debes repartir tus fichas actuales entre las 3 opciones. ¡Las que falles desaparecen!",
+                chipsLabel: "Fichas disponibles",
+                avisoReparto: "Debes repartir todas tus fichas disponibles antes de confirmar.",
+                confirmBtn: "Confirmar Distribución",
+                nextBtn: "Siguiente Pregunta",
+                gameOverTitle: "Fin de la Partida",
+                finalChipsLbl: "Fichas Finales:",
+                lostChipsLbl: "Fichas Perdidas:",
+                bestStreakLbl: "Mejor Racha:",
+                accuracyLbl: "Tasa de Acierto:",
+                playAgainBtn: "Jugar de Nuevo y Mejorar",
+                backMenuBtn: "Volver al Menú de Juegos",
+                diffs: { Easy: "Fácil", Medium: "Media", Hard: "Difícil" },
+                ratings: {
+                    perfect: { text: "¡Victoria Impecable! Maestro del Riesgo.", icon: "👑" },
+                    excellent: { text: "¡Excelente gestión del riesgo!", icon: "🌟" },
+                    veryGood: { text: "¡Muy buen resultado en la partida!", icon: "👏" },
+                    medium: { text: "Partida estable, ¡puedes hacerlo mejor!", icon: "⚖️" },
+                    bad: { text: "¡Partida difícil! Inténtalo otra vez.", icon: "⚠️" },
+                    eliminated: { text: "¡Banca rota! Te has quedado sin fichas.", icon: "💸" }
+                }
             },
             fr: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
-                subtitulo: "Combien de fois avez-vous crié sur la télé depuis votre canapé en pensant pouvoir gagner le grand prix ? Sortez du salon et prouvez-le.",
-                badge1: "Prêt à jouer",
-                desc1: "Classez des jalons historiques, technologiques et de pop-culture sous pression avant que vos vies ne s'épuisent.",
-                btn1: "Prouvez-le maintenant",
-                badge2: "Prêt à jouer",
-                desc2: "Devinez le prix exact d'objets insolites ou du quotidien en utilisant le curseur de précision.",
-                btn2: "Prouvez-le maintenant",
-                badge3: "Prêt à jouer",
-                desc3: "Gérez vos mises et votre stratégie pour conquérir le plateau et atteindre l'objectif ultime.",
-                btn3: "Prouvez-le maintenant",
-                legal: "Mentions Légales",
-                privacidad: "Politique de Confidentialité",
-                rights: "© 2026 I Can Do It Better Than Them. Tous droits réservés.",
-                btnCerrar: "Fermer",
-                legalTitle: "Mentions Légales",
-                legalText: "Ce site web est une plateforme indépendante de divertissement proposant des mini-jeux inspirés de jeux télévisés. Toutes les marques citées appartiennent à leurs propriétaires respectifs.",
-                privacidadTitle: "Politique de Confidentialité",
-                privacidadText: "Nous respectons votre vie privée. Ce site utilise le stockage local uniquement pour vos préférences de langue et intègre Google AdSense pour la gestion des annonces publicitaires."
+                home: "← Accueil",
+                sub: "Distribuez tous vos jetons disponibles. Ce qui est perdu ne revient pas !",
+                startBtn: "Commencer (20 Jetons)",
+                startTitle: "Êtes-vous prêt à tout risquer ?",
+                startDesc: "Vous commencez avec 20 jetons. Placez vos jetons sur les 3 options à chaque tour.",
+                chipsLabel: "Jetons disponibles",
+                avisoReparto: "Vous devez distribuer tous vos jetons disponibles avant de confirmer.",
+                confirmBtn: "Confirmer la distribution",
+                nextBtn: "Question Suivante",
+                gameOverTitle: "Fin de Partie",
+                finalChipsLbl: "Jetons Finaux :",
+                lostChipsLbl: "Jetons Perdus :",
+                bestStreakLbl: "Meilleure Série :",
+                accuracyLbl: "Taux de Réussite :",
+                playAgainBtn: "Rejouer pour Améliorer",
+                backMenuBtn: "Retour aux Jeux",
+                diffs: { Easy: "Facile", Medium: "Moyen", Hard: "Difficile" },
+                ratings: {
+                    perfect: { text: "Victoire Parfaite ! Maître du Risque.", icon: "👑" },
+                    excellent: { text: "Excellente gestion du risque !", icon: "🌟" },
+                    veryGood: { text: "Très bon résultat de partie !", icon: "👏" },
+                    medium: { text: "Résultat correct, visez plus haut.", icon: "⚖️" },
+                    bad: { text: "Partie difficile ! Retentez votre chance.", icon: "⚠️" },
+                    eliminated: { text: "Faillite ! Plus de jetons restants.", icon: "💸" }
+                }
             },
             de: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
-                subtitulo: "Wie oft hast du vom Sofa aus den Fernseher angeschrien und gedacht, du könntest den Hauptgewinn gewinnen? Raus aus dem Wohnzimmer und beweise es.",
-                badge1: "Spielbereit",
-                desc1: "Ordne historische, technologische und Popkultur-Meilensteine unter Druck richtig an, bevor deine Leben ablaufen.",
-                btn1: "Jetzt beweisen",
-                badge2: "Spielbereit",
-                desc2: "Errate den genauen Preis von skurrilen oder alltäglichen Gegenständen mit dem Präzisionsregler.",
-                btn2: "Jetzt beweisen",
-                badge3: "Spielbereit",
-                desc3: "Verwalte deine Einsätze und Strategie klug, um das Brett zu erobern und das Ziel zu erreichen.",
-                btn3: "Jetzt beweisen",
-                legal: "Impressum",
-                privacidad: "Datenschutz",
-                rights: "© 2026 I Can Do It Better Than Them. Alle Rechte vorbehalten.",
-                btnCerrar: "Schließen",
-                legalTitle: "Impressum",
-                legalText: "Diese Website ist eine unabhängige Unterhaltungsplattform mit Minispielen, die von Fernsehshows inspiriert sind. Alle genannten Marken gehören ihren jeweiligen Eigentümern.",
-                privacidadTitle: "Datenschutz",
-                privacidadText: "Wir respektieren Ihre Privatsphäre. Diese Website nutzt den lokalen Speicher (localStorage) nur für Spracheinstellungen und verwendet Google AdSense zur Schaltung von Werbung."
+                home: "← Startseite",
+                sub: "Verteile all deine verfügbaren Chips. Was verloren geht, kommt nicht zurück!",
+                startBtn: "Spiel starten (20 Chips)",
+                startTitle: "Bist du bereit, alles zu riskieren?",
+                startDesc: "Du beginnst mit 20 Chips. Setze sie in jeder Runde auf die 3 Optionen auf.",
+                chipsLabel: "Verfügbare Chips",
+                avisoReparto: "Du musst alle verfügbaren Chips verteilen, bevor du bestätigst.",
+                confirmBtn: "Verteilung bestätigen",
+                nextBtn: "Nächste Frage",
+                gameOverTitle: "Spiel Vorbei",
+                finalChipsLbl: "Endergebnis Chips:",
+                lostChipsLbl: "Verlorene Chips:",
+                bestStreakLbl: "Beste Serie:",
+                accuracyLbl: "Erfolgsquote:",
+                playAgainBtn: "Nochmal spielen & Rekord brechen",
+                backMenuBtn: "Zurück zur Spieleübersicht",
+                diffs: { Easy: "Einfach", Medium: "Mittel", Hard: "Schwer" },
+                ratings: {
+                    perfect: { text: "Makelloser Sieg! Meister des Risikos.", icon: "👑" },
+                    excellent: { text: "Exzellentes Risikomanagement!", icon: "🌟" },
+                    veryGood: { text: "Sehr solides Spielergebnis!", icon: "👏" },
+                    medium: { text: "Durchschnittliche Runde, du kannst das!", icon: "⚖️" },
+                    bad: { text: "Schwieriges Spiel! Probier es noch einmal.", icon: "⚠️" },
+                    eliminated: { text: "Pleite! Keine Chips mehr übrig.", icon: "💸" }
+                }
             }
         };
 
-        let modalActual = '';
-
-        function cambiarIdiomaGlobal(lang) {
+        function cambiarIdioma(lang) {
+            idiomaActual = lang;
             localStorage.setItem('whenwastimeline_idioma', lang);
-            aplicarTextosMenu(lang);
-            if (!document.getElementById('modal-container').classList.contains('hidden')) {
-                abrirModal(modalActual);
-            }
-        }
-
-        function aplicarTextosMenu(lang) {
-            const t = menuI18n[lang] || menuI18n.en;
             document.getElementById('select-idioma').value = lang;
-            document.getElementById('svg-titulo-1').textContent = t.t1;
-            document.getElementById('svg-titulo-2').textContent = t.t2;
-            document.getElementById('txt-subtitulo').textContent = t.subtitulo;
-            document.getElementById('badge-juego1').textContent = t.badge1;
-            document.getElementById('txt-desc-juego1').textContent = t.desc1;
-            document.getElementById('txt-btn-juego1').textContent = t.btn1;
-            document.getElementById('badge-juego2').textContent = t.badge2;
-            document.getElementById('txt-desc-juego2').textContent = t.desc2;
-            document.getElementById('txt-btn-juego2').textContent = t.btn2;
-            document.getElementById('badge-juego3').textContent = t.badge3;
-            document.getElementById('txt-desc-juego3').textContent = t.desc3;
-            document.getElementById('txt-btn-juego3').textContent = t.btn3;
-            document.getElementById('txt-legal').textContent = t.legal;
-            document.getElementById('txt-privacidad').textContent = t.privacidad;
-            document.getElementById('txt-rights').textContent = t.rights;
-            document.getElementById('txt-btn-cerrar').textContent = t.btnCerrar;
+            actualizarTextosUI();
+            if (estadoFase === 'repartiendo' || estadoFase === 'resultado') {
+                actualizarTextosPreguntaActual();
+            }
         }
 
-        function abrirModal(tipo) {
-            modalActual = tipo;
-            const lang = localStorage.getItem('whenwastimeline_idioma') || 'en';
-            const t = menuI18n[lang] || menuI18n.en;
+        function actualizarTextosUI() {
+            const t = traducciones[idiomaActual] || traducciones.en;
+            document.getElementById('btn-volver').textContent = t.home;
+            document.getElementById('txt-sub').textContent = t.sub;
+            document.getElementById('btn-comenzar').textContent = t.startBtn;
+            document.getElementById('txt-inicio-titulo').textContent = t.startTitle;
+            document.getElementById('txt-inicio-desc').textContent = t.startDesc;
+            document.getElementById('txt-chips-label').textContent = t.chipsLabel;
+            document.getElementById('txt-aviso-reparto').textContent = t.avisoReparto;
+            if (estadoFase === 'repartiendo') {
+                document.getElementById('btn-confirmar').textContent = t.confirmBtn;
+            } else {
+                document.getElementById('btn-confirmar').textContent = t.nextBtn;
+            }
+            document.getElementById('txt-fin-titulo').textContent = t.gameOverTitle;
+            document.getElementById('txt-fin-finalchips').textContent = t.finalChipsLbl;
+            document.getElementById('txt-fin-lostchips').textContent = t.lostChipsLbl;
+            document.getElementById('txt-fin-streak').textContent = t.bestStreakLbl;
+            document.getElementById('txt-fin-accuracy').textContent = t.accuracyLbl;
+            document.getElementById('btn-reiniciar').textContent = t.playAgainBtn;
+            document.getElementById('btn-volver-menu').textContent = t.backMenuBtn;
+        }
 
-            const tituloEl = document.getElementById('modal-titulo');
-            const cuerpoEl = document.getElementById('modal-cuerpo');
+        function actualizarTextosPreguntaActual() {
+            if (preguntaActualIdx < 0 || preguntaActualIdx >= preguntasPartida.length) return;
+            const p = preguntasPartida[preguntaActualIdx];
+            const t = traducciones[idiomaActual] || traducciones.en;
 
-            if (tipo === 'legal') {
-                tituloEl.textContent = t.legalTitle;
-                cuerpoEl.innerHTML = `<p>${t.legalText}</p>`;
-            } else if (tipo === 'privacidad') {
-                tituloEl.textContent = t.privacidadTitle;
-                cuerpoEl.innerHTML = `<p>${t.privacidadText}</p>`;
+            document.getElementById('badge-categoria').textContent = p.cat[idiomaActual] || p.cat.en;
+            document.getElementById('badge-dificultad').textContent = t.diffs[p.diff] || p.diff;
+            document.getElementById('texto-pregunta').textContent = p.q[idiomaActual] || p.q.en;
+
+            document.getElementById('texto-opcion-a').textContent = opcionesActualesMezcladas[0].textoObj[idiomaActual] || opcionesActualesMezcladas[0].textoObj.en;
+            document.getElementById('texto-opcion-b').textContent = opcionesActualesMezcladas[1].textoObj[idiomaActual] || opcionesActualesMezcladas[1].textoObj.en;
+            document.getElementById('texto-opcion-c').textContent = opcionesActualesMezcladas[2].textoObj[idiomaActual] || opcionesActualesMezcladas[2].textoObj.en;
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function comenzarPartida() {
+            totalFichasRonda = 20;
+            preguntaActualIdx = 0;
+            rachaActual = 0;
+            mejorRacha = 0;
+            estadoFase = 'repartiendo';
+            apuestasEnTransito = { A: 0, B: 0, C: 0 };
+            
+            let bancoCopia = [...bancoPreguntas];
+            shuffleArray(bancoCopia);
+            preguntasPartida = bancoCopia.slice(0, 10);
+
+            const mainCard = document.getElementById('main-container');
+            mainCard.classList.remove('card-resultado-exito', 'card-resultado-perfecto', 'card-resultado-fallo');
+
+            document.getElementById('pantalla-inicio').classList.add('hidden');
+            document.getElementById('pantalla-fin').classList.add('hidden');
+            document.getElementById('pantalla-juego').classList.remove('hidden');
+
+            cargarPregunta();
+        }
+
+        function cargarPregunta() {
+            if (totalFichasRonda <= 0 || preguntaActualIdx >= 10) {
+                finalizarPartida();
+                return;
             }
 
-            document.getElementById('modal-container').classList.remove('hidden');
+            apuestas = { A: 0, B: 0, C: 0 };
+            apuestasEnTransito = { A: 0, B: 0, C: 0 };
+            estadoFase = 'repartiendo';
+            
+            const p = preguntasPartida[preguntaActualIdx];
+
+            document.getElementById('label-pregunta-num').textContent = `Question ${preguntaActualIdx + 1} / 10`;
+
+            let opcionesObj = [
+                { textoObj: p.opts[0], esCorrecta: true },
+                { textoObj: p.opts[1], esCorrecta: false },
+                { textoObj: p.opts[2], esCorrecta: false }
+            ];
+            opcionesObj.sort(() => Math.random() - 0.5);
+
+            opcionesActualesMezcladas = opcionesObj;
+
+            if (opcionesObj[0].esCorrecta) respuestaCorrectaLetra = 'A';
+            else if (opcionesObj[1].esCorrecta) respuestaCorrectaLetra = 'B';
+            else respuestaCorrectaLetra = 'C';
+
+            actualizarTextosPreguntaActual();
+
+            ['A', 'B', 'C'].forEach(opt => {
+                const caja = document.getElementById(`box-opcion-${opt}`);
+                caja.classList.remove('resaltar-verde', 'resaltar-rojo');
+            });
+
+            actualizarVistaApuestas();
         }
 
-        function cerrarModal() {
-            document.getElementById('modal-container').classList.add('hidden');
-        }
-
-        document.getElementById('modal-container').addEventListener('click', (e) => {
-            if (e.target.id === 'modal-container') {
-                cerrarModal();
+        function animarMonedaTrayectoria(origenId, destinoId, alTerminar) {
+            const origenEl = document.getElementById(origenId);
+            const destinoEl = document.getElementById(destinoId);
+            if (!origenEl || !destinoEl) {
+                if (alTerminar) alTerminar();
+                return;
             }
-        });
+
+            const oRect = origenEl.getBoundingClientRect();
+            const dRect = destinoEl.getBoundingClientRect();
+
+            const moneda = document.createElement('div');
+            moneda.className = 'coin-icon flying-coin';
+            moneda.textContent = '🪙';
+            moneda.style.left = `${oRect.left + oRect.width / 2 - 11}px`;
+            moneda.style.top = `${oRect.top + oRect.height / 2 - 11}px`;
+
+            const deltaX = (dRect.left + dRect.width / 2) - (oRect.left + oRect.width / 2);
+            const deltaY = (dRect.top + dRect.height / 2) - (oRect.top + oRect.height / 2);
+
+            moneda.style.setProperty('--deltaX', `${deltaX}px`);
+            moneda.style.setProperty('--deltaY', `${deltaY}px`);
+
+            document.body.appendChild(moneda);
+
+            setTimeout(() => {
+                moneda.remove();
+                if (alTerminar) alTerminar();
+            }, 400);
+        }
+
+        function modificarApuesta(opcion, cambio) {
+            if (estadoFase !== 'repartiendo') return;
+
+            let totalApostadoReal = apuestas.A + apuestas.B + apuestas.C;
+            let totalEnTransitoReal = apuestasEnTransito.A + apuestasEnTransito.B + apuestasEnTransito.C;
+            let fichasDisponiblesReales = totalFichasRonda - (totalApostadoReal + totalEnTransitoReal);
+
+            if (cambio > 0 && fichasDisponiblesReales > 0) {
+                apuestasEnTransito[opcion]++;
+                actualizarVistaApuestas();
+
+                const contenedor = document.getElementById(`monedas-visual-${opcion}`);
+                const tempM = document.createElement('div');
+                tempM.className = 'coin-icon';
+                tempM.style.visibility = 'hidden';
+                tempM.textContent = '🪙';
+                contenedor.appendChild(tempM);
+                const tempId = 'temp-coin-dest-' + Math.random();
+                tempM.id = tempId;
+
+                animarMonedaTrayectoria('contador-fichas-header', tempId, () => {
+                    tempM.remove();
+                    apuestasEnTransito[opcion]--;
+                    apuestas[opcion]++;
+                    actualizarVistaApuestas();
+                });
+
+            } else if (cambio < 0 && apuestas[opcion] > 0) {
+                apuestas[opcion]--;
+                apuestasEnTransito[opcion]--; 
+                actualizarVistaApuestas();
+
+                const contenedor = document.getElementById(`monedas-visual-${opcion}`);
+                const ultimaMoneda = contenedor.lastElementChild;
+                if (ultimaMoneda) {
+                    const origenId = 'temp-coin-orig-' + Math.random();
+                    ultimaMoneda.id = origenId;
+
+                    animarMonedaTrayectoria(origenId, 'contador-fichas-header', () => {
+                        apuestasEnTransito[opcion]++; 
+                        actualizarVistaApuestas();
+                    });
+                } else {
+                    apuestasEnTransito[opcion]++;
+                    actualizarVistaApuestas();
+                }
+            }
+        }
+
+        function ponerTodas(opcion) {
+            if (estadoFase !== 'repartiendo') return;
+
+            let totalApostadoReal = apuestas.A + apuestas.B + apuestas.C;
+            let totalEnTransitoReal = apuestasEnTransito.A + apuestasEnTransito.B + apuestasEnTransito.C;
+            let fichasDisponiblesReales = totalFichasRonda - (totalApostadoReal + totalEnTransitoReal);
+
+            let totalApostadoOtras = Object.keys(apuestas)
+                .filter(k => k !== opcion)
+                .reduce((acc, k) => acc + apuestas[k] + apuestasEnTransito[k], 0);
+            
+            let cantidadAAdd = totalFichasRonda - totalApostadoOtras - apuestas[opcion];
+            
+            if (cantidadAAdd > 0) {
+                apuestasEnTransito[opcion] += cantidadAAdd;
+                actualizarVistaApuestas();
+
+                const contenedor = document.getElementById(`monedas-visual-${opcion}`);
+                let completados = 0;
+
+                for (let i = 0; i < cantidadAAdd; i++) {
+                    const tempM = document.createElement('div');
+                    tempM.className = 'coin-icon';
+                    tempM.style.visibility = 'hidden';
+                    tempM.textContent = '🪙';
+                    contenedor.appendChild(tempM);
+                    const tempId = 'temp-coin-max-' + Math.random() + '-' + i;
+                    tempM.id = tempId;
+
+                    setTimeout(() => {
+                        animarMonedaTrayectoria('contador-fichas-header', tempId, () => {
+                            tempM.remove();
+                            apuestasEnTransito[opcion]--;
+                            apuestas[opcion]++;
+                            completados++;
+                            if (completados === cantidadAAdd) {
+                                actualizarVistaApuestas();
+                            }
+                        });
+                    }, i * 60);
+                }
+            }
+        }
+
+        function actualizarVistaApuestas() {
+            if (estadoFase !== 'repartiendo') return;
+
+            let totalApostado = apuestas.A + apuestas.B + apuestas.C;
+            let totalEnTransito = apuestasEnTransito.A + apuestasEnTransito.B + apuestasEnTransito.C;
+            let fichasDisponibles = totalFichasRonda - (totalApostado + totalEnTransito);
+
+            if (fichasDisponibles < 0) fichasDisponibles = 0;
+
+            document.getElementById('apuesta-a').textContent = apuestas.A;
+            document.getElementById('apuesta-b').textContent = apuestas.B;
+            document.getElementById('apuesta-c').textContent = apuestas.C;
+            
+            document.getElementById('val-fichas-disp').textContent = fichasDisponibles;
+
+            ['A', 'B', 'C'].forEach(opt => {
+                const contenedor = document.getElementById(`monedas-visual-${opt}`);
+                contenedor.innerHTML = '';
+                for (let i = 0; i < apuestas[opt]; i++) {
+                    const m = document.createElement('div');
+                    m.className = 'coin-icon';
+                    m.textContent = '🪙';
+                    contenedor.appendChild(m);
+                }
+            });
+
+            const btnConf = document.getElementById('btn-confirmar');
+            const aviso = document.getElementById('aviso-reparto');
+            if (fichasDisponibles === 0 && totalApostado > 0 && totalEnTransito === 0) {
+                btnConf.disabled = false;
+                btnConf.classList.remove('opacity-50', 'cursor-not-allowed');
+                aviso.classList.add('hidden');
+            } else {
+                btnConf.disabled = true;
+                btnConf.classList.add('opacity-50', 'cursor-not-allowed');
+                aviso.classList.remove('hidden');
+            }
+        }
+
+        function manejarBotonPrincipal() {
+            if (estadoFase === 'repartiendo') {
+                estadoFase = 'resultado';
+
+                let fichasCorrectasApostadas = apuestas[respuestaCorrectaLetra];
+
+                ['A', 'B', 'C'].forEach(opt => {
+                    const caja = document.getElementById(`box-opcion-${opt}`);
+                    const contenedorMonedas = document.getElementById(`monedas-visual-${opt}`);
+
+                    if (opt === respuestaCorrectaLetra) {
+                        caja.classList.add('resaltar-verde');
+                    } else {
+                        caja.classList.add('resaltar-rojo');
+                        if (apuestas[opt] > 0) {
+                            const monedasHijas = contenedorMonedas.children;
+                            Array.from(monedasHijas).forEach((m, idx) => {
+                                m.classList.add('falling-coin-item');
+                                m.style.animationDelay = `${idx * 0.05}s`;
+                            });
+                        }
+                    }
+                });
+
+                if (fichasCorrectasApostadas > 0) {
+                    rachaActual++;
+                    if (rachaActual > mejorRacha) mejorRacha = rachaActual;
+                } else {
+                    rachaActual = 0;
+                }
+
+                totalFichasRonda = fichasCorrectasApostadas;
+
+                const t = traducciones[idiomaActual] || traducciones.en;
+                const btnConf = document.getElementById('btn-confirmar');
+                btnConf.textContent = t.nextBtn;
+                btnConf.disabled = false;
+                btnConf.classList.remove('opacity-50', 'cursor-not-allowed');
+                document.getElementById('aviso-reparto').classList.add('hidden');
+
+            } else {
+                preguntaActualIdx++;
+                if (totalFichasRonda <= 0 || preguntaActualIdx >= 10) {
+                    finalizarPartida();
+                } else {
+                    cargarPregunta();
+                }
+            }
+        }
+
+        function finalizarPartida() {
+            document.getElementById('pantalla-juego').classList.add('hidden');
+            document.getElementById('pantalla-fin').classList.remove('hidden');
+
+            let fichasPerdidas = 20 - totalFichasRonda;
+            let porcentajePrecision = Math.round((totalFichasRonda / 20) * 100);
+
+            document.getElementById('fin-fichas-totales').textContent = `${totalFichasRonda} / 20 🪙`;
+            document.getElementById('fin-fichas-perdidas').textContent = `-${fichasPerdidas} 🪙`;
+            document.getElementById('fin-mejor-racha').textContent = `${mejorRacha} streak`;
+            document.getElementById('fin-precision-porcentaje').textContent = `${porcentajePrecision}%`;
+
+            const mainCard = document.getElementById('main-container');
+            const badgeCalif = document.getElementById('contenedor-calificacion');
+            const txtCalif = document.getElementById('txt-calificacion');
+            const iconoTrofeo = document.getElementById('fin-icono-trofeo');
+            const badgeFichas = document.getElementById('fin-fichas-totales');
+
+            mainCard.classList.remove('card-resultado-exito', 'card-resultado-perfecto', 'card-resultado-fallo');
+
+            let califKey = "medium";
+            const t = traducciones[idiomaActual] || traducciones.en;
+            const ratings = t.ratings;
+
+            if (totalFichasRonda === 20) {
+                califKey = "perfect";
+                mainCard.classList.add('card-resultado-perfecto');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#1e3a8a] bg-[#eff6ff] text-[#1e3a8a] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#1e3a8a] bg-[#eff6ff] px-2.5 py-0.5 rounded-md border border-[#1e3a8a]";
+            } else if (totalFichasRonda >= 15) {
+                califKey = "excellent";
+                mainCard.classList.add('card-resultado-exito');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#22c55e] bg-[#f0fdf4] text-[#16a34a] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#16a34a] bg-[#f0fdf4] px-2.5 py-0.5 rounded-md border border-[#22c55e]";
+            } else if (totalFichasRonda >= 10) {
+                califKey = "veryGood";
+                mainCard.classList.add('card-resultado-exito');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#84cc16] bg-[#f7fee7] text-[#65a30d] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#65a30d] bg-[#f7fee7] px-2.5 py-0.5 rounded-md border border-[#84cc16]";
+            } else if (totalFichasRonda >= 5) {
+                califKey = "medium";
+                mainCard.classList.add('card-resultado-exito');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#eab308] bg-[#fefce8] text-[#ca8a04] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#ca8a04] bg-[#fefce8] px-2.5 py-0.5 rounded-md border border-[#eab308]";
+            } else if (totalFichasRonda >= 1) {
+                califKey = "bad";
+                mainCard.classList.add('card-resultado-exito');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#84cc16] bg-[#f7fee7] text-[#65a30d] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#65a30d] bg-[#f7fee7] px-2.5 py-0.5 rounded-md border border-[#84cc16]";
+            } else {
+                califKey = "eliminated";
+                mainCard.classList.add('card-resultado-fallo');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#ef4444] bg-[#fef2f2] text-[#dc2626] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#dc2626] bg-[#fef2f2] px-2.5 py-0.5 rounded-md border border-[#ef4444]";
+            }
+
+            const dataRating = ratings[califKey];
+            txtCalif.textContent = `${dataRating.icon} ${dataRating.text}`;
+            iconoTrofeo.textContent = dataRating.icon;
+        }
+
+        function reiniciarJuego() {
+            comenzarPartida();
+        }
 
         window.onload = () => {
-            const langGuardado = localStorage.getItem('whenwastimeline_idioma') || 'en';
-            aplicarTextosMenu(langGuardado);
+            document.getElementById('select-idioma').value = idiomaActual;
+            actualizarTextosUI();
         };
     </script>
 </body>
