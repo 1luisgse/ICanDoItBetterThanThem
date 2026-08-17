@@ -100,7 +100,7 @@
     </header>
 
     <!-- CONTENEDOR DE JUEGOS -->
-    <main class="max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 my-auto">
+    <main class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 my-auto">
         
         <!-- TARJETA JUEGO 1: WHENWAS -->
         <a href="whenwas/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
@@ -156,6 +156,33 @@
             </div>
         </a>
 
+        <!-- TARJETA JUEGO 3: STAKE20 -->
+        <a href="stake20/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
+                        🎯
+                    </span>
+                    <span id="badge-juego3" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
+                        Ready to play
+                    </span>
+                </div>
+
+                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
+                    Stake20
+                </h2>
+                
+                <p id="txt-desc-juego3" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
+                    Manage your stakes and strategy wisely to conquer the board and reach the ultimate objective without losing control.
+                </p>
+            </div>
+
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
+                <span id="txt-btn-juego3" class="uppercase tracking-widest text-[11px]">Prove it now</span>
+                <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
+            </div>
+        </a>
+
     </main>
 
     <!-- PIE DE PÁGINA CLÁSICO -->
@@ -207,6 +234,9 @@
                 badge2: "Ready to play",
                 desc2: "Guess the exact price of bizarre, historic, or everyday items using the precision fader before your budget runs out.",
                 btn2: "Prove it now",
+                badge3: "Ready to play",
+                desc3: "Manage your stakes and strategy wisely to conquer the board and reach the ultimate objective without losing control.",
+                btn3: "Prove it now",
                 legal: "Legal Notice",
                 privacidad: "Privacy Policy",
                 rights: "© 2026 I Can Do It Better Than Them. All rights reserved.",
@@ -226,6 +256,9 @@
                 badge2: "Listo para jugar",
                 desc2: "Adivina el precio exacto de objetos insólitos, históricos o cotidianos usando el fader de precisión antes de que se agote tu presupuesto.",
                 btn2: "Demuéstralo ahora",
+                badge3: "Listo para jugar",
+                desc3: "Gestiona tus apuestas y estrategia con inteligencia para conquistar el tablero y alcanzar el objetivo final sin perder el control.",
+                btn3: "Demuéstralo ahora",
                 legal: "Aviso Legal",
                 privacidad: "Política de Privacidad",
                 rights: "© 2026 I Can Do It Better Than Them. Todos los derechos reservados.",
@@ -245,6 +278,9 @@
                 badge2: "Prêt à jouer",
                 desc2: "Devinez le prix exact d'objets insolites ou du quotidien en utilisant le curseur de précision.",
                 btn2: "Prouvez-le maintenant",
+                badge3: "Prêt à jouer",
+                desc3: "Gérez vos mises et votre stratégie pour conquérir le plateau et atteindre l'objectif ultime.",
+                btn3: "Prouvez-le maintenant",
                 legal: "Mentions Légales",
                 privacidad: "Politique de Confidentialité",
                 rights: "© 2026 I Can Do It Better Than Them. Tous droits réservés.",
@@ -264,6 +300,9 @@
                 badge2: "Spielbereit",
                 desc2: "Errate den genauen Preis von skurrilen oder alltäglichen Gegenständen mit dem Präzisionsregler.",
                 btn2: "Jetzt beweisen",
+                badge3: "Spielbereit",
+                desc3: "Verwalte deine Einsätze und Strategie klug, um das Brett zu erobern und das Ziel zu erreichen.",
+                btn3: "Jetzt beweisen",
                 legal: "Impressum",
                 privacidad: "Datenschutz",
                 rights: "© 2026 I Can Do It Better Than Them. Alle Rechte vorbehalten.",
@@ -297,6 +336,9 @@
             document.getElementById('badge-juego2').textContent = t.badge2;
             document.getElementById('txt-desc-juego2').textContent = t.desc2;
             document.getElementById('txt-btn-juego2').textContent = t.btn2;
+            document.getElementById('badge-juego3').textContent = t.badge3;
+            document.getElementById('txt-desc-juego3').textContent = t.desc3;
+            document.getElementById('txt-btn-juego3').textContent = t.btn3;
             document.getElementById('txt-legal').textContent = t.legal;
             document.getElementById('txt-privacidad').textContent = t.privacidad;
             document.getElementById('txt-rights').textContent = t.rights;
