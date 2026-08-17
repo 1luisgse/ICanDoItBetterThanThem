@@ -13,6 +13,9 @@
             overflow-x: hidden;
             touch-action: manipulation;
         }
+        button, a, select {
+            touch-action: manipulation;
+        }
         .classic-card {
             background: #ffffff;
             border: 1px solid #e6dfd5;
@@ -24,7 +27,6 @@
             color: #735d43;
             border: 1px solid #e0d5c1;
         }
-        /* Estilos de las monedas animadas */
         .coin-icon {
             display: inline-flex;
             align-items: center;
@@ -76,13 +78,11 @@
             border-color: #ef4444 !important;
             background-color: #fee2e2 !important;
         }
-        /* Estilos vibrantes para la pantalla final */
         .card-resultado-exito {
             border: 2px solid #22c55e !important;
             background: linear-gradient(to bottom, #ffffff, #f0fdf4);
             box-shadow: 0 15px 35px -10px rgba(34, 197, 94, 0.2);
         }
-        /* Azul oscuro brillante de perfección */
         .card-resultado-perfecto {
             border: 2px solid #1e3a8a !important;
             background: linear-gradient(to bottom, #ffffff, #eff6ff);
@@ -97,7 +97,6 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between py-10 px-4 select-none relative">
 
-    <!-- BOTÓN VOLVER / SELECTOR DE IDIOMA -->
     <div class="absolute top-6 left-6 z-20">
         <a href="../" id="btn-volver" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] hover:bg-[#eae2d5] transition shadow-sm no-underline">
             ← Home
@@ -113,7 +112,6 @@
         </select>
     </div>
 
-    <!-- CABECERA -->
     <header class="w-full max-w-xl mx-auto text-center relative z-10 mb-6 mt-4">
         <h1 class="text-2xl sm:text-3xl font-bold tracking-wide text-[#3a3228] uppercase">
             Stake<span class="text-[#9c7c51] italic font-normal">20</span>
@@ -123,10 +121,8 @@
         </p>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL DEL JUEGO -->
     <main id="main-container" class="max-w-xl w-full classic-card rounded-2xl p-6 sm:p-8 relative z-10 my-auto shadow-xl">
         
-        <!-- PANTALLA DE INICIO -->
         <div id="pantalla-inicio" class="text-center py-6">
             <div class="text-4xl mb-4">🪙</div>
             <h2 id="txt-inicio-titulo" class="text-lg font-bold text-[#2c2825] uppercase tracking-wide mb-2">Are you ready to risk it all?</h2>
@@ -138,9 +134,7 @@
             </button>
         </div>
 
-        <!-- PANTALLA DE JUEGO (PREGUNTA Y APUESTAS) -->
         <div id="pantalla-juego" class="hidden">
-            <!-- Barra superior de estado -->
             <div class="flex justify-between items-center pb-4 border-b border-[#f0ebe1] text-xs font-semibold mb-6">
                 <span id="label-pregunta-num" class="text-[#735d43] uppercase tracking-wider">Question 1 / 10</span>
                 <span id="contador-fichas-header" class="classic-badge px-3 py-1 rounded-full uppercase tracking-wider text-[11px] flex items-center gap-1.5 font-bold">
@@ -148,20 +142,16 @@
                 </span>
             </div>
 
-            <!-- Categoría y Dificultad -->
             <div class="flex justify-between items-center mb-3">
                 <span id="badge-categoria" class="text-[10px] uppercase font-bold tracking-widest text-[#9c7c51] bg-[#f9f7f2] px-2.5 py-1 rounded-md border border-[#e6dfd5]">Category</span>
                 <span id="badge-dificultad" class="text-[10px] uppercase font-bold tracking-widest text-[#6b6257]">Normal</span>
             </div>
 
-            <!-- Texto de la pregunta -->
             <h3 id="texto-pregunta" class="text-sm sm:text-base font-bold text-[#2c2825] mb-6 leading-relaxed">
                 Pregunta...
             </h3>
 
-            <!-- Opciones de Respuesta y Distribución de Fichas -->
             <div class="space-y-4 mb-6">
-                <!-- Opción A -->
                 <div id="box-opcion-A" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
                     <div class="flex items-center gap-3 w-full sm:w-1/2">
                         <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">A</span>
@@ -178,7 +168,6 @@
                     </div>
                 </div>
 
-                <!-- Opción B -->
                 <div id="box-opcion-B" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
                     <div class="flex items-center gap-3 w-full sm:w-1/2">
                         <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">B</span>
@@ -195,7 +184,6 @@
                     </div>
                 </div>
 
-                <!-- Opción C -->
                 <div id="box-opcion-C" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
                     <div class="flex items-center gap-3 w-full sm:w-1/2">
                         <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">C</span>
@@ -213,55 +201,42 @@
                 </div>
             </div>
 
-            <!-- Aviso de reparto obligatorio -->
             <div id="aviso-reparto" class="text-center text-xs text-[#9c7c51] mb-6 font-bold font-sans">
                 ⚠️ <span id="txt-aviso-reparto">Debes repartir todas tus fichas disponibles antes de confirmar.</span>
             </div>
 
-            <!-- Botón de Confirmar Apuesta / Siguiente Pregunta -->
             <button onclick="manejarBotonPrincipal()" id="btn-confirmar" disabled class="w-full classic-badge text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest opacity-50 cursor-not-allowed transition">
                 Confirm Distribution
             </button>
         </div>
 
-        <!-- PANTALLA DE FIN DE PARTIDA -->
         <div id="pantalla-fin" class="hidden text-center py-2">
-            <!-- Icono de Estado Global -->
             <div id="fin-icono-trofeo" class="text-5xl mb-2 animate-bounce">🏆</div>
-            
-            <!-- Título Principal -->
             <h3 id="txt-fin-titulo" class="text-xl font-bold uppercase tracking-wider text-[#3a3228] mb-1">Game Over</h3>
             
-            <!-- Nota / Calificación Destacada con Estilo -->
             <div id="contenedor-calificacion" class="my-3 py-2 px-4 rounded-xl border inline-block shadow-sm">
                 <p id="txt-calificacion" class="text-xs sm:text-sm font-bold uppercase tracking-wider m-0">Resultado</p>
             </div>
 
-            <!-- Tarjeta de Desglose de Datos Relevantes -->
             <div id="tarjeta-desglose-fin" class="bg-[#f9f7f2] border border-[#e6dfd5] rounded-2xl p-5 mb-6 space-y-3 font-sans text-xs shadow-inner">
-                <!-- Fichas Finales -->
                 <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
                     <span id="txt-fin-finalchips" class="text-[#6b6257] font-semibold">Final Chips:</span>
                     <strong id="fin-fichas-totales" class="text-sm font-bold px-2.5 py-0.5 rounded-md">13 / 20</strong>
                 </div>
-                <!-- Fichas Perdidas -->
                 <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
                     <span id="txt-fin-lostchips" class="text-[#6b6257] font-semibold">Chips Lost:</span>
                     <strong id="fin-fichas-perdidas" class="text-xs font-bold text-[#ef4444] px-2 py-0.5 bg-[#fee2e2] rounded-md">-7 🪙</strong>
                 </div>
-                <!-- Mejor Racha -->
                 <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
                     <span id="txt-fin-streak" class="text-[#6b6257] font-semibold">Best Streak:</span>
                     <strong id="fin-mejor-racha" class="text-xs font-bold text-[#22c55e] px-2 py-0.5 bg-[#f0fdf4] rounded-md">3 consecutive</strong>
                 </div>
-                <!-- Precisión General -->
                 <div class="flex justify-between items-center">
                     <span id="txt-fin-accuracy" class="text-[#6b6257] font-semibold">Success Rate:</span>
                     <strong id="fin-precision-porcentaje" class="text-xs font-bold px-2 py-0.5 rounded-md">65%</strong>
                 </div>
             </div>
 
-            <!-- Botones de Acción de Mejora -->
             <div class="space-y-2.5">
                 <button onclick="reiniciarJuego()" id="btn-reiniciar" class="w-full bg-[#3a3228] text-white hover:bg-[#52473a] text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest transition cursor-pointer shadow-md">
                     Play Again & Beat Score
@@ -274,14 +249,22 @@
 
     </main>
 
-    <!-- PIE -->
     <footer class="mt-8 text-center text-xs text-[#7c7265] font-sans">
         <p>© 2026 icandoit. All rights reserved.</p>
     </footer>
 
     <script>
+        // Bloqueo global JS contra doble tap zoom en móviles agresivos
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            let now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, { passive: false });
+
         const bancoPreguntas = [
-            // Videojuegos
             { 
                 cat: {en: "Video Games", es: "Videojuegos", fr: "Jeux Vidéo", de: "Videospiele"}, 
                 diff: "Medium", 
@@ -410,8 +393,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Historia
             { 
                 cat: {en: "History", es: "Historia", fr: "Histoire", de: "Geschichte"}, 
                 diff: "Easy", 
@@ -492,8 +473,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Geografía
             { 
                 cat: {en: "Geography", es: "Geografía", fr: "Géographie", de: "Geographie"}, 
                 diff: "Easy", 
@@ -558,8 +537,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Ciencia
             { 
                 cat: {en: "Science", es: "Ciencia", fr: "Science", de: "Wissenschaft"}, 
                 diff: "Medium", 
@@ -624,8 +601,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Tecnología
             { 
                 cat: {en: "Technology", es: "Tecnología", fr: "Technologie", de: "Technologie"}, 
                 diff: "Easy", 
@@ -674,8 +649,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Cine
             { 
                 cat: {en: "Cinema", es: "Cine", fr: "Cinéma", de: "Kino"}, 
                 diff: "Medium", 
@@ -708,8 +681,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Deportes
             { 
                 cat: {en: "Sports", es: "Deportes", fr: "Sports", de: "Sport"}, 
                 diff: "Easy", 
@@ -742,8 +713,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Espacio
             { 
                 cat: {en: "Space", es: "Espacio", fr: "Espace", de: "Weltraum"}, 
                 diff: "Easy", 
@@ -776,8 +745,6 @@
                 ], 
                 correct: 0 
             },
-
-            // Comida
             { 
                 cat: {en: "Food", es: "Comida", fr: "Nourriture", de: "Essen"}, 
                 diff: "Easy", 
@@ -937,7 +904,6 @@
 
         function cambiarIdioma(lang) {
             idiomaActual = lang;
-            localStorage.getItem('whenwastimeline_idioma') || 'en';
             localStorage.setItem('whenwastimeline_idioma', lang);
             document.getElementById('select-idioma').value = lang;
             actualizarTextosUI();
