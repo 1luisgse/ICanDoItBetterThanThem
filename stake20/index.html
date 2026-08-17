@@ -810,12 +810,11 @@
                 backMenuBtn: "Back to Game Arena",
                 diffs: { Easy: "Easy", Medium: "Medium", Hard: "Hard" },
                 ratings: {
-                    perfect: { text: "Flawless Victory! Master of Risk.", icon: "👑" },
-                    excellent: { text: "Outstanding risk management!", icon: "🌟" },
-                    veryGood: { text: "Very solid game performance!", icon: "👏" },
-                    medium: { text: "Decent run, room to improve.", icon: "⚖️" },
-                    bad: { text: "Tough game! Time to try again.", icon: "⚠️" },
-                    eliminated: { text: "Bankrupt! Zero chips remaining.", icon: "💸" }
+                    notBad: { text: "Not Bad", icon: "⚖️" },
+                    thatsOkay: { text: "That's Okay", icon: "👏" },
+                    wellDone: { text: "Well Done", icon: "🌟" },
+                    perfect: { text: "Perfect", icon: "👑" },
+                    eliminated: { text: "Game Over", icon: "💸" }
                 }
             },
             es: {
@@ -828,7 +827,7 @@
                 avisoReparto: "Debes repartir todas tus fichas disponibles antes de confirmar.",
                 confirmBtn: "Confirmar Distribución",
                 nextBtn: "Siguiente Pregunta",
-                gameOverTitle: "Fin de la Partida",
+                gameOverTitle: "Game Over",
                 finalChipsLbl: "Fichas Finales:",
                 lostChipsLbl: "Fichas Perdidas:",
                 bestStreakLbl: "Mejor Racha:",
@@ -837,12 +836,11 @@
                 backMenuBtn: "Volver al Menú de Juegos",
                 diffs: { Easy: "Fácil", Medium: "Media", Hard: "Difícil" },
                 ratings: {
-                    perfect: { text: "¡Victoria Impecable! Maestro del Riesgo.", icon: "👑" },
-                    excellent: { text: "¡Excelente gestión del riesgo!", icon: "🌟" },
-                    veryGood: { text: "¡Muy buen resultado en la partida!", icon: "👏" },
-                    medium: { text: "Partida estable, ¡puedes hacerlo mejor!", icon: "⚖️" },
-                    bad: { text: "¡Partida difícil! Inténtalo otra vez.", icon: "⚠️" },
-                    eliminated: { text: "¡Banca rota! Te has quedado sin fichas.", icon: "💸" }
+                    notBad: { text: "No está mal", icon: "⚖️" },
+                    thatsOkay: { text: "Así se hace", icon: "👏" },
+                    wellDone: { text: "Bien hecho", icon: "🌟" },
+                    perfect: { text: "Perfecto", icon: "👑" },
+                    eliminated: { text: "Game Over", icon: "💸" }
                 }
             },
             fr: {
@@ -855,7 +853,7 @@
                 avisoReparto: "Vous devez distribuer tous vos jetons disponibles avant de confirmer.",
                 confirmBtn: "Confirmer la distribution",
                 nextBtn: "Question Suivante",
-                gameOverTitle: "Fin de Partie",
+                gameOverTitle: "Game Over",
                 finalChipsLbl: "Jetons Finaux :",
                 lostChipsLbl: "Jetons Perdus :",
                 bestStreakLbl: "Meilleure Série :",
@@ -864,12 +862,11 @@
                 backMenuBtn: "Retour aux Jeux",
                 diffs: { Easy: "Facile", Medium: "Moyen", Hard: "Difficile" },
                 ratings: {
-                    perfect: { text: "Victoire Parfaite ! Maître du Risque.", icon: "👑" },
-                    excellent: { text: "Excellente gestion du risque !", icon: "🌟" },
-                    veryGood: { text: "Très bon résultat de partie !", icon: "👏" },
-                    medium: { text: "Résultat correct, visez plus haut.", icon: "⚖️" },
-                    bad: { text: "Partie difficile ! Retentez votre chance.", icon: "⚠️" },
-                    eliminated: { text: "Faillite ! Plus de jetons restants.", icon: "💸" }
+                    notBad: { text: "Pas mal", icon: "⚖️" },
+                    thatsOkay: { text: "C'est bien", icon: "👏" },
+                    wellDone: { text: "Bien joué", icon: "🌟" },
+                    perfect: { text: "Parfait", icon: "👑" },
+                    eliminated: { text: "Game Over", icon: "💸" }
                 }
             },
             de: {
@@ -882,7 +879,7 @@
                 avisoReparto: "Du musst alle verfügbaren Chips verteilen, bevor du bestätigst.",
                 confirmBtn: "Verteilung bestätigen",
                 nextBtn: "Nächste Frage",
-                gameOverTitle: "Spiel Vorbei",
+                gameOverTitle: "Game Over",
                 finalChipsLbl: "Endergebnis Chips:",
                 lostChipsLbl: "Verlorene Chips:",
                 bestStreakLbl: "Beste Serie:",
@@ -891,12 +888,11 @@
                 backMenuBtn: "Zurück zur Spieleübersicht",
                 diffs: { Easy: "Einfach", Medium: "Mittel", Hard: "Schwer" },
                 ratings: {
-                    perfect: { text: "Makelloser Sieg! Meister des Risikos.", icon: "👑" },
-                    excellent: { text: "Exzellentes Risikomanagement!", icon: "🌟" },
-                    veryGood: { text: "Sehr solides Spielergebnis!", icon: "👏" },
-                    medium: { text: "Durchschnittliche Runde, du kannst das!", icon: "⚖️" },
-                    bad: { text: "Schwieriges Spiel! Probier es noch einmal.", icon: "⚠️" },
-                    eliminated: { text: "Pleite! Keine Chips mehr übrig.", icon: "💸" }
+                    notBad: { text: "Nicht schlecht", icon: "⚖️" },
+                    thatsOkay: { text: "Das ist okay", icon: "👏" },
+                    wellDone: { text: "Gut gemacht", icon: "🌟" },
+                    perfect: { text: "Perfekt", icon: "👑" },
+                    eliminated: { text: "Game Over", icon: "💸" }
                 }
             }
         };
@@ -925,7 +921,6 @@
             } else {
                 document.getElementById('btn-confirmar').textContent = t.nextBtn;
             }
-            document.getElementById('txt-fin-titulo').textContent = t.gameOverTitle;
             document.getElementById('txt-fin-finalchips').textContent = t.finalChipsLbl;
             document.getElementById('txt-fin-lostchips').textContent = t.lostChipsLbl;
             document.getElementById('txt-fin-streak').textContent = t.bestStreakLbl;
@@ -1245,43 +1240,41 @@
             const txtCalif = document.getElementById('txt-calificacion');
             const iconoTrofeo = document.getElementById('fin-icono-trofeo');
             const badgeFichas = document.getElementById('fin-fichas-totales');
+            const txtFinTitulo = document.getElementById('txt-fin-titulo');
 
             mainCard.classList.remove('card-resultado-exito', 'card-resultado-perfecto', 'card-resultado-fallo');
 
-            let califKey = "medium";
+            let califKey = "notBad";
             const t = traducciones[idiomaActual] || traducciones.en;
             const ratings = t.ratings;
+            txtFinTitulo.textContent = "Score Summary";
 
-            if (totalFichasRonda === 20) {
+            if (totalFichasRonda <= 0) {
+                califKey = "eliminated";
+                txtFinTitulo.textContent = "Game Over";
+                mainCard.classList.add('card-resultado-fallo');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#ef4444] bg-[#fef2f2] text-[#dc2626] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#dc2626] bg-[#fef2f2] px-2.5 py-0.5 rounded-md border border-[#ef4444]";
+            } else if (totalFichasRonda === 20) {
                 califKey = "perfect";
                 mainCard.classList.add('card-resultado-perfecto');
                 badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#1e3a8a] bg-[#eff6ff] text-[#1e3a8a] inline-block shadow-sm";
                 badgeFichas.className = "text-sm font-bold text-[#1e3a8a] bg-[#eff6ff] px-2.5 py-0.5 rounded-md border border-[#1e3a8a]";
-            } else if (totalFichasRonda >= 15) {
-                califKey = "excellent";
+            } else if (totalFichasRonda >= 14) {
+                califKey = "wellDone";
                 mainCard.classList.add('card-resultado-exito');
                 badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#22c55e] bg-[#f0fdf4] text-[#16a34a] inline-block shadow-sm";
                 badgeFichas.className = "text-sm font-bold text-[#16a34a] bg-[#f0fdf4] px-2.5 py-0.5 rounded-md border border-[#22c55e]";
-            } else if (totalFichasRonda >= 10) {
-                califKey = "veryGood";
-                mainCard.classList.add('card-resultado-exito');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#84cc16] bg-[#f7fee7] text-[#65a30d] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#65a30d] bg-[#f7fee7] px-2.5 py-0.5 rounded-md border border-[#84cc16]";
-            } else if (totalFichasRonda >= 5) {
-                califKey = "medium";
-                mainCard.classList.add('card-resultado-exito');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#eab308] bg-[#fefce8] text-[#ca8a04] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#ca8a04] bg-[#fefce8] px-2.5 py-0.5 rounded-md border border-[#eab308]";
-            } else if (totalFichasRonda >= 1) {
-                califKey = "bad";
+            } else if (totalFichasRonda >= 8) {
+                califKey = "thatsOkay";
                 mainCard.classList.add('card-resultado-exito');
                 badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#84cc16] bg-[#f7fee7] text-[#65a30d] inline-block shadow-sm";
                 badgeFichas.className = "text-sm font-bold text-[#65a30d] bg-[#f7fee7] px-2.5 py-0.5 rounded-md border border-[#84cc16]";
             } else {
-                califKey = "eliminated";
-                mainCard.classList.add('card-resultado-fallo');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#ef4444] bg-[#fef2f2] text-[#dc2626] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#dc2626] bg-[#fef2f2] px-2.5 py-0.5 rounded-md border border-[#ef4444]";
+                califKey = "notBad";
+                mainCard.classList.add('card-resultado-exito');
+                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#eab308] bg-[#fefce8] text-[#ca8a04] inline-block shadow-sm";
+                badgeFichas.className = "text-sm font-bold text-[#ca8a04] bg-[#fefce8] px-2.5 py-0.5 rounded-md border border-[#eab308]";
             }
 
             const dataRating = ratings[califKey];
