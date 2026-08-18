@@ -16,6 +16,7 @@
     <meta name="description" content="I can do it better than them - TV Game Show Arena from your sofa. Put your skills to the test with classic challenges.">
     <title>I can do it better than them | TV Sofa Challenge</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1627189663364841" crossorigin="anonymous"></script>
     <script>
         if (!localStorage.getItem('whenwastimeline_idioma')) {
@@ -48,6 +49,12 @@
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
         }
+        .game-title {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            font-size: 1.35rem;
+            letter-spacing: 0.05em;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between py-12 px-4 select-none relative">
@@ -61,13 +68,13 @@
         </select>
     </div>
 
-    <header class="w-full max-w-xl mx-auto text-center relative z-10 mb-6 mt-2 flex flex-col items-center justify-center">
+    <header class="w-full max-w-xl mx-auto text-center relative z-10 mb-6 mt-12 sm:mt-16 flex flex-col items-center justify-center">
         
-        <div class="relative w-full max-w-lg mx-auto -my-12 sm:-my-16">
+        <div class="relative w-full max-w-lg mx-auto -my-8 sm:-my-10">
             <img src="logo.jpg" alt="I Can Do It Better Than Them" class="w-full h-auto object-contain">
         </div>
         
-        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#ff0000] font-serif max-w-lg mx-auto leading-relaxed mt-2">
+        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#ff0000] font-serif max-w-lg mx-auto leading-relaxed mt-16 sm:mt-20">
             How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.
         </p>
     </header>
@@ -77,15 +84,15 @@
         <a href="whenwas/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300">
-                        ⏳
+                    <span class="w-12 h-12 flex items-center justify-center bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300 overflow-hidden p-1">
+                        <img src="logo-whenwas.jpg" alt="WhenWasTimeLine Logo" class="w-full h-full object-contain">
                     </span>
                     <span id="badge-juego1" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
                     </span>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
+                <h2 class="game-title text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
                     WhenWasTimeLine
                 </h2>
                 
@@ -103,15 +110,15 @@
         <a href="aimprice/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300">
-                        🏷️
+                    <span class="w-12 h-12 flex items-center justify-center bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300 overflow-hidden p-1">
+                        <img src="logo-aimprice.jpg" alt="AimPrice Logo" class="w-full h-full object-contain">
                     </span>
                     <span id="badge-juego2" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
                     </span>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
+                <h2 class="game-title text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
                     AimPrice
                 </h2>
                 
@@ -129,15 +136,15 @@
         <a href="stake20/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300">
-                        🎯
+                    <span class="w-12 h-12 flex items-center justify-center bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300 overflow-hidden p-1">
+                        <img src="logo-stake20.jpg" alt="Stake20 Logo" class="w-full h-full object-contain">
                     </span>
                     <span id="badge-juego3" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
                     </span>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
+                <h2 class="game-title text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
                     Stake20
                 </h2>
                 
@@ -244,7 +251,7 @@
                 legalTitle: "Mentions Légales",
                 legalText: "Ce site web est une plateforme indépendante de divertissement proposant des mini-jeux inspirés de jeux télévisés. Toutes les marques citées appartiennent à leurs propriétaires respectifs.",
                 privacidadTitle: "Politique de Confidentialité",
-                privacidadText: "Nous respectons votre vie privée. Ce site utilise le stockage local uniquement pour vos préférences de langue et intègre Google AdSense pour la gestion des annonces publicitaires."
+                privacidadText: "Nous respectamos votre vie privée. Ce site utilise le stockage local uniquement pour vos préférences de langue et intègre Google AdSense pour la gestion des annonces publicitaires."
             },
             de: {
                 subtitulo: "Wie oft hast du vom Sofa aus den Fernseher angeschrien und gedacht, du könntest den Hauptgewinn gewinnen? Raus aus dem Wohnzimmer und beweise es.",
