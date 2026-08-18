@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCN3CB1RMZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RCN3CB1RMZ');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Verificacion google -->
@@ -94,15 +103,15 @@
         <!-- VISTA: MENÚ PRINCIPAL -->
         <div id="vista-menu">
             <header class="text-center mb-4 relative pt-1">
-                <!-- Enlace para volver a la plataforma principal (I can do it better than them) -->
+                <!-- Enlace de vuelta con una simple flecha -->
                 <div class="absolute top-0 left-0">
-                    <a href="../" class="bg-[#f4efe6] text-[#735d43] text-[11px] font-semibold py-1 px-2.5 rounded-xl border border-[#e0d5c1] flex items-center gap-1 shadow-sm hover:bg-[#ede6d8] transition">
-                        🏠 Hub
+                    <a href="../" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1 px-2.5 rounded-xl border border-[#e0d5c1] flex items-center justify-center shadow-sm hover:bg-[#ede6d8] transition">
+                        ←
                     </a>
                 </div>
 
-                <!-- Contador de Racha (Arriba a la izquierda ajustado si hay hub, o flotante) -->
-                <div class="absolute top-0 left-[62px] bg-[#f4efe6] text-[#735d43] text-[11px] font-semibold py-1 px-2 rounded-xl border border-[#e0d5c1] flex items-center gap-1 shadow-sm">
+                <!-- Contador de Racha -->
+                <div class="absolute top-0 left-[42px] bg-[#f4efe6] text-[#735d43] text-[11px] font-semibold py-1 px-2 rounded-xl border border-[#e0d5c1] flex items-center gap-1 shadow-sm">
                     🔥 <span id="current-streak-num">0</span>
                 </div>
 
@@ -1100,6 +1109,7 @@
             
             pointerSrcIndex = parseInt(this.dataset.index);
             const rect = this.getBoundingClientRect();
+            const cardWidth = rect.width || this.offsetWidth;
             
             cloneOffsetX = e.clientX - rect.left;
             cloneOffsetY = e.clientY - rect.top;
@@ -1108,7 +1118,8 @@
 
             activePointerClone = this.cloneNode(true);
             activePointerClone.className = `p-2.5 rounded-xl border border-[#bfa181] bg-[#ffffff] flex items-center justify-between mobile-dragging-clone`;
-            activePointerClone.style.width = `${rect.width}px`;
+            activePointerClone.style.width = `${cardWidth}px`;
+            activePointerClone.style.boxSizing = 'border-box';
             activePointerClone.style.left = `${rect.left}px`;
             activePointerClone.style.top = `${rect.top}px`;
             document.body.appendChild(activePointerClone);
@@ -1122,6 +1133,7 @@
 
         function handlePointerMove(e) {
             if (!activePointerClone) return;
+            if (e.clientX === 0 && e.clientY === 0) return;
             e.preventDefault();
 
             const x = e.clientX - cloneOffsetX;
@@ -1143,21 +1155,27 @@
         function handlePointerUp(e) {
             if (!activePointerClone) return;
 
-            activePointerClone.style.display = 'none';
-            const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
-            const targetCard = elementBelow ? elementBelow.closest('div[data-index]') : null;
+            if (e.clientX !== 0 || e.clientY !== 0) {
+                activePointerClone.style.display = 'none';
+                const elementBelow = document.elementFromPoint(e.clientX, e.clientY);
+                activePointerClone.style.display = 'flex';
 
-            if (targetCard) {
-                const targetIndex = parseInt(targetCard.dataset.index);
-                if (pointerSrcIndex !== null && pointerSrcIndex !== targetIndex) {
-                    limpiarColoresVisuales();
-                    const temp = eventosJuego[pointerSrcIndex];
-                    eventosJuego[pointerSrcIndex] = eventosJuego[targetIndex];
-                    eventosJuego[targetIndex] = temp;
+                const targetCard = elementBelow ? elementBelow.closest('div[data-index]') : null;
+
+                if (targetCard) {
+                    const targetIndex = parseInt(targetCard.dataset.index);
+                    if (pointerSrcIndex !== null && pointerSrcIndex !== targetIndex) {
+                        limpiarColoresVisuales();
+                        const temp = eventosJuego[pointerSrcIndex];
+                        eventosJuego[pointerSrcIndex] = eventosJuego[targetIndex];
+                        eventosJuego[targetIndex] = temp;
+                    }
                 }
             }
 
-            activePointerClone.remove();
+            if (activePointerClone && activePointerClone.parentNode) {
+                activePointerClone.remove();
+            }
             activePointerClone = null;
             pointerSrcIndex = null;
 

@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCN3CB1RMZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-RCN3CB1RMZ');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="YvlBoqkR35-GFkVl5UpkPOl77Dy7S_0K268ER0zwgZE" />
@@ -9,45 +18,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1627189663364841" crossorigin="anonymous"></script>
     <script>
-        // Establecer inglés por defecto si no hay idioma guardado
         if (!localStorage.getItem('whenwastimeline_idioma')) {
             localStorage.setItem('whenwastimeline_idioma', 'en');
         }
     </script>
     <style>
         body {
-            background-color: #fcfbf9;
-            color: #2c2825;
+            background-color: #ffffff;
+            color: #ff0000;
             font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         }
         .classic-card {
-            background: #ffffff;
-            border: 1px solid #e6dfd5;
-            box-shadow: 0 10px 30px -10px rgba(80, 70, 60, 0.08);
+            background: #ff0000;
+            border: 2px solid #ff0000;
+            box-shadow: 0 10px 30px -10px rgba(255, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
         .classic-card:hover {
-            border-color: #bfa181;
-            box-shadow: 0 15px 35px -10px rgba(181, 148, 114, 0.2);
+            border-color: #ff0000;
+            box-shadow: 0 15px 35px -10px rgba(255, 0, 0, 0.3);
             transform: translateY(-2px);
         }
         .classic-badge {
-            background-color: #f4efe6;
-            color: #735d43;
-            border: 1px solid #e0d5c1;
+            background-color: #ffffff;
+            color: #ff0000;
+            border: 1px solid #ff0000;
         }
-        /* Estilo para el fondo oscuro del modal */
         .modal-overlay {
-            background-color: rgba(44, 40, 37, 0.4);
+            background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-between py-12 px-4 select-none relative">
 
-    <!-- SELECTOR DE IDIOMA GLOBAL (ARRIBA A LA DERECHA) -->
     <div class="absolute top-6 right-6 z-20">
-        <select id="select-idioma" onchange="cambiarIdiomaGlobal(this.value)" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] focus:outline-none cursor-pointer shadow-sm">
+        <select id="select-idioma" onchange="cambiarIdiomaGlobal(this.value)" class="bg-[#ff0000] text-[#ffffff] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#ffffff] focus:outline-none cursor-pointer shadow-sm">
             <option value="en">🇬🇧 EN</option>
             <option value="es">🇪🇸 ES</option>
             <option value="fr">🇫🇷 FR</option>
@@ -55,129 +61,92 @@
         </select>
     </div>
 
-    <!-- CABECERA INSTITUCIONAL PERFECTAMENTE EQUILIBRADA -->
-    <header class="w-full max-w-2xl mx-auto text-center relative z-10 mb-12 mt-4 flex flex-col items-center justify-center">
+    <header class="w-full max-w-xl mx-auto text-center relative z-10 mb-6 mt-2 flex flex-col items-center justify-center">
         
-        <!-- NUBE DE PENSAMIENTO CON TÍTULO VECTORIAL DE GRAN IMPACTO Y CENTRADO ABSOLUTO -->
-        <div class="relative w-full max-w-xl mx-auto my-2" style="filter: drop-shadow(0 14px 28px rgba(44, 40, 37, 0.08));">
-            <svg class="w-full h-auto z-0 overflow-visible" viewBox="0 0 660 380" xmlns="http://www.w3.org/2000/svg">
-                <!-- Cuerpo principal de la nube -->
-                <path d="M140,240 
-                         C50,240 10,180 20,115 
-                         C30,50  90,20  160,35 
-                         C200,-5  270,-10 330,20 
-                         C395,0   460,25  500,75 
-                         C570,65  640,110 630,175 
-                         C660,220 600,265 530,255 
-                         C490,295 415,305 355,285 
-                         C305,310 235,300 190,270 
-                         C155,290 150,265 140,240 Z" 
-                      fill="#ffffff" 
-                      stroke="#2c2825" 
-                      stroke-width="4.5" 
-                      stroke-linejoin="round" />
-                
-                <!-- Burbuja de pensamiento mediana integrada -->
-                <circle cx="170" cy="315" r="15" fill="#ffffff" stroke="#2c2825" stroke-width="4" />
-                
-                <!-- Burbuja de pensamiento pequeña integrada -->
-                <circle cx="145" cy="348" r="8" fill="#ffffff" stroke="#2c2825" stroke-width="3.5" />
-
-                <!-- Título vectorial con tamaño grande, legible y proporción óptima -->
-                <text x="330" y="128" text-anchor="middle" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="46" font-weight="bold" fill="#3a3228" letter-spacing="1.5">
-                    <tspan id="svg-titulo-1">I CAN DO IT</tspan>
-                </text>
-                <text x="330" y="185" text-anchor="middle" font-family="Georgia, Cambria, 'Times New Roman', serif" font-size="42" font-style="italic" fill="#9c7c51" letter-spacing="1">
-                    <tspan id="svg-titulo-2">BETTER THAN THEM</tspan>
-                </text>
-            </svg>
+        <div class="relative w-full max-w-lg mx-auto -my-12 sm:-my-16">
+            <img src="logo.jpg" alt="I Can Do It Better Than Them" class="w-full h-auto object-contain">
         </div>
         
-        <!-- Subtítulo descriptivo con separación limpia -->
-        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#6b6257] font-serif max-w-lg mx-auto leading-relaxed mt-4">
+        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#ff0000] font-serif max-w-lg mx-auto leading-relaxed mt-2">
             How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.
         </p>
     </header>
 
-    <!-- CONTENEDOR DE JUEGOS -->
     <main class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 my-auto">
         
-        <!-- TARJETA JUEGO 1: WHENWAS -->
         <a href="whenwas/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
+                    <span class="text-2xl p-2.5 bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300">
                         ⏳
                     </span>
-                    <span id="badge-juego1" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
+                    <span id="badge-juego1" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
                     </span>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
+                <h2 class="text-lg font-bold text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
                     WhenWasTimeLine
                 </h2>
                 
-                <p id="txt-desc-juego1" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
+                <p id="txt-desc-juego1" class="text-xs text-[#ffffff] mt-2 leading-relaxed font-sans">
                     Order historical, technological, and pop-culture milestones correctly under pressure before your time or lives run out.
                 </p>
             </div>
 
-            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#ff4d4d] text-xs font-bold text-[#ffffff]">
                 <span id="txt-btn-juego1" class="uppercase tracking-widest text-[11px]">Prove it now</span>
                 <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
             </div>
         </a>
 
-        <!-- TARJETA JUEGO 2: AIMPRICE -->
         <a href="aimprice/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
+                    <span class="text-2xl p-2.5 bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300">
                         🏷️
                     </span>
-                    <span id="badge-juego2" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
+                    <span id="badge-juego2" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
                     </span>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
+                <h2 class="text-lg font-bold text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
                     AimPrice
                 </h2>
                 
-                <p id="txt-desc-juego2" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
+                <p id="txt-desc-juego2" class="text-xs text-[#ffffff] mt-2 leading-relaxed font-sans">
                     Guess the exact price of bizarre, historic, or everyday items using the precision fader before your budget runs out.
                 </p>
             </div>
 
-            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#ff4d4d] text-xs font-bold text-[#ffffff]">
                 <span id="txt-btn-juego2" class="uppercase tracking-widest text-[11px]">Prove it now</span>
                 <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
             </div>
         </a>
 
-        <!-- TARJETA JUEGO 3: STAKE20 -->
         <a href="stake20/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
-                    <span class="text-2xl p-2.5 bg-[#f9f7f2] rounded-xl border border-[#e6dfd5] group-hover:scale-105 transition duration-300">
+                    <span class="text-2xl p-2.5 bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300">
                         🎯
                     </span>
-                    <span id="badge-juego3" class="text-[10px] font-semibold bg-[#eef7ed] text-[#3b7a37] border border-[#d2ead0] py-1 px-3 rounded-full uppercase tracking-wider">
+                    <span id="badge-juego3" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
                     </span>
                 </div>
 
-                <h2 class="text-lg font-bold text-[#2c2825] group-hover:text-[#8a6840] transition duration-200">
+                <h2 class="text-lg font-bold text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
                     Stake20
                 </h2>
                 
-                <p id="txt-desc-juego3" class="text-xs text-[#6b6257] mt-2 leading-relaxed font-sans">
+                <p id="txt-desc-juego3" class="text-xs text-[#ffffff] mt-2 leading-relaxed font-sans">
                     Manage your stakes and strategy wisely to conquer the board and reach the ultimate objective without losing control.
                 </p>
             </div>
 
-            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#f0ebe1] text-xs font-bold text-[#8a6840]">
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#ff4d4d] text-xs font-bold text-[#ffffff]">
                 <span id="txt-btn-juego3" class="uppercase tracking-widest text-[11px]">Prove it now</span>
                 <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
             </div>
@@ -185,36 +154,30 @@
 
     </main>
 
-    <!-- PIE DE PÁGINA CLÁSICO -->
-    <footer class="mt-16 text-center text-xs text-[#7c7265] flex flex-col sm:flex-row items-center gap-4 relative z-10 font-sans">
+    <footer class="mt-16 text-center text-xs text-[#ff0000] flex flex-col sm:flex-row items-center gap-4 relative z-10 font-sans">
         <div class="flex gap-5 font-medium">
-            <button onclick="abrirModal('legal')" id="txt-legal" class="hover:text-[#3a3228] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#7c7265]">Legal Notice</button>
-            <span class="text-[#d9cebc]">•</span>
-            <button onclick="abrirModal('privacidad')" id="txt-privacidad" class="hover:text-[#3a3228] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#7c7265]">Privacy Policy</button>
+            <button onclick="abrirModal('legal')" id="txt-legal" class="hover:text-[#cc0000] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#ff0000]">Legal Notice</button>
+            <span class="text-[#ff4d4d]">•</span>
+            <button onclick="abrirModal('privacidad')" id="txt-privacidad" class="hover:text-[#cc0000] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#ff0000]">Privacy Policy</button>
         </div>
-        <span class="hidden sm:inline text-[#d9cebc]">|</span>
-        <p id="txt-rights" class="text-[11px] text-[#8c8275]">© 2026 I Can Do It Better Than Them. All rights reserved.</p>
+        <span class="hidden sm:inline text-[#ff4d4d]">|</span>
+        <p id="txt-rights" class="text-[11px] text-[#ff0000]">© 2026 I Can Do It Better Than Them. All rights reserved.</p>
     </footer>
 
-    <!-- MODAL POP-UP (OCULTO POR DEFECTO) -->
     <div id="modal-container" class="fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4 hidden">
-        <div class="classic-card bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl max-h-[85vh] flex flex-col">
-            <!-- Botón de cerrar -->
-            <button onclick="cerrarModal()" class="absolute top-4 right-4 text-[#735d43] hover:text-[#2c2825] text-xl font-bold px-2 py-1 bg-[#f4efe6] rounded-lg border border-[#e0d5c1] transition">
+        <div class="bg-[#ff0000] border-2 border-[#ff0000] rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl max-h-[85vh] flex flex-col text-white">
+            <button onclick="cerrarModal()" class="absolute top-4 right-4 text-[#ff0000] hover:text-[#cc0000] text-xl font-bold px-2 py-1 bg-[#ffffff] rounded-lg border border-[#ffffff] transition">
                 &times;
             </button>
             
-            <!-- Título del Modal -->
-            <h3 id="modal-titulo" class="text-xl font-bold text-[#3a3228] uppercase tracking-wide mb-4 pr-8">Título</h3>
+            <h3 id="modal-titulo" class="text-xl font-bold text-[#ffffff] uppercase tracking-wide mb-4 pr-8">Título</h3>
             
-            <!-- Contenido dinámico del Modal -->
-            <div id="modal-cuerpo" class="text-xs sm:text-sm text-[#6b6257] font-sans leading-relaxed overflow-y-auto pr-2 space-y-3">
+            <div id="modal-cuerpo" class="text-xs sm:text-sm text-[#ffffff] font-sans leading-relaxed overflow-y-auto pr-2 space-y-3">
                 Texto informativo...
             </div>
 
-            <!-- Botón inferior para cerrar -->
-            <div class="mt-6 pt-4 border-t border-[#f0ebe1] text-right">
-                <button onclick="cerrarModal()" id="txt-btn-cerrar" class="classic-badge text-xs font-semibold py-2 px-6 rounded-xl uppercase tracking-wider hover:bg-[#eae2d5] transition">
+            <div class="mt-6 pt-4 border-t border-[#ff4d4d] text-right">
+                <button onclick="cerrarModal()" id="txt-btn-cerrar" class="classic-badge text-xs font-semibold py-2 px-6 rounded-xl uppercase tracking-wider hover:bg-[#fff0f0] transition">
                     Close
                 </button>
             </div>
@@ -222,11 +185,8 @@
     </div>
 
     <script>
-        // Diccionario multilingüe para el menú principal y los modales (incluyendo líneas del SVG)
         const menuI18n = {
             en: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
                 subtitulo: "How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.",
                 badge1: "Ready to play",
                 desc1: "Order historical, technological, and pop-culture milestones correctly under pressure before your time or lives run out.",
@@ -247,8 +207,6 @@
                 privacidadText: "We respect your privacy. This site uses local storage (localStorage) exclusively to remember your language preferences and game progress on your device. We also utilize third-party services like Google AdSense, which may use cookies to serve personalized or non-personalized ads according to your browser settings and consent."
             },
             es: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
                 subtitulo: "¿Cuántas veces le has gritado a la tele desde el sofá pensando que podrías ganar el gran premio? Sal del salón y demuéstralo con minijuegos inspirados en programas legendarios de televisión.",
                 badge1: "Listo para jugar",
                 desc1: "Ordena hitos históricos, tecnológicos y de la cultura pop correctamente bajo presión antes de que se acaben tus vidas.",
@@ -269,8 +227,6 @@
                 privacidadText: "Respetamos tu privacidad. Este sitio utiliza almacenamiento local (localStorage) únicamente para recordar tus preferencias de idioma y progresos en tu propio dispositivo. Asimismo, empleamos servicios de terceros como Google AdSense, que puede utilizar cookies para mostrar anuncios adaptados según la normativa de privacidad y tu consentimiento."
             },
             fr: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
                 subtitulo: "Combien de fois avez-vous crié sur la télé depuis votre canapé en pensant pouvoir gagner le grand prix ? Sortez du salon et prouvez-le.",
                 badge1: "Prêt à jouer",
                 desc1: "Classez des jalons historiques, technologiques et de pop-culture sous pression avant que vos vies ne s'épuisent.",
@@ -291,8 +247,6 @@
                 privacidadText: "Nous respectons votre vie privée. Ce site utilise le stockage local uniquement pour vos préférences de langue et intègre Google AdSense pour la gestion des annonces publicitaires."
             },
             de: {
-                t1: "I CAN DO IT",
-                t2: "BETTER THAN THEM",
                 subtitulo: "Wie oft hast du vom Sofa aus den Fernseher angeschrien und gedacht, du könntest den Hauptgewinn gewinnen? Raus aus dem Wohnzimmer und beweise es.",
                 badge1: "Spielbereit",
                 desc1: "Ordne historische, technologische und Popkultur-Meilensteine unter Druck richtig an, bevor deine Leben ablaufen.",
@@ -327,8 +281,6 @@
         function aplicarTextosMenu(lang) {
             const t = menuI18n[lang] || menuI18n.en;
             document.getElementById('select-idioma').value = lang;
-            document.getElementById('svg-titulo-1').textContent = t.t1;
-            document.getElementById('svg-titulo-2').textContent = t.t2;
             document.getElementById('txt-subtitulo').textContent = t.subtitulo;
             document.getElementById('badge-juego1').textContent = t.badge1;
             document.getElementById('txt-desc-juego1').textContent = t.desc1;
