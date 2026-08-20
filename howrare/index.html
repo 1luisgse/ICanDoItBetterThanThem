@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HowRare?</title>
+    <!-- Fuente Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --primary-red: #ff2a2a;
+            --primary-red-hover: #e02424;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --border-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--text-white);
+        }
+
+        header h1 span {
+            color: var(--primary-red);
+        }
+
+        header p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .game-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .score-board span span {
+            color: var(--text-white);
+        }
+
+        .event-image-container {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 16px;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .event-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .event-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 24px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Estilo del Slider Avanzado */
+        .slider-section {
+            width: 100%;
+            margin-bottom: 24px;
+        }
+
+        .value-display {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            margin-bottom: 12px;
+        }
+
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            background: var(--primary-red);
+            cursor: pointer;
+            -webkit-appearance: none;
+            margin-top: -8px;
+            box-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
+            transition: transform 0.1s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .scale-markers {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            margin-top: 6px;
+            padding: 0 4px;
+        }
+
+        /* Botón de Acción */
+        .btn {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(255, 42, 42, 0.4);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-red-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Pantalla de Resultados */
+        .result-box {
+            display: none;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-diff {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-gray);
+        }
+
+        .result-diff span {
+            font-weight: 700;
+            color: var(--text-white);
+        }
+
+        .points-earned {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+        }
+
+        .actual-value-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .actual-value-card b {
+            color: var(--primary-red);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>How<span>Rare</span>?</h1>
+            <p>Adivina la probabilidad exacta del suceso</p>
+        </header>
+
+        <div class="game-card">
+            <!-- Interfaz de Juego -->
+            <div id="game-interface" style="width: 100%;">
+                <div class="score-board">
+                    <span>Ronda: <span id="round-num">1</span> / 5</span>
+                    <span>Puntuación: <span id="total-score">0</span> pts</span>
+                </div>
+
+                <div class="event-image-container">
+                    <img id="event-img" src="" alt="Imagen del evento">
+                </div>
+
+                <div class="event-title" id="event-title">Cargando evento...</div>
+
+                <div class="slider-section">
+                    <div class="value-display" id="slider-val-display">50.00%</div>
+                    <!-- Slider con escala logarítmica simulada mediante JS -->
+                    <input type="range" id="rare-slider" min="0" max="1000" value="500">
+                    <div class="scale-markers">
+                        <span>0% (Imposible)</span>
+                        <span>1%</span>
+                        <span>10%</span>
+                        <span>50%</span>
+                        <span>100% (Seguro)</span>
+                    </div>
+                </div>
+
+                <button class="btn" id="guess-btn">¡COMPROBAR!</button>
+            </div>
+
+            <!-- Interfaz de Resultados de Ronda -->
+            <div class="result-box" id="result-interface">
+                <div class="result-diff">Tu respuesta se desvió un:</div>
+                <div class="result-diff"><span id="diff-value">0%</span></div>
+                <div class="points-earned" id="points-earned">+0 PUNTOS</div>
+                
+                <div class="actual-value-card">
+                    El porcentaje real era: <br><b id="real-value-display">0%</b>
+                </div>
+
+                <button class="btn" id="next-btn">SIGUIENTE CASO</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Base de datos de sucesos con sus probabilidades reales (en porcentaje 0 - 100)
+        const eventsDB = [
+            { title: "Que te toque el Gordo de la Lotería de Navidad (un décimo)", real: 0.001, img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80" },
+            { title: "Que te caiga un rayo a lo largo de tu vida", real: 0.014, img: "https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&w=600&q=80" },
+            { title: "Nacer con los ojos azules (a nivel mundial)", real: 8.0, img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" },
+            { title: "Ser una persona albina", real: 0.005, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" },
+            { title: "Sacar un 3 en un dado de 6 caras", real: 16.66, img: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80" },
+            { title: "Tener el pelo pelirrojo natural en el mundo", real: 1.5, img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" },
+            { title: "Encontrar un trébol de 4 hojas", real: 0.01, img: "https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&w=600&q=80" },
+            { title: "Nacer zurdo", real: 10.0, img: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=600&q=80" },
+            { title: "Sobrevivir a un ataque de tiburón", real: 95.0, img: "https://images.unsplash.com/photo-1563389234-58a2e7c370e9?auto=format&fit=crop&w=600&q=80" },
+            { title: "Sacar cara en una moneda", real: 50.0, img: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=600&q=80" }
+        ];
+
+        let currentRound = 1;
+        let totalScore = 0;
+        let currentGameEvents = [];
+        let activeEvent = null;
+
+        const slider = document.getElementById('rare-slider');
+        const sliderValDisplay = document.getElementById('slider-val-display');
+        const eventTitle = document.getElementById('event-title');
+        const eventImg = document.getElementById('event-img');
+        const guessBtn = document.getElementById('guess-btn');
+        const nextBtn = document.getElementById('next-btn');
+        
+        const gameInterface = document.getElementById('game-interface');
+        const resultInterface = document.getElementById('result-interface');
+        
+        const roundNumEl = document.getElementById('round-num');
+        const totalScoreEl = document.getElementById('total-score');
+        const diffValueEl = document.getElementById('diff-value');
+        const pointsEarnedEl = document.getElementById('points-earned');
+        const realValueDisplay = document.getElementById('real-value-display');
+
+        // Mapeo logarítmico para que el fader sea muy preciso cerca del 0% y más amplio al final
+        // Slider va de 0 a 1000
+        function sliderToPercentage(val) {
+            let v = parseInt(val);
+            if (v <= 500) {
+                // De 0 a 500 en el slider mapea de 0% a 1% (permite muchísima precisión en lo ultra raro)
+                return (v / 500) * 1.0;
+            } else {
+                // De 500 a 1000 mapea de 1% a 100% con progresión cuadrática/exponencial suave
+                let normalized = (v - 500) / 500; // 0 a 1
+                return 1.0 + Math.pow(normalized, 2) * 99.0;
+            }
+        }
+
+        slider.addEventListener('input', () => {
+            let realVal = sliderToPercentage(slider.value);
+            if (realVal < 0.01) {
+                sliderValDisplay.textContent = realVal.toFixed(4) + "%";
+            } else if (realVal < 1) {
+                sliderValDisplay.textContent = realVal.toFixed(3) + "%";
+            } else if (realVal < 10) {
+                sliderValDisplay.textContent = realVal.toFixed(2) + "%";
+            } else {
+                sliderValDisplay.textContent = realVal.toFixed(1) + "%";
+            }
+        });
+
+        function initGame() {
+            currentRound = 1;
+            totalScore = 0;
+            // Mezclar eventos
+            currentGameEvents = [...eventsDB].sort(() => Math.random() - 0.5);
+            loadRound();
+        }
+
+        function loadRound() {
+            if (currentRound > 5) {
+                // Fin del juego
+                gameInterface.style.display = "none";
+                resultInterface.style.display = "block";
+                document.querySelector('.result-diff').textContent = "¡Partida Finalizada!";
+                diffValueEl.parentElement.style.display = "none";
+                pointsEarnedEl.textContent = `Puntuación Total: ${totalScore} pts`;
+                realValueDisplay.parentElement.innerHTML = `¡Has completado el reto de probabilidades de HowRare?!`;
+                nextBtn.textContent = "JUGAR OTRA VEZ";
+                nextBtn.onclick = initGame;
+                return;
+            }
+
+            document.querySelector('.result-diff').parentElement.style.display = "block";
+            gameInterface.style.display = "block";
+            resultInterface.style.display = "none";
+            
+            roundNumEl.textContent = currentRound;
+            totalScoreEl.textContent = totalScore;
+
+            activeEvent = currentGameEvents[currentRound - 1];
+            eventTitle.textContent = activeEvent.title;
+            eventImg.src = activeEvent.img;
+
+            // Resetear slider al centro
+            slider.value = 500;
+            slider.dispatchEvent(new Event('input'));
+        }
+
+        guessBtn.addEventListener('click', () => {
+            let userGuess = sliderToPercentage(slider.value);
+            let actual = activeEvent.real;
+
+            // Calcular diferencia porcentual absoluta
+            let diff = Math.abs(userGuess - actual);
+            
+            // Sistema de puntuación basado en cercanía (máximo 1000 puntos por ronda)
+            // Si aciertas clavado o casi, da 1000. Cae según la desviación relativa/absoluta.
+            let maxPoints = 1000;
+            let errorRatio = diff / Math.max(actual, 1); 
+            let roundPoints = Math.max(0, Math.round(maxPoints * (1 - Math.min(diff / 10, 1))));
+            
+            // Ajuste extra fino si el evento es ultra raro y acierta el margen milimétrico
+            if (diff <= 0.005 && actual < 0.1) {
+                roundPoints = 1000;
+            }
+
+            totalScore += roundPoints;
+
+            // Mostrar resultados
+            gameInterface.style.display = "none";
+            resultInterface.style.display = "block";
+            
+            diffValueEl.textContent = diff < 0.01 ? diff.toFixed(4) + "%" : diff.toFixed(2) + "%";
+            pointsEarnedEl.textContent = `+${roundPoints} PUNTOS`;
+            realValueDisplay.textContent = `${actual}%`;
+
+            currentRound++;
+            nextBtn.textContent = "SIGUIENTE CASO";
+            nextBtn.onclick = loadRound;
+        });
+
+        // Iniciar al cargar la página
+        initGame();
+    </script>
+</body>
+</html>

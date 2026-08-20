@@ -25,19 +25,19 @@
     </script>
     <style>
         body {
-            background-color: #ffffff;
+            background-color: #1c1c1c;
             color: #ff0000;
             font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         }
         .classic-card {
             background: #ff0000;
             border: 2px solid #ff0000;
-            box-shadow: 0 10px 30px -10px rgba(255, 0, 0, 0.2);
+            box-shadow: 0 10px 30px -10px rgba(255, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
         .classic-card:hover {
             border-color: #ff0000;
-            box-shadow: 0 15px 35px -10px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 15px 35px -10px rgba(255, 0, 0, 0.4);
             transform: translateY(-2px);
         }
         .classic-badge {
@@ -46,7 +46,7 @@
             border: 1px solid #ff0000;
         }
         .modal-overlay {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.75);
             backdrop-filter: blur(4px);
         }
         .game-title {
@@ -71,10 +71,10 @@
     <header class="w-full max-w-xl mx-auto text-center relative z-10 mb-6 mt-12 sm:mt-16 flex flex-col items-center justify-center">
         
         <div class="relative w-full max-w-lg mx-auto -my-8 sm:-my-10">
-            <img src="logo.jpg" alt="I Can Do It Better Than Them" class="w-full h-auto object-contain">
+            <img src="logo.png" alt="I Can Do It Better Than Them" class="w-full h-auto object-contain">
         </div>
         
-        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#ff0000] font-serif max-w-lg mx-auto leading-relaxed mt-16 sm:mt-20">
+        <p id="txt-subtitulo" class="text-xs sm:text-sm text-[#ffffff] font-serif max-w-lg mx-auto leading-relaxed mt-16 sm:mt-20">
             How many times have you shouted at the TV from your sofa thinking you could win the grand prize? Step out of the living room and prove it with minigames inspired by legendary television shows.
         </p>
     </header>
@@ -85,7 +85,7 @@
             <div>
                 <div class="flex items-center justify-between mb-4">
                     <span class="w-12 h-12 flex items-center justify-center bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300 overflow-hidden p-1">
-                        <img src="logo-whenwas.jpg" alt="WhenWasTimeLine Logo" class="w-full h-full object-contain">
+                        <img src="logo-whenwas.png" alt="WhenWasTimeLine Logo" class="w-full h-full object-contain">
                     </span>
                     <span id="badge-juego1" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
@@ -111,7 +111,7 @@
             <div>
                 <div class="flex items-center justify-between mb-4">
                     <span class="w-12 h-12 flex items-center justify-center bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300 overflow-hidden p-1">
-                        <img src="logo-aimprice.jpg" alt="AimPrice Logo" class="w-full h-full object-contain">
+                        <img src="logo-aimprice.png" alt="AimPrice Logo" class="w-full h-full object-contain">
                     </span>
                     <span id="badge-juego2" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
@@ -137,7 +137,7 @@
             <div>
                 <div class="flex items-center justify-between mb-4">
                     <span class="w-12 h-12 flex items-center justify-center bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300 overflow-hidden p-1">
-                        <img src="logo-stake20.jpg" alt="Stake20 Logo" class="w-full h-full object-contain">
+                        <img src="logo-stake20.png" alt="Stake20 Logo" class="w-full h-full object-contain">
                     </span>
                     <span id="badge-juego3" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
                         Ready to play
@@ -161,14 +161,14 @@
 
     </main>
 
-    <footer class="mt-16 text-center text-xs text-[#ff0000] flex flex-col sm:flex-row items-center gap-4 relative z-10 font-sans">
+    <footer class="mt-16 text-center text-xs text-[#ffffff] flex flex-col sm:flex-row items-center gap-4 relative z-10 font-sans">
         <div class="flex gap-5 font-medium">
-            <button onclick="abrirModal('legal')" id="txt-legal" class="hover:text-[#cc0000] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#ff0000]">Legal Notice</button>
+            <button onclick="abrirModal('legal')" id="txt-legal" class="hover:text-[#ff4d4d] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#ffffff]">Legal Notice</button>
             <span class="text-[#ff4d4d]">•</span>
-            <button onclick="abrirModal('privacidad')" id="txt-privacidad" class="hover:text-[#cc0000] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#ff0000]">Privacy Policy</button>
+            <button onclick="abrirModal('privacidad')" id="txt-privacidad" class="hover:text-[#ff4d4d] transition underline bg-transparent border-none cursor-pointer p-0 font-medium text-xs text-[#ffffff]">Privacy Policy</button>
         </div>
         <span class="hidden sm:inline text-[#ff4d4d]">|</span>
-        <p id="txt-rights" class="text-[11px] text-[#ff0000]">© 2026 I Can Do It Better Than Them. All rights reserved.</p>
+        <p id="txt-rights" class="text-[11px] text-[#ffffff]">© 2026 I Can Do It Better Than Them. All rights reserved.</p>
     </footer>
 
     <div id="modal-container" class="fixed inset-0 modal-overlay z-50 flex items-center justify-center p-4 hidden">

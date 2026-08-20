@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCN3CB1RMZ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -25,6 +25,7 @@
     <link rel="canonical" href="https://whenwastimeline.vercel.app/">
     <title>WhenWasTimeLine | Classical Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -51,11 +52,12 @@
         }
         .dragging {
             opacity: 0.4;
-            background: #ede6d8 !important;
+            background: #ffe6e6 !important;
         }
         .drag-over {
-            border-color: #bfa181 !important;
-            background: rgba(181, 148, 114, 0.15) !important;
+            border-color: #ff0000 !important;
+            border-width: 4px !important;
+            background: #fff0f0 !important;
             transform: scale(1.02);
         }
         /* Estilo para la tarjeta flotante en móvil */
@@ -65,59 +67,74 @@
             z-index: 1000;
             opacity: 0.95;
             transform: scale(1.05) rotate(1deg);
-            box-shadow: 0 20px 25px -5px rgba(80, 70, 60, 0.25), 0 10px 10px -5px rgba(80, 70, 60, 0.2);
-            border-color: #bfa181 !important;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.25), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: #ff0000 !important;
+            border-width: 3px !important;
             background: #ffffff !important;
+            color: #ff0000 !important;
             transition: none !important;
         }
         body {
-            background-color: #fcfbf9;
-            color: #2c2825;
+            background-color: #ffffff;
+            color: #ff0000;
             font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         }
         .classic-card-container {
-            background: #ffffff;
-            border: 1px solid #e6dfd5;
-            box-shadow: 0 15px 35px -10px rgba(80, 70, 60, 0.08);
+            background: #ff0000;
+            border: 2px solid #ff0000;
+            box-shadow: 0 10px 30px -10px rgba(255, 0, 0, 0.2);
         }
         .classic-item {
-            background: #f9f7f2;
-            border: 1px solid #e6dfd5;
+            background: #ff0000;
+            border: 2px solid #ffffff;
             transition: all 0.2s ease;
         }
         .classic-item:hover {
-            border-color: #bfa181;
-            background: #ffffff;
+            border-width: 3px;
+            border-color: #ffffff;
+            background: #b80000;
         }
         .classic-badge {
-            background-color: #f4efe6;
-            color: #735d43;
-            border: 1px solid #e0d5c1;
+            background-color: #ffffff;
+            color: #ff0000;
+            border: 1px solid #ffffff;
+        }
+        .game-title-anton {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .category-title-anton {
+            font-family: 'Anton', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 1.4rem;
+            line-height: 1.1;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center py-6 p-3 select-none relative overflow-y-auto">
 
-    <div class="max-w-md w-full classic-card-container rounded-3xl p-5 relative z-10 my-auto">
+    <div class="max-w-md w-full classic-card-container rounded-3xl p-5 relative z-10 my-auto text-white">
         
         <!-- VISTA: MENÚ PRINCIPAL -->
         <div id="vista-menu">
             <header class="text-center mb-4 relative pt-1">
                 <!-- Enlace de vuelta con una simple flecha -->
                 <div class="absolute top-0 left-0">
-                    <a href="../" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1 px-2.5 rounded-xl border border-[#e0d5c1] flex items-center justify-center shadow-sm hover:bg-[#ede6d8] transition">
+                    <a href="../" class="bg-[#ffffff] text-[#ff0000] text-xs font-semibold py-1 px-2.5 rounded-xl border border-[#ffffff] flex items-center justify-center shadow-sm hover:bg-[#fff0f0] transition">
                         ←
                     </a>
                 </div>
 
                 <!-- Contador de Racha -->
-                <div class="absolute top-0 left-[42px] bg-[#f4efe6] text-[#735d43] text-[11px] font-semibold py-1 px-2 rounded-xl border border-[#e0d5c1] flex items-center gap-1 shadow-sm">
-                    🔥 <span id="current-streak-num">0</span>
+                <div class="absolute top-0 left-[42px] bg-[#ffffff] text-[#ff0000] text-[11px] font-semibold py-1 px-2 rounded-xl border border-[#ffffff] flex items-center gap-1 shadow-sm">
+                    <img src="racha.jpg" alt="Racha" class="w-3.5 h-3.5 object-contain" /> <span id="current-streak-num">0</span>
                 </div>
 
                 <!-- Selector de Idioma (Arriba a la derecha) -->
                 <div class="absolute top-0 right-0">
-                    <select id="select-idioma" onchange="cambiarIdioma(this.value)" class="bg-[#f4efe6] text-[#735d43] text-[11px] font-semibold py-1 px-2 rounded-xl border border-[#e0d5c1] focus:outline-none cursor-pointer">
+                    <select id="select-idioma" onchange="cambiarIdioma(this.value)" class="bg-[#ff0000] text-[#ffffff] text-[11px] font-semibold py-1 px-2 rounded-xl border border-[#ffffff] focus:outline-none cursor-pointer">
                         <option value="en">🇬🇧 EN</option>
                         <option value="es">🇪🇸 ES</option>
                         <option value="fr">🇫🇷 FR</option>
@@ -125,15 +142,15 @@
                     </select>
                 </div>
 
-                <h1 class="text-xl font-bold tracking-wide text-[#3a3228] pt-8 uppercase">WhenWasTimeLine</h1>
-                <p id="txt-subtitulo" class="text-xs text-[#6b6257] mt-1 font-serif">The daily challenge of ordering history. One category, one challenge a day.</p>
-                <div id="fecha-diaria" class="mt-2.5 text-[11px] classic-badge py-1 px-3.5 rounded-full inline-block font-sans font-medium shadow-sm"></div>
+                <h1 class="text-2xl font-bold tracking-wide text-[#ffffff] pt-8 game-title-anton">WhenWasTimeLine</h1>
+                <p id="txt-subtitulo" class="text-xs text-[#ffe6e6] mt-1 font-serif">The daily challenge of ordering history. One category, one challenge a day.</p>
+                <div id="fecha-diaria" class="mt-2.5 text-[11px] classic-badge py-1 px-3.5 rounded-full inline-flex items-center gap-1.5 font-sans font-medium shadow-sm"></div>
             </header>
 
             <!-- BOTÓN MODO ALEATORIO ILIMITADO -->
             <div class="mb-3">
-                <button onclick="iniciarPartidaAleatoria()" class="w-full bg-[#f9f7f2] hover:bg-[#f4efe6] text-[#735d43] font-semibold py-2.5 px-4 rounded-2xl border border-[#e6dfd5] transition duration-200 text-xs cursor-pointer flex items-center justify-center gap-2 shadow-sm font-sans">
-                    🎲 <span id="txt-modo-aleatorio">Unlimited Random Mode</span>
+                <button onclick="iniciarPartidaAleatoria()" class="w-full bg-[#ffffff] hover:bg-[#fff0f0] text-[#ff0000] font-semibold py-2.5 px-4 rounded-2xl border border-[#ffffff] transition duration-200 text-xs cursor-pointer flex items-center justify-center gap-2 shadow-md font-sans">
+                    <img src="aleatorio.jpg" alt="Aleatorio" class="w-4 h-4 object-contain" /> <span id="txt-modo-aleatorio">Unlimited Random Mode</span>
                 </button>
             </div>
 
@@ -141,52 +158,52 @@
 
             <!-- BOTÓN VER TUTORIAL -->
             <div class="text-center mb-2 font-sans">
-                <button onclick="abrirTutorial()" class="text-[11px] text-[#7c7265] hover:text-[#2c2825] underline cursor-pointer">
+                <button onclick="abrirTutorial()" class="text-[11px] text-[#ffe6e6] hover:text-[#ffffff] underline cursor-pointer">
                     <span id="txt-ver-tutorial">How to play? (View tutorial)</span>
                 </button>
             </div>
 
-            <footer id="txt-footer" class="text-center text-[10px] text-[#8c8275] font-sans font-medium mt-2">
+            <footer id="txt-footer" class="text-center text-[10px] text-[#ffe6e6] font-sans font-medium mt-2">
                 Updates daily at 00:00 UTC
             </footer>
         </div>
 
         <!-- VISTA: JUEGO -->
         <div id="vista-juego" class="hidden font-sans">
-            <header class="flex justify-between items-center mb-4">
-                <div>
-                    <button id="txt-volver" onclick="volverAlMenu()" class="text-xs text-[#8a6840] hover:text-[#5e452a] font-semibold mb-1 flex items-center gap-1 cursor-pointer transition">
+            <header class="flex justify-between items-start mb-4">
+                <div class="max-w-[55%]">
+                    <button id="txt-volver" onclick="volverAlMenu()" class="text-xs text-[#ffe6e6] hover:text-[#ffffff] font-semibold mb-1 flex items-center gap-1 cursor-pointer transition">
                         ← Back to menu
                     </button>
-                    <h1 id="titulo-categoria-juego" class="text-sm font-bold tracking-tight text-[#3a3228] uppercase font-serif"></h1>
+                    <div id="titulo-categoria-juego" class="font-bold tracking-wide text-[#ffffff] category-title-anton flex items-center gap-1.5 flex-wrap"></div>
                 </div>
-                <div class="flex items-center space-x-2">
-                    <div id="cronometro-display" class="text-xs font-mono bg-[#f9f7f2] text-[#6b6257] py-1 px-2.5 rounded-xl border border-[#e6dfd5]">
-                        ⏱️ 00:00
+                <div class="flex items-center space-x-2 shrink-0 pt-1">
+                    <div id="cronometro-display" class="text-xs font-mono font-bold bg-[#ffffff] text-[#ff0000] py-1 px-2.5 rounded-xl border border-[#ffffff] flex items-center gap-1.5 shadow-sm">
+                        <img src="cronometro.jpg" alt="Cronómetro" class="w-3.5 h-3.5 object-contain" /> <span>00:00</span>
                     </div>
                     <div id="vidas-container" class="flex space-x-1">
-                        <span class="vida text-[#d9cebc] font-bold text-base transition duration-300">✕</span>
-                        <span class="vida text-[#d9cebc] font-bold text-base transition duration-300">✕</span>
-                        <span class="vida text-[#d9cebc] font-bold text-base transition duration-300">✕</span>
-                        <span class="vida text-[#d9cebc] font-bold text-base transition duration-300">✕</span>
-                        <span class="vida text-[#d9cebc] font-bold text-base transition duration-300">✕</span>
+                        <span class="vida font-bold text-base transition duration-300">✕</span>
+                        <span class="vida font-bold text-base transition duration-300">✕</span>
+                        <span class="vida font-bold text-base transition duration-300">✕</span>
+                        <span class="vida font-bold text-base transition duration-300">✕</span>
+                        <span class="vida font-bold text-base transition duration-300">✕</span>
                     </div>
                 </div>
             </header>
 
             <div id="cards-container" class="space-y-2 mb-4"></div>
 
-            <button id="btn-comprobar" onclick="verificarOrden()" class="w-full bg-[#8a6840] hover:bg-[#735d43] text-[#fcfbf9] font-semibold py-2.5 px-4 rounded-2xl transition duration-200 shadow-md cursor-pointer text-xs">
+            <button id="btn-comprobar" onclick="verificarOrden()" class="w-full bg-[#ffffff] hover:bg-[#fff0f0] text-[#ff0000] font-semibold py-2.5 px-4 rounded-2xl transition duration-200 shadow-md cursor-pointer text-xs">
                 Check order
             </button>
 
             <div id="resultado-container" class="mt-3 hidden text-center">
                 <p id="resultado-texto" class="font-medium text-xs mb-2.5"></p>
-                <button id="btn-compartir" onclick="compartirResultado()" class="hidden w-full bg-[#f9f7f2] hover:bg-[#f4efe6] text-[#2c2825] font-medium py-2 px-4 rounded-xl transition duration-200 text-xs cursor-pointer mb-2 border border-[#e6dfd5]">
-                    📋 Copy result for social media
+                <button id="btn-compartir" onclick="compartirResultado()" class="hidden w-full bg-[#ffffff] hover:bg-[#fff0f0] text-[#ff0000] font-semibold py-2.5 px-4 rounded-2xl transition duration-200 text-xs cursor-pointer mb-2 border border-[#ffffff] shadow-md flex items-center justify-center gap-2">
+                    <img src="copiar.jpg" alt="Copiar" class="w-4 h-4 object-contain" /> <span id="txt-btn-compartir">Copy result for social media</span>
                 </button>
-                <button id="txt-volver-menu" onclick="volverAlMenu()" class="w-full bg-[#f9f7f2] hover:bg-[#f4efe6] text-[#6b6257] font-medium py-2 px-4 rounded-xl transition duration-200 text-xs cursor-pointer border border-[#e6dfd5]">
-                    🏠 Back to main menu
+                <button id="txt-volver-menu" onclick="volverAlMenu()" class="w-full bg-[#ffffff] hover:bg-[#fff0f0] text-[#ff0000] font-semibold py-2.5 px-4 rounded-2xl transition duration-200 text-xs cursor-pointer border border-[#ffffff] shadow-md flex items-center justify-center gap-2">
+                    <img src="casa.jpg" alt="Menú" class="w-4 h-4 object-contain" /> <span>Back to main menu</span>
                 </button>
             </div>
         </div>
@@ -194,31 +211,31 @@
     </div>
 
     <!-- PIE DE PÁGINA / ENLACES LEGALES -->
-    <footer class="mt-4 text-center text-[11px] text-[#7c7265] flex gap-4 justify-center relative z-10 font-sans">
-        <a href="../aviso-legal.html" class="hover:text-[#2c2825] underline transition">Legal Notice</a>
+    <footer class="mt-4 text-center text-[11px] text-[#ff0000] flex gap-4 justify-center relative z-10 font-sans">
+        <a href="../aviso-legal.html" class="hover:text-[#cc0000] underline transition">Legal Notice</a>
         <span>•</span>
-        <a href="../privacidad.html" class="hover:text-[#2c2825] underline transition">Privacy Policy</a>
+        <a href="../privacidad.html" class="hover:text-[#cc0000] underline transition">Privacy Policy</a>
     </footer>
 
     <!-- MODAL DE TUTORIAL -->
-    <div id="modal-tutorial" class="fixed inset-0 bg-[#2c2825]/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden font-sans">
-        <div class="bg-[#ffffff] border border-[#e6dfd5] rounded-3xl max-w-sm w-full p-5 shadow-2xl text-center relative">
-            <h3 id="tut-titulo" class="text-base font-bold text-[#3a3228] mb-3 font-serif">🌍 How to play WhenWasTimeLine?</h3>
-            <div class="space-y-3 text-xs text-[#6b6257] text-left mb-5">
-                <div class="flex items-start gap-2.5 bg-[#f9f7f2] p-2.5 rounded-xl border border-[#e6dfd5]">
+    <div id="modal-tutorial" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden font-sans">
+        <div class="bg-[#ff0000] border-2 border-[#ff0000] rounded-3xl max-w-sm w-full p-5 shadow-2xl text-center relative text-white">
+            <h3 id="tut-titulo" class="text-lg font-bold text-[#ffffff] mb-3 game-title-anton">🌍 How to play WhenWasTimeLine?</h3>
+            <div class="space-y-3 text-xs text-[#ffe6e6] text-left mb-5">
+                <div class="flex items-start gap-2.5 bg-[#cc0000] p-2.5 rounded-xl border border-[#ff4d4d]">
                     <span class="text-base">👆</span>
-                    <p id="tut-p1"><strong class="text-[#2c2825]">Order the cards:</strong> Drag and drop historical milestones from oldest (top) to newest (bottom).</p>
+                    <p id="tut-p1"><strong class="text-[#ffffff]">Order the cards:</strong> Drag and drop historical milestones from oldest (top) to newest (bottom).</p>
                 </div>
-                <div class="flex items-start gap-2.5 bg-[#f9f7f2] p-2.5 rounded-xl border border-[#e6dfd5]">
+                <div class="flex items-start gap-2.5 bg-[#cc0000] p-2.5 rounded-xl border border-[#ff4d4d]">
                     <span class="text-base">🔍</span>
-                    <p id="tut-p2"><strong class="text-[#2c2825]">Check order:</strong> Press check. Correct ones turn green, close ones yellow, errors red.</p>
+                    <p id="tut-p2"><strong class="text-[#ffffff]">Check order:</strong> Press check. Correct ones turn green, close ones yellow, errors red.</p>
                 </div>
-                <div class="flex items-start gap-2.5 bg-[#f9f7f2] p-2.5 rounded-xl border border-[#e6dfd5]">
+                <div class="flex items-start gap-2.5 bg-[#cc0000] p-2.5 rounded-xl border border-[#ff4d4d]">
                     <span class="text-base">❤️</span>
-                    <p id="tut-p3"><strong class="text-[#2c2825]">Limited lives:</strong> You have 5 overall attempts to sort the entire timeline correctly.</p>
+                    <p id="tut-p3"><strong class="text-[#ffffff]">Limited lives:</strong> You have 5 overall attempts to sort the entire timeline correctly.</p>
                 </div>
             </div>
-            <button onclick="cerrarTutorial()" id="tut-btn" class="w-full bg-[#8a6840] hover:bg-[#735d43] text-[#fcfbf9] font-semibold py-2.5 px-4 rounded-2xl transition duration-200 text-xs cursor-pointer shadow-md">
+            <button onclick="cerrarTutorial()" id="tut-btn" class="w-full bg-[#ffffff] hover:bg-[#fff0f0] text-[#ff0000] font-semibold py-2.5 px-4 rounded-2xl transition duration-200 text-xs cursor-pointer shadow-md">
                 Got it, let's play!
             </button>
         </div>
@@ -234,8 +251,8 @@
                 verTutorial: "How to play? (View tutorial)",
                 volver: "← Back to menu",
                 comprobar: "Check order",
-                compartir: "📋 Copy result for social media",
-                volverMenu: "🏠 Back to main menu",
+                compartir: "Copy result for social media",
+                volverMenu: "Back to main menu",
                 jugarBtn: "Play →",
                 ordenarSub: "Order 8 historical milestones",
                 modoRevision: "Challenge finished (Review mode)",
@@ -259,8 +276,8 @@
                 verTutorial: "¿Cómo se juega? (Ver tutorial)",
                 volver: "← Volver al menú",
                 comprobar: "Comprobar orden",
-                compartir: "📋 Copiar resultado para redes",
-                volverMenu: "🏠 Volver al menú principal",
+                compartir: "Copiar resultado para redes",
+                volverMenu: "Volver al menú principal",
                 jugarBtn: "Jugar →",
                 ordenarSub: "Ordenar 8 hitos históricos",
                 modoRevision: "Reto finalizado (Modo revisión)",
@@ -284,8 +301,8 @@
                 verTutorial: "Comment jouer ? (Voir le tutoriel)",
                 volver: "← Retour au menu",
                 comprobar: "Vérifier l'ordre",
-                compartir: "📋 Copier le résultat",
-                volverMenu: "🏠 Retour au menu principal",
+                compartir: "Copier le résultat",
+                volverMenu: "Retour au menu principal",
                 jugarBtn: "Jouer →",
                 ordenarSub: "Classer 8 jalons historiques",
                 modoRevision: "Défi terminé (Mode révision)",
@@ -309,8 +326,8 @@
                 verTutorial: "Spielanleitung (Tutorial ansehen)",
                 volver: "← Zurück zum Menü",
                 comprobar: "Reihenfolge prüfen",
-                compartir: "📋 Ergebnis kopieren",
-                volverMenu: "🏠 Zurück zum Hauptmenü",
+                compartir: "Ergebnis kopieren",
+                volverMenu: "Zurück zum Hauptmenü",
                 jugarBtn: "Spielen →",
                 ordenarSub: "Ordne 8 historische Meilensteine",
                 modoRevision: "Herausforderung beendet (Ansichtsmodus)",
@@ -350,13 +367,16 @@
             document.getElementById('txt-footer').textContent = t.footer;
             document.getElementById('txt-volver').textContent = t.volver;
             document.getElementById('btn-comprobar').textContent = t.comprobar;
-            document.getElementById('btn-compartir').textContent = t.compartir;
-            document.getElementById('txt-volver-menu').textContent = t.volverMenu;
+            document.getElementById('txt-btn-compartir').textContent = t.compartir;
+            
+            // Actualizar texto del botón de volver al menú manteniendo su estructura con imagen
+            const btnVolverMenu = document.getElementById('txt-volver-menu');
+            btnVolverMenu.innerHTML = `<img src="casa.jpg" alt="Menú" class="w-4 h-4 object-contain" /> <span>${t.volverMenu}</span>`;
 
             document.getElementById('tut-titulo').textContent = t.tutTitulo;
-            document.getElementById('tut-p1').innerHTML = `<strong class="text-[#2c2825]">${t.tutP1.split(':')[0]}:</strong>${t.tutP1.split(':')[1]}`;
-            document.getElementById('tut-p2').innerHTML = `<strong class="text-[#2c2825]">${t.tutP2.split(':')[0]}:</strong>${t.tutP2.split(':')[1]}`;
-            document.getElementById('tut-p3').innerHTML = `<strong class="text-[#2c2825]">${t.tutP3.split(':')[0]}:</strong>${t.tutP3.split(':')[1]}`;
+            document.getElementById('tut-p1').innerHTML = `<strong class="text-[#ffffff]">${t.tutP1.split(':')[0]}:</strong>${t.tutP1.split(':')[1]}`;
+            document.getElementById('tut-p2').innerHTML = `<strong class="text-[#ffffff]">${t.tutP2.split(':')[0]}:</strong>${t.tutP2.split(':')[1]}`;
+            document.getElementById('tut-p3').innerHTML = `<strong class="text-[#ffffff]">${t.tutP3.split(':')[0]}:</strong>${t.tutP3.split(':')[1]}`;
             document.getElementById('tut-btn').textContent = t.tutBtn;
         }
 
@@ -626,23 +646,23 @@
         const metadataCategorias = {
             tecnologia: { 
                 nombre: { es: "Tecnología e Invenciones", en: "Technology & Inventions", fr: "Technologie et Inventions", de: "Technologie & Erfindungen" }, 
-                icono: "💻" 
+                imagen: "tecnologia.jpg" 
             },
             historia: { 
                 nombre: { es: "Historia Mundial", en: "World History", fr: "Histoire du Monde", de: "Weltgeschichte" }, 
-                icono: "🏛️" 
+                imagen: "historia.jpg" 
             },
             videojuegos: { 
                 nombre: { es: "Videojuegos", en: "Video Games", fr: "Jeux Vidéo", de: "Videospiele" }, 
-                icono: "🎮" 
+                imagen: "videojuegos.jpg" 
             },
             series: { 
                 nombre: { es: "Series y TV", en: "Series & TV", fr: "Séries et TV", de: "Serien & TV" }, 
-                icono: "📺" 
+                imagen: "series.jpg" 
             },
             arte: { 
                 nombre: { es: "Arte y Cultura", en: "Art & Culture", fr: "Art et Culture", de: "Kunst & Kultur" }, 
-                icono: "🎨" 
+                imagen: "arte.jpg" 
             }
         };
 
@@ -820,7 +840,8 @@
             const fechaEl = document.getElementById('fecha-diaria');
             const localesFecha = { en: 'en-US', fr: 'fr-FR', de: 'de-DE', es: 'es-ES' };
             const opcionesFecha = { timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric' };
-            fechaEl.textContent = `📅 ${new Date(obtenerFechaSemilla() + 'T00:00:00Z').toLocaleDateString(localesFecha[lang] || 'en-US', opcionesFecha)}`;
+            const fechaTextoFormateada = new Date(obtenerFechaSemilla() + 'T00:00:00Z').toLocaleDateString(localesFecha[lang] || 'en-US', opcionesFecha);
+            fechaEl.innerHTML = `<img src="fecha.jpg" alt="Fecha" class="w-3.5 h-3.5 object-contain" /> ${fechaTextoFormateada}`;
 
             const container = document.getElementById('categorias-container');
             container.innerHTML = '';
@@ -831,12 +852,12 @@
                 const estadoCat = progreso[key];
                 const yaCompletado = estadoCat && estadoCat.completado;
 
-                let badgeHTML = `<span class="text-xs bg-[#f4efe6] text-[#735d43] py-1 px-2.5 rounded-xl border border-[#e0d5c1] font-medium">${t.jugarBtn}</span>`;
+                let badgeHTML = `<span class="text-xs bg-[#ffffff] text-[#ff0000] py-1 px-2.5 rounded-xl border border-[#ffffff] font-medium">${t.jugarBtn}</span>`;
                 if (yaCompletado) {
                     if (estadoCat.ganado) {
-                        badgeHTML = `<span class="text-xs bg-[#eef7ed] text-[#3b7a37] py-1 px-2.5 rounded-xl border border-[#d2ead0] font-medium">⏱️ (${estadoCat.tiempoTexto}) →</span>`;
+                        badgeHTML = `<span class="text-xs bg-[#ffffff] text-[#275024] py-1 px-2.5 rounded-xl border border-[#ffffff] font-medium">⏱️ (${estadoCat.tiempoTexto}) →</span>`;
                     } else {
-                        badgeHTML = `<span class="text-xs bg-[#fdf2f2] text-[#9b2c2c] py-1 px-2.5 rounded-xl border border-[#f5c6c6] font-medium">${t.falladoRevision} →</span>`;
+                        badgeHTML = `<span class="text-xs bg-[#ffffff] text-[#9b2c2c] py-1 px-2.5 rounded-xl border border-[#ffffff] font-medium">${t.falladoRevision} →</span>`;
                     }
                 }
 
@@ -846,10 +867,10 @@
 
                 btn.innerHTML = `
                     <div class="flex items-center space-x-3">
-                        <span class="text-xl p-2 bg-[#ffffff] rounded-xl border border-[#e6dfd5]">${cat.icono}</span>
+                        <img src="${cat.imagen}" alt="${cat.nombre[lang]}" class="w-10 h-10 object-contain p-1.5 bg-[#ffffff] rounded-xl border border-[#ff4d4d]" />
                         <div class="text-left">
-                            <h2 class="text-xs font-bold text-[#2c2825] tracking-tight">${cat.nombre[lang]}</h2>
-                            <p class="text-[10px] text-[#7c7265]">${yaCompletado ? t.modoRevision : t.ordenarSub}</p>
+                            <h2 class="text-base font-bold text-[#ffffff] tracking-wide category-title-anton">${cat.nombre[lang]}</h2>
+                            <p class="text-[10px] text-[#ffe6e6]">${yaCompletado ? t.modoRevision : t.ordenarSub}</p>
                         </div>
                     </div>
                     ${badgeHTML}
@@ -886,7 +907,10 @@
 
             document.getElementById('vista-menu').classList.add('hidden');
             document.getElementById('vista-juego').classList.remove('hidden');
-            document.getElementById('titulo-categoria-juego').textContent = metadataCategorias[key].nombre[lang] + (esModoAleatorio ? " (🎲)" : "");
+            
+            const tituloContainer = document.getElementById('titulo-categoria-juego');
+            let contenidoTitulo = metadataCategorias[key].nombre[lang];
+            tituloContainer.innerHTML = contenidoTitulo;
 
             const resultadoContainer = document.getElementById('resultado-container');
             const btnComprobar = document.getElementById('btn-comprobar');
@@ -904,12 +928,12 @@
                     eventosJuego = reto.mezclados.map(e => ({ ...e, estadoVisual: 'correcto' }));
                 }
 
-                document.getElementById('cronometro-display').textContent = `⏱️ ${estadoCat.tiempoTexto}`;
+                document.getElementById('cronometro-display').innerHTML = `<img src="cronometro.jpg" alt="Cronómetro" class="w-3.5 h-3.5 object-contain" /> <span>${estadoCat.tiempoTexto}</span>`;
                 btnComprobar.classList.add('hidden');
                 resultadoContainer.classList.remove('hidden');
 
                 if (estadoCat.ganado) {
-                    resultadoTexto.className = "font-medium text-xs mb-2.5 text-[#3b7a37]";
+                    resultadoTexto.className = "font-medium text-xs mb-2.5 text-[#eef7ed]";
                     resultadoTexto.textContent = t.revisionExito(estadoCat.tiempoTexto);
                     btnCompartir.classList.remove('hidden');
                 } else {
@@ -959,12 +983,12 @@
         function iniciarCronometro() {
             detenerCronometro();
             const display = document.getElementById('cronometro-display');
-            display.textContent = "⏱️ 00:00";
+            display.innerHTML = `<img src="cronometro.jpg" alt="Cronómetro" class="w-3.5 h-3.5 object-contain" /> <span>00:00</span>`;
             cronometroInterval = setInterval(() => {
                 segundosTranscurridos++;
                 const mins = String(Math.floor(segundosTranscurridos / 60)).padStart(2, '0');
                 const secs = String(segundosTranscurridos % 60).padStart(2, '0');
-                display.textContent = `⏱️ ${mins}:${secs}`;
+                display.innerHTML = `<img src="cronometro.jpg" alt="Cronómetro" class="w-3.5 h-3.5 object-contain" /> <span>${mins}:${secs}</span>`;
             }, 1000);
         }
 
@@ -980,10 +1004,10 @@
             vidasSpan.forEach((span, index) => {
                 if (index < (5 - intentosRestantes)) {
                     span.textContent = "✕";
-                    span.className = "vida text-[#9b2c2c] font-bold text-base transition duration-300";
+                    span.className = "vida text-[#500000] font-extrabold text-base transition duration-300 opacity-60";
                 } else {
                     span.textContent = "✕";
-                    span.className = "vida text-[#d9cebc] font-bold text-base transition duration-300";
+                    span.className = "vida text-[#ffffff] font-extrabold text-lg drop-shadow-[0_1px_2px_rgba(0,0,0,0.5)] transition duration-300";
                 }
             });
         }
@@ -997,38 +1021,36 @@
                 const card = document.createElement('div');
                 const textoHito = evento.texto[lang] || evento.texto.es;
                 
-                let estiloVisualExtra = "";
-                let badgeDerecha = `<span class="text-xs text-[#8c8275]">☰</span>`;
+                let estiloVisualExtra = "bg-[#ffffff] text-[#ff0000] border-[#ffffff]";
+                let badgeDerecha = `<span class="text-xs text-[#ff0000]">☰</span>`;
 
                 if (evento.estadoVisual === 'correcto') {
-                    estiloVisualExtra = "border-[#d2ead0] bg-[#eef7ed] text-[#275024]";
-                    badgeDerecha = `<span class="text-[10px] font-mono bg-[#d2ead0] text-[#275024] px-2 py-0.5 rounded-lg border border-[#a8dfa4]">${evento.anio}</span>`;
+                    estiloVisualExtra = "border-[#15803d] bg-[#166534] text-[#ffffff] shadow-lg ring-2 ring-[#22c55e]";
+                    badgeDerecha = `<span class="text-xs font-mono font-bold bg-[#14532d] text-[#ffffff] px-2.5 py-1 rounded-lg border border-[#22c55e]">${evento.anio}</span>`;
                 } else if (evento.estadoVisual === 'cercano') {
-                    estiloVisualExtra = "border-[#faedcb] bg-[#fcf8ec] text-[#7c5e10]";
+                    estiloVisualExtra = "border-[#a16207] bg-[#854d0e] text-[#ffffff] shadow-lg ring-2 ring-[#eab308]";
                 } else if (evento.estadoVisual === 'incorrecto') {
-                    estiloVisualExtra = "border-[#f5c6c6] bg-[#fdf2f2] text-[#9b2c2c] animate-shake";
+                    estiloVisualExtra = "border-[#b91c1c] bg-[#991b1b] text-[#ffffff] shadow-lg ring-2 ring-[#ef4444] animate-shake";
                 }
 
                 if (juegoTerminado) {
-                    card.className = `p-2.5 rounded-xl border flex items-center justify-between select-none cursor-default ${estiloVisualExtra}`;
+                    card.className = `p-3 rounded-xl border-2 flex items-center justify-between select-none cursor-default ${estiloVisualExtra}`;
                 } else {
-                    card.className = `p-2.5 rounded-xl border border-[#e6dfd5] bg-[#ffffff] flex items-center justify-between cursor-grab active:cursor-grabbing transition transform duration-150 select-none touch-none ${estiloVisualExtra}`;
+                    card.className = `p-3 rounded-xl border-2 flex items-center justify-between cursor-grab active:cursor-grabbing transition transform duration-150 select-none touch-none ${estiloVisualExtra}`;
                     card.draggable = true;
                     card.dataset.index = index;
 
-                    // Eventos de ratón (Escritorio)
                     card.addEventListener('dragstart', handleDragStart);
                     card.addEventListener('dragend', handleDragEnd);
                     card.addEventListener('dragover', handleDragOver);
                     card.addEventListener('dragleave', handleDragLeave);
                     card.addEventListener('drop', handleDrop);
 
-                    // Eventos de puntero unificados (Móviles y Táctiles con tarjeta flotante dinámica)
                     card.addEventListener('pointerdown', handlePointerDown);
                 }
 
                 card.innerHTML = `
-                    <span class="text-xs font-medium text-[#2c2825] pr-2">${textoHito}</span>
+                    <span class="font-semibold text-sm pr-2">${textoHito}</span>
                     <div class="flex items-center shrink-0">${badgeDerecha}</div>
                 `;
 
@@ -1117,7 +1139,7 @@
             this.classList.add('dragging');
 
             activePointerClone = this.cloneNode(true);
-            activePointerClone.className = `p-2.5 rounded-xl border border-[#bfa181] bg-[#ffffff] flex items-center justify-between mobile-dragging-clone`;
+            activePointerClone.className = `p-3 rounded-xl border-2 border-[#ff0000] bg-[#ffffff] text-[#ff0000] flex items-center justify-between mobile-dragging-clone`;
             activePointerClone.style.width = `${cardWidth}px`;
             activePointerClone.style.boxSizing = 'border-box';
             activePointerClone.style.left = `${rect.left}px`;
@@ -1261,11 +1283,11 @@
             }
 
             if (ganado) {
-                resultadoTexto.className = "font-medium text-xs mb-2.5 text-[#3b7a37]";
+                resultadoTexto.className = "font-medium text-xs mb-2.5 text-[#ffffff]";
                 resultadoTexto.textContent = esModoAleatorio ? `🎉 Random mode completed in ${tiempoStr}!` : t.resultadoExito(tiempoStr, intentosRestantes);
                 btnCompartir.classList.remove('hidden');
             } else {
-                resultadoTexto.className = "font-medium text-xs mb-2.5 text-[#9b2c2c]";
+                resultadoTexto.className = "font-medium text-xs mb-2.5 text-[#ffffe6]";
                 resultadoTexto.textContent = t.resultadoFallo;
                 btnCompartir.classList.add('hidden');
             }
@@ -1282,11 +1304,11 @@
             const textoClipboard = t.compartirTexto(fechaStr, catNombre, mins, secs, intentosRestantes);
 
             navigator.clipboard.writeText(textoClipboard).then(() => {
-                const btn = document.getElementById('btn-compartir');
-                const originalText = btn.textContent;
-                btn.textContent = t.copiadoExito;
+                const btnSpan = document.getElementById('txt-btn-compartir');
+                const originalText = btnSpan.textContent;
+                btnSpan.textContent = t.copiadoExito;
                 setTimeout(() => {
-                    btn.textContent = originalText;
+                    btnSpan.textContent = originalText;
                 }, 2000);
             });
         }
