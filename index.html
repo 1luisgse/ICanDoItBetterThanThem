@@ -79,8 +79,9 @@
         </p>
     </header>
 
-    <main class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10 my-auto">
+    <main class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 relative z-10 my-auto">
         
+        <!-- WhenWasTimeLine -->
         <a href="whenwas/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
@@ -107,6 +108,7 @@
             </div>
         </a>
 
+        <!-- AimPrice -->
         <a href="aimprice/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
@@ -133,6 +135,7 @@
             </div>
         </a>
 
+        <!-- Stake20 -->
         <a href="stake20/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
             <div>
                 <div class="flex items-center justify-between mb-4">
@@ -155,6 +158,33 @@
 
             <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#ff4d4d] text-xs font-bold text-[#ffffff]">
                 <span id="txt-btn-juego3" class="uppercase tracking-widest text-[11px]">Prove it now</span>
+                <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
+            </div>
+        </a>
+
+        <!-- HowRare -->
+        <a href="howrare/" class="classic-card rounded-2xl p-6 flex flex-col justify-between group">
+            <div>
+                <div class="flex items-center justify-between mb-4">
+                    <span class="w-12 h-12 flex items-center justify-center bg-[#ffffff] rounded-xl border border-[#ffcccc] group-hover:scale-105 transition duration-300 overflow-hidden p-1">
+                        <img src="logo-howrare.png" alt="HowRare Logo" class="w-full h-full object-contain">
+                    </span>
+                    <span id="badge-juego4" class="text-[10px] font-semibold bg-[#ffffff] text-[#ff0000] border border-[#ffffff] py-1 px-3 rounded-full uppercase tracking-wider">
+                        Ready to play
+                    </span>
+                </div>
+
+                <h2 class="game-title text-[#ffffff] group-hover:text-[#ffe6e6] transition duration-200">
+                    HowRare
+                </h2>
+                
+                <p id="txt-desc-juego4" class="text-xs text-[#ffffff] mt-2 leading-relaxed font-sans">
+                    Test your intuition against real-world statistics and frequencies. Can you guess how rare or common an event truly is?
+                </p>
+            </div>
+
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#ff4d4d] text-xs font-bold text-[#ffffff]">
+                <span id="txt-btn-juego4" class="uppercase tracking-widest text-[11px]">Prove it now</span>
                 <span class="transform group-hover:translate-x-1 transition duration-200 text-sm">→</span>
             </div>
         </a>
@@ -204,6 +234,9 @@
                 badge3: "Ready to play",
                 desc3: "Manage your stakes and strategy wisely to conquer the board and reach the ultimate objective without losing control.",
                 btn3: "Prove it now",
+                badge4: "Ready to play",
+                desc4: "Test your intuition against real-world statistics and frequencies. Can you guess how rare or common an event truly is?",
+                btn4: "Prove it now",
                 legal: "Legal Notice",
                 privacidad: "Privacy Policy",
                 rights: "© 2026 I Can Do It Better Than Them. All rights reserved.",
@@ -224,6 +257,9 @@
                 badge3: "Listo para jugar",
                 desc3: "Gestiona tus apuestas y estrategia con inteligencia para conquistar el tablero y alcanzar el objetivo final sin perder el control.",
                 btn3: "Demuéstralo ahora",
+                badge4: "Listo para jugar",
+                desc4: "Pon a prueba tu intuición con estadísticas y frecuencias del mundo real. ¿Sabrías adivinar cuán raro o común es un acontecimiento?",
+                btn4: "Demuéstralo ahora",
                 legal: "Aviso Legal",
                 privacidad: "Política de Privacidad",
                 rights: "© 2026 I Can Do It Better Than Them. Todos los derechos reservados.",
@@ -244,6 +280,9 @@
                 badge3: "Prêt à jouer",
                 desc3: "Gérez vos mises et votre stratégie pour conquérir le plateau et atteindre l'objectif ultime.",
                 btn3: "Prouvez-le maintenant",
+                badge4: "Prêt à jouer",
+                desc4: "Testez votre intuition face à des statistiques réelles. Pouvez-vous deviner à quel point un événement est rare ou fréquent ?",
+                btn4: "Prouvez-le maintenant",
                 legal: "Mentions Légales",
                 privacidad: "Politique de Confidentialité",
                 rights: "© 2026 I Can Do It Better Than Them. Tous droits réservés.",
@@ -264,6 +303,9 @@
                 badge3: "Spielbereit",
                 desc3: "Verwalte deine Einsätze und Strategie klug, um das Brett zu erobern und das Ziel zu erreichen.",
                 btn3: "Jetzt beweisen",
+                badge4: "Spielbereit",
+                desc4: "Teste deine Intuition anhand realer Statistiken und Häufigkeiten. Kannst du erraten, wie selten oder alltäglich ein Ereignis ist?",
+                btn4: "Jetzt beweisen",
                 legal: "Impressum",
                 privacidad: "Datenschutz",
                 rights: "© 2026 I Can Do It Better Than Them. Alle Rechte vorbehalten.",
@@ -298,6 +340,9 @@
             document.getElementById('badge-juego3').textContent = t.badge3;
             document.getElementById('txt-desc-juego3').textContent = t.desc3;
             document.getElementById('txt-btn-juego3').textContent = t.btn3;
+            document.getElementById('badge-juego4').textContent = t.badge4;
+            document.getElementById('txt-desc-juego4').textContent = t.desc4;
+            document.getElementById('txt-btn-juego4').textContent = t.btn4;
             document.getElementById('txt-legal').textContent = t.legal;
             document.getElementById('txt-privacidad').textContent = t.privacidad;
             document.getElementById('txt-rights').textContent = t.rights;

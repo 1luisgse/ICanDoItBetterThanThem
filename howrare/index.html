@@ -111,7 +111,7 @@
         }
 
         .event-title {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
             text-align: center;
             margin-bottom: 24px;
@@ -119,6 +119,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 0 10px;
         }
 
         /* Estilo del Slider Avanzado */
@@ -137,6 +138,7 @@
 
         input[type=range] {
             -webkit-appearance: none;
+            appearance: none;
             width: 100%;
             background: transparent;
         }
@@ -160,6 +162,7 @@
             background: var(--primary-red);
             cursor: pointer;
             -webkit-appearance: none;
+            appearance: none;
             margin-top: -8px;
             box-shadow: 0 0 10px rgba(255, 42, 42, 0.5);
             transition: transform 0.1s;
@@ -174,8 +177,9 @@
             justify-content: space-between;
             font-size: 0.75rem;
             color: var(--text-gray);
-            margin-top: 6px;
-            padding: 0 4px;
+            margin-top: 8px;
+            padding: 0 2px;
+            width: 100%;
         }
 
         /* Botón de Acción */
@@ -244,6 +248,55 @@
             color: var(--primary-red);
             font-size: 1.2rem;
         }
+
+        /* Estilos Mejorados para la Pantalla Final Épica */
+        .final-screen-badge {
+            background: linear-gradient(135deg, rgba(255, 42, 42, 0.15), rgba(255, 42, 42, 0.05));
+            border: 2px solid var(--primary-red);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 25px rgba(255, 42, 42, 0.2);
+        }
+
+        .final-screen-badge i {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 10px;
+        }
+
+        .final-screen-badge h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-gray);
+            margin-bottom: 5px;
+        }
+
+        .final-screen-badge .player-tier {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-white);
+        }
+
+        .final-screen-badge .player-tier span {
+            color: var(--primary-red);
+        }
+
+        .final-score-big {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary-red);
+            line-height: 1;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(255, 42, 42, 0.4);
+        }
+
+        .final-subtitle {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -270,13 +323,10 @@
 
                 <div class="slider-section">
                     <div class="value-display" id="slider-val-display">50.00%</div>
-                    <!-- Slider con escala logarítmica simulada mediante JS -->
+                    <!-- Slider con escala progresiva original -->
                     <input type="range" id="rare-slider" min="0" max="1000" value="500">
                     <div class="scale-markers">
                         <span>0% (Imposible)</span>
-                        <span>1%</span>
-                        <span>10%</span>
-                        <span>50%</span>
                         <span>100% (Seguro)</span>
                     </div>
                 </div>
@@ -286,11 +336,11 @@
 
             <!-- Interfaz de Resultados de Ronda -->
             <div class="result-box" id="result-interface">
-                <div class="result-diff">Tu respuesta se desvió un:</div>
+                <div class="result-diff" id="result-header-text">Tu respuesta se desvió un:</div>
                 <div class="result-diff"><span id="diff-value">0%</span></div>
                 <div class="points-earned" id="points-earned">+0 PUNTOS</div>
                 
-                <div class="actual-value-card">
+                <div class="actual-value-card" id="actual-card-box">
                     El porcentaje real era: <br><b id="real-value-display">0%</b>
                 </div>
 
@@ -300,18 +350,370 @@
     </div>
 
     <script>
-        // Base de datos de sucesos con sus probabilidades reales (en porcentaje 0 - 100)
         const eventsDB = [
-            { title: "Que te toque el Gordo de la Lotería de Navidad (un décimo)", real: 0.001, img: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?auto=format&fit=crop&w=600&q=80" },
-            { title: "Que te caiga un rayo a lo largo de tu vida", real: 0.014, img: "https://images.unsplash.com/photo-1513002749550-c59d786b8e6c?auto=format&fit=crop&w=600&q=80" },
-            { title: "Nacer con los ojos azules (a nivel mundial)", real: 8.0, img: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" },
-            { title: "Ser una persona albina", real: 0.005, img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" },
-            { title: "Sacar un 3 en un dado de 6 caras", real: 16.66, img: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?auto=format&fit=crop&w=600&q=80" },
-            { title: "Tener el pelo pelirrojo natural en el mundo", real: 1.5, img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80" },
-            { title: "Encontrar un trébol de 4 hojas", real: 0.01, img: "https://images.unsplash.com/photo-1522383225653-ed111181a951?auto=format&fit=crop&w=600&q=80" },
-            { title: "Nacer zurdo", real: 10.0, img: "https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=600&q=80" },
-            { title: "Sobrevivir a un ataque de tiburón", real: 95.0, img: "https://images.unsplash.com/photo-1563389234-58a2e7c370e9?auto=format&fit=crop&w=600&q=80" },
-            { title: "Sacar cara en una moneda", real: 50.0, img: "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?auto=format&fit=crop&w=600&q=80" }
+            { title: "Sacar un 6 al lanzar un dado de seis caras", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar un número par en un dado de seis caras", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar un número impar en un dado de seis caras", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice-0.svg?width=600" },
+            { title: "Sacar dos 6 seguidos con dos dados", real: 2.78, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar al menos un 6 lanzando dos dados", real: 30.56, img: "https://commons.wikimedia.org/wiki/Special:FilePath/A%26A_Dice.jpg?width=600" },
+            { title: "Sacar un doble al lanzar dos dados", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/A%26A_Dice.jpg?width=600" },
+            { title: "Sacar tres 6 consecutivos con un dado", real: 0.463, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dungeons_%26_Dragons_Dice.jpg?width=600" },
+            { title: "Sacar cara al lanzar una moneda", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Sacar cruz al lanzar una moneda", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Sacar tres caras seguidas con una moneda", real: 12.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+
+            { title: "Sacar cinco caras seguidas con una moneda", real: 3.125, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Sacar siete caras seguidas con una moneda", real: 0.781, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_Toss_(3635981474).jpg?width=600" },
+            { title: "Sacar exactamente dos caras en cuatro lanzamientos", real: 37.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Sacar exactamente tres caras en cinco lanzamientos", real: 31.25, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_tossing.JPG?width=600" },
+            { title: "Sacar al menos una cara en cinco lanzamientos", real: 96.875, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Acertar una carta concreta de una baraja de 52 cartas", real: 1.923, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.jpg?width=600" },
+            { title: "Sacar un as de una baraja de 52 cartas", real: 7.692, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_cards.jpg?width=600" },
+            { title: "Sacar un rey de una baraja de 52 cartas", real: 7.692, img: "https://commons.wikimedia.org/wiki/Special:FilePath/King_playing_cards.jpg?width=600" },
+            { title: "Sacar una carta roja de una baraja francesa", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.JPG?width=600" },
+            { title: "Sacar una carta negra de una baraja francesa", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.JPG?width=600" },
+
+            { title: "Sacar dos ases seguidos sin reemplazar la carta", real: 0.452, img: "https://commons.wikimedia.org/wiki/Special:FilePath/King_playing_cards.jpg?width=600" },
+            { title: "Sacar tres cartas del mismo palo seguidas", real: 12.11, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+            { title: "Conseguir una escalera real en cinco cartas", real: 0.000154, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+            { title: "Conseguir una pareja en una mano de póker", real: 42.26, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+            { title: "Conseguir un trío en una mano de póker", real: 2.11, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Man_playing_cards.jpg?width=600" },
+            { title: "Conseguir un full en una mano de póker", real: 0.144, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.JPG?width=600" },
+            { title: "Conseguir un póker en una mano de cinco cartas", real: 0.024, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+            { title: "Conseguir color en una mano de póker", real: 0.197, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.jpg?width=600" },
+            { title: "Encontrar una moneda durante un paseo", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Encontrar un billete por la calle", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+
+            { title: "Encontrar un billete de 20 euros por la calle", real: 0.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+            { title: "Encontrar un billete de 50 euros por la calle", real: 0.1, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_Money_-_panoramio.jpg?width=600" },
+            { title: "Encontrar dinero dentro de un bolsillo", real: 8.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+            { title: "Encontrar una moneda debajo de un sofá", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Encontrar dinero dentro de un libro", real: 3.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+            { title: "Ver un perro durante un paseo", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_dog.jpg?width=600" },
+            { title: "Encontrarse un perro inesperadamente", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_Dog_(164696873).jpeg?width=600" },
+            { title: "Ver un perro de color completamente negro", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_dog.jpg?width=600" },
+            { title: "Ver un perro pequeño por la calle", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_Dog_(164696873).jpeg?width=600" },
+            { title: "Ver dos perros juntos durante un paseo", real: 35.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_dog.jpg?width=600" },
+
+            { title: "Encontrarse un gato por la calle", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Ver un gato negro", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+            { title: "Ver un gato blanco", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Ver dos gatos juntos", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+            { title: "Ver un gato sentado mirando a la calle", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Ver una araña dentro de casa", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_Spider_(20247415).jpeg?width=600" },
+            { title: "Encontrar una telaraña en una esquina", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_(176674981).jpeg?width=600" },
+            { title: "Ver una araña grande", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_Spider_(20247415).jpeg?width=600" },
+            { title: "Ver una mariposa durante un paseo", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+            { title: "Que una mariposa se pose sobre ti", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+
+            { title: "Ver una mariposa de colores llamativos", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+            { title: "Encontrar una flor amarilla", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Encontrar una flor blanca", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/FLOWER(1).jpg?width=600" },
+            { title: "Ver una flor roja", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_--0.jpg?width=600" },
+            { title: "Encontrar una flor mientras caminas por un parque", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Ver una flor completamente abierta", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower..jpg?width=600" },
+            { title: "Encontrar una flor pequeña", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/FLOWER_PHOTO.JPG?width=600" },
+            { title: "Ver varias flores juntas", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_--.jpg?width=600" },
+            { title: "Ver un árbol durante un paseo", real: 99.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar un árbol muy grande", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+
+            { title: "Ver un arcoíris durante un año", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Rainbow_Image.JPG?width=600" },
+            { title: "Ver un arcoíris doble", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/RAINBOW(1).jpg?width=600" },
+            { title: "Ver un arcoíris después de una tormenta", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Rainbow_Image.JPG?width=600" },
+            { title: "Ver un arcoíris completo de extremo a extremo", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/RAINBOW(1).jpg?width=600" },
+            { title: "Ver un relámpago durante una tormenta", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_over_city.jpg?width=600" },
+            { title: "Ver un relámpago muy cerca", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_1.jpg?width=600" },
+            { title: "Ver un rayo caer sobre un árbol", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/A_Lightning.jpg?width=600" },
+            { title: "Ver varios relámpagos durante una tormenta", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning.png?width=600" },
+            { title: "Ver la Luna llena", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Ver la Luna creciente", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon_.jpg?width=600" },
+
+            { title: "Ver la Luna perfectamente despejada", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.png?width=600" },
+            { title: "Ver la Luna durante el día", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Ver una estrella fugaz", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star%2A.svg?width=600" },
+            { title: "Ver una estrella especialmente brillante", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star-.svg?width=600" },
+            { title: "Ver diez estrellas en el cielo nocturno", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star%2A.svg?width=600" },
+            { title: "Ver una nube con forma reconocible", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cloud.svg?width=600" },
+            { title: "Ver una nube con forma de animal", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cloud.svg?width=600" },
+            { title: "Ver una nube perfectamente redonda", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cloud.svg?width=600" },
+            { title: "Ver un libro durante un día cualquiera", real: 95.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+            { title: "Encontrar un libro olvidado en casa", real: 35.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/BOOK_.jpg?width=600" },
+
+            { title: "Encontrar una fotografía dentro de un libro", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_stock_image.png?width=600" },
+            { title: "Quedarse dormido leyendo un libro", real: 35.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+            { title: "Perder el punto de lectura de un libro", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+            { title: "Encontrar un libro antiguo", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/BOOK_.jpg?width=600" },
+            { title: "Abrir un libro exactamente por la página buscada", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_(Search).svg?width=600" },
+            { title: "Encontrar una errata en un libro", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+            { title: "Encontrar una moneda dentro de un libro", real: 3.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_stock_image.png?width=600" },
+            { title: "Encontrar una nota dentro de un libro", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+            { title: "Encontrar un huevo dentro de una caja de huevos", real: 99.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Egg.JPG?width=600" },
+            { title: "Encontrar un huevo perfectamente intacto", real: 95.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Egg_IMG.jpg?width=600" },
+
+            { title: "Encontrar dos yemas dentro de un huevo", real: 0.1, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Egg_Cup_and_egg.jpg?width=600" },
+            { title: "Romper un huevo accidentalmente", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Egg_(egg).jpg?width=600" },
+            { title: "Encontrar un huevo especialmente grande", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Egg_IMG.jpg?width=600" },
+            { title: "Encontrar un huevo con una forma extraña", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Egg_(egg).jpg?width=600" },
+            { title: "Tomarse una taza de café durante un día", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+            { title: "Derramar café accidentalmente", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_at_the_Cafe.JPG?width=600" },
+            { title: "Preparar café en una cafetera", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_preparing.JPG?width=600" },
+            { title: "Que el café esté demasiado caliente", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+            { title: "Que se derrame una bebida sobre una mesa", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_at_the_Cafe.JPG?width=600" },
+            { title: "Que una bebida tenga hielo", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+
+            { title: "Ver un avión mientras miras al cielo", real: 95.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_in_flight.jpg?width=600" },
+            { title: "Ver un avión en un aeropuerto", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_at_airport.jpg?width=600" },
+            { title: "Ver un avión dejando una estela", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_on_sky.jpg?width=600" },
+            { title: "Ver un avión despegando", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_in_flight.jpg?width=600" },
+            { title: "Ver un avión aterrizando", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_at_Vienna_International_Airport.jpg?width=600" },
+            { title: "Viajar en avión durante un año", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_view.jpg?width=600" },
+            { title: "Ver un tren durante un viaje", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Train_.jpg?width=600" },
+            { title: "Ver un tren entrar en una estación", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Train_.jpg?width=600" },
+            { title: "Perder un tren por llegar tarde", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Train_.jpg?width=600" },
+            { title: "Ver un autobús durante un paseo", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Bus_Bus_(23974032516).jpg?width=600" },
+
+            { title: "Encontrar un asiento libre en un autobús lleno", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Bus_Bus_(23974032516).jpg?width=600" },
+            { title: "Perder un autobús por pocos segundos", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Bus_Bus_(23974032516).jpg?width=600" },
+            { title: "Ver un coche durante un paseo", real: 99.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Car_-_%E0%B4%95%E0%B4%BE%E0%B5%BC.JPG?width=600" },
+            { title: "Ver un coche amarillo", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Car_-_%E0%B4%95%E0%B4%BE%E0%B5%BC.JPG?width=600" },
+            { title: "Ver un coche clásico", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Car_-_%E0%B4%95%E0%B4%BE%E0%B4%BE.JPG?width=600" },
+            { title: "Encontrar aparcamiento rápidamente", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Car_-_%E0%B4%95%E0%B4%BE%E0%B4%BC.JPG?width=600" },
+            { title: "Olvidarse de dónde se ha aparcado el coche", real: 35.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Car_-_%E0%B4%95%E0%B4%BE%E0%B4%BC.JPG?width=600" },
+            { title: "Ver un barco desde la costa", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ship.svg?width=600" },
+            { title: "Ver un barco grande en el mar", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ship.svg?width=600" },
+            { title: "Ver un delfín en libertad", real: 8.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ship.svg?width=600" },
+            { title: "Ver una ballena en libertad", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ship.svg?width=600" },
+
+            { title: "Tener el pelo pelirrojo natural", real: 1.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+            { title: "Tener el pelo rubio natural", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+            { title: "Tener pecas visibles", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+            { title: "Tener hoyuelos en las mejillas", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Ser capaz de doblar la lengua", real: 65.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Ser capaz de mover las orejas voluntariamente", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Ser zurdo", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+            { title: "Ser ambidiestro", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+            { title: "Tener un lunar visible", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Tener una marca de nacimiento visible", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+
+            { title: "Tener ojos verdes", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Tener ojos grises", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+            { title: "Tener ojos marrones", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Tener ojos azules", real: 8.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+            { title: "Tener el grupo sanguíneo O positivo", real: 38.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Tener el grupo sanguíneo O negativo", real: 7.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Tener el grupo sanguíneo A positivo", real: 34.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Tener el grupo sanguíneo B positivo", real: 9.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Tener el grupo sanguíneo AB positivo", real: 3.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Tener el grupo sanguíneo AB negativo", real: 0.6, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+
+            { title: "Romper accidentalmente un vaso durante un año", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_at_the_Cafe.JPG?width=600" },
+            { title: "Romper accidentalmente un plato durante un año", real: 12.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_at_the_Cafe.JPG?width=600" },
+            { title: "Derramar una bebida sobre una mesa", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_at_the_Cafe.JPG?width=600" },
+            { title: "Que un móvil se caiga de la mano", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_.jpg?width=600" },
+            { title: "Recibir una llamada de un número desconocido", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Enviar un mensaje a la persona equivocada", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_.jpg?width=600" },
+            { title: "Que el móvil se quede sin batería", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Que unos auriculares se enreden", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_.jpg?width=600" },
+            { title: "Que una llamada se corte", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_.jpg?width=600" },
+            { title: "Olvidar una contraseña", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+
+            { title: "Encontrar una pieza de LEGO en el suelo", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Pisar accidentalmente una pieza de LEGO", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Construir una torre de cinco monedas", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Construir una torre de diez monedas", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Que una moneda caiga de canto", real: 0.1, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Que una pelota rebote tres veces", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ball_1.jpg?width=600" },
+            { title: "Que una pelota caiga dentro de un recipiente", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ball_1.jpg?width=600" },
+            { title: "Que un objeto redondo ruede por una superficie", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ball_1.jpg?width=600" },
+            { title: "Ver una pelota durante un partido", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ball_1.jpg?width=600" },
+            { title: "Hacer rebotar una pelota cinco veces", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Ball_1.jpg?width=600" },
+
+            { title: "Encontrar un trébol de cuatro hojas", real: 0.01, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Encontrar una piedra con forma de corazón", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar una concha perfecta en la playa", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar una seta en el bosque", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar una bellota en un bosque", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar una piña de pino", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver una ardilla en un parque", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un zorro en libertad", real: 3.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un ciervo en libertad", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un jabalí en libertad", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+
+            { title: "Ver un oso en libertad", real: 0.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un lobo en libertad", real: 0.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un león en libertad", real: 0.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un elefante en libertad", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver una jirafa en libertad", real: 0.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un tigre en libertad", real: 0.2, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un gorila en libertad", real: 0.2, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un cocodrilo en libertad", real: 3.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver una serpiente en libertad", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un pingüino en libertad", real: 0.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+
+            { title: "Que una vela se apague por una corriente de aire", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning.png?width=600" },
+            { title: "Que una bombilla se funda durante un año", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning.svg?width=600" },
+            { title: "Que se vaya la luz durante una tormenta", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_over_city.jpg?width=600" },
+            { title: "Que una puerta se cierre por una corriente de aire", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning.svg?width=600" },
+            { title: "Que una planta de interior florezca", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Que una hoja de una planta se vuelva amarilla", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar polvo debajo de un mueble", real: 90.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar un objeto perdido debajo de la cama", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_stock_image.png?width=600" },
+            { title: "Encontrar una prenda olvidada en un armario", real: 35.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_stock_image.png?width=600" },
+            { title: "Encontrar un objeto que creías haber perdido", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_book.jpg?width=600" },
+
+            { title: "Dormirse mientras se ve una película", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Despertarse antes de que suene la alarma", real: 35.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_.jpg?width=600" },
+            { title: "Soñar que se está cayendo", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon_.jpg?width=600" },
+            { title: "Hablar dormido alguna vez", real: 67.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Caminar dormido alguna vez", real: 7.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon_.jpg?width=600" },
+            { title: "Tener un sueño lúcido alguna vez", real: 55.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Tener hipo durante más de una hora", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Estornudar dos veces seguidas", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+            { title: "Tener un calambre durante una semana", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_dog.jpg?width=600" },
+            { title: "Despertarse durante la noche", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+
+            { title: "Ver una persona con una camiseta del mismo color que la tuya", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_Dog_(164696873).jpeg?width=600" },
+            { title: "Encontrarte con un conocido inesperadamente", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_Dog_(164696873).jpeg?width=600" },
+            { title: "Que dos personas digan lo mismo a la vez", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_dog.jpg?width=600" },
+            { title: "Recibir un regalo inesperado", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_stock_image.png?width=600" },
+            { title: "Encontrar una fotografía antigua que habías olvidado", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_stock_image.png?width=600" },
+            { title: "Escuchar una canción que no oías desde hace años", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_.jpg?width=600" },
+            { title: "Recibir una llamada inesperada", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Recibir un mensaje de alguien en quien estabas pensando", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_.jpg?width=600" },
+            { title: "Que alguien te llame por tu nombre inesperadamente", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Phone_image.png?width=600" },
+            { title: "Encontrar una sorpresa dentro de una caja", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Book_stock_image.png?width=600" },
+
+            { title: "Conseguir una bola de helado perfectamente redonda", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/ICE_CREAM_001.jpg?width=600" },
+            { title: "Que se te caiga una tostada", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+            { title: "Que una palomita se quede atrapada entre los dientes", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/ICE_CREAM_001.jpg?width=600" },
+            { title: "Que se te queme una pizza", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/ICE_CREAM_001.jpg?width=600" },
+            { title: "Encontrar dos alimentos con exactamente la misma forma", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/ICE_CREAM_001.jpg?width=600" },
+            { title: "Que una lata de refresco haga espuma al abrirla", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+            { title: "Que una rodaja de limón caiga dentro de una bebida", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+            { title: "Que una galleta se rompa al mojarla", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+            { title: "Que un cubito de hielo caiga fuera del vaso", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_at_the_Cafe.JPG?width=600" },
+            { title: "Que un cubito de hielo flote en una bebida", real: 95.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coffee_.jpg?width=600" },
+
+            { title: "Que una burbuja de jabón explote al tocar una superficie", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Crear una burbuja de jabón gigante", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_--.jpg?width=600" },
+            { title: "Atrapar una burbuja de jabón sin que explote", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_--0.jpg?width=600" },
+            { title: "Ver una burbuja perfectamente esférica", real: 95.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Ver una burbuja reflejando muchos colores", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Rainbow_Image.JPG?width=600" },
+            { title: "Ver una nube completamente blanca", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cloud.svg?width=600" },
+            { title: "Ver un cielo completamente despejado", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Ver una tormenta acercándose", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_over_city.jpg?width=600" },
+            { title: "Ver varios relámpagos en pocos minutos", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_1.jpg?width=600" },
+            { title: "Ver un relámpago muy brillante", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/A_Lightning.jpg?width=600" },
+
+            { title: "Ver un eclipse lunar", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Ver un eclipse solar", real: 0.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon_.jpg?width=600" },
+            { title: "Ver una aurora boreal alguna vez", real: 1.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star%2A.svg?width=600" },
+            { title: "Ver Venus a simple vista", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star%2A.svg?width=600" },
+            { title: "Ver Júpiter a simple vista", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star-.svg?width=600" },
+            { title: "Ver Saturno a simple vista", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star-.svg?width=600" },
+            { title: "Ver una estrella fugaz dos veces en una noche", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Star%2A.svg?width=600" },
+            { title: "Ver una noche con la Luna completamente llena", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+            { title: "Ver la Luna entre nubes", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon_.jpg?width=600" },
+            { title: "Ver la Luna durante un paseo nocturno", real: 60.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Moon.jpg?width=600" },
+
+            { title: "Encontrar una moneda de 1 céntimo", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Encontrar una moneda de 2 euros", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Encontrar una moneda extranjera en casa", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+            { title: "Encontrar un billete antiguo", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_Money_-_panoramio.jpg?width=600" },
+            { title: "Encontrar una moneda de colección", real: 2.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Encontrar dinero en un bolsillo antes de lavar la ropa", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+            { title: "Encontrar dinero dentro de un coche", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+            { title: "Encontrar una moneda debajo de una mesa", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Encontrar una moneda debajo de una cama", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Encontrar dinero dentro de una mochila", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Money_money.jpg?width=600" },
+
+            { title: "Ver una araña en el jardín", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_Spider_(20247415).jpeg?width=600" },
+            { title: "Ver una araña en una esquina", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_(176674981).jpeg?width=600" },
+            { title: "Ver una telaraña por la mañana", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_(176674981).jpeg?width=600" },
+            { title: "Ver una mariposa azul", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+            { title: "Ver una mariposa amarilla", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+            { title: "Ver tres mariposas juntas", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Butterfly_.jpg?width=600" },
+            { title: "Ver una flor completamente blanca", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/FLOWER(1).jpg?width=600" },
+            { title: "Ver una flor completamente amarilla", real: 15.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Ver una flor de color rojo intenso", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_--0.jpg?width=600" },
+            { title: "Encontrar una flor con muchos pétalos", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_--.jpg?width=600" },
+
+            { title: "Ver un árbol con muchas ramas", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un árbol completamente aislado", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Encontrar hojas caídas debajo de un árbol", real: 80.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un bosque desde lejos", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un arcoíris sobre árboles", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Rainbow_Image.JPG?width=600" },
+            { title: "Ver un arcoíris perfectamente definido", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/RAINBOW(1).jpg?width=600" },
+            { title: "Ver un relámpago sobre una ciudad", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_over_city.jpg?width=600" },
+            { title: "Ver un relámpago entre las nubes", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_1.jpg?width=600" },
+            { title: "Ver un rayo muy cerca del horizonte", real: 5.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/A_Lightning.jpg?width=600" },
+            { title: "Ver una tormenta eléctrica completa", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Lightning_over_city.jpg?width=600" },
+
+            { title: "Ver un avión blanco", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_in_flight.jpg?width=600" },
+            { title: "Ver un avión desde la ventana de un edificio", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_view.jpg?width=600" },
+            { title: "Ver un avión estacionado en pista", real: 70.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_at_airport.jpg?width=600" },
+            { title: "Ver un avión muy pequeño en el cielo", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Airplane_on_sky.jpg?width=600" },
+            { title: "Ver un tren rojo", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Train_.jpg?width=600" },
+            { title: "Ver un tren de noche", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Train_.jpg?width=600" },
+            { title: "Ver un autobús lleno de pasajeros", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Bus_Bus_(23974032516).jpg?width=600" },
+            { title: "Ver un autobús vacío", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Bus_Bus_(23974032516).jpg?width=600" },
+            { title: "Ver un coche aparcado", real: 95.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Car_-_%E0%B4%95%E0%B4%BE%E0%B4%BC.JPG?width=600" },
+            { title: "Ver un coche circulando", real: 95.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Car_-_%E0%B4%95%E0%B4%BE%E0%B4%BC.JPG?width=600" },
+
+            { title: "Ver un perro sentado", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_dog.jpg?width=600" },
+            { title: "Ver un perro mirando a una persona", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dog_Dog_(164696873).jpeg?width=600" },
+            { title: "Ver un gato sentado", real: 50.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_cat.jpg?width=600" },
+            { title: "Ver un gato mirando hacia una ventana", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Cat_pic.jpg?width=600" },
+            { title: "Ver una araña pequeña", real: 40.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_Spider_(20247415).jpeg?width=600" },
+            { title: "Ver una telaraña iluminada por el sol", real: 10.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Spider_(176674981).jpeg?width=600" },
+            { title: "Encontrar una flor después de la lluvia", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_.jpg?width=600" },
+            { title: "Encontrar una flor cubierta de gotas de agua", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Flower_--.jpg?width=600" },
+            { title: "Ver un árbol después de una tormenta", real: 30.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Tree_.jpg?width=600" },
+            { title: "Ver un arcoíris después de la lluvia", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Rainbow_Image.JPG?width=600" },
+
+            { title: "Ver una carta de corazones", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.JPG?width=600" },
+            { title: "Ver una carta de diamantes", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_cards.jpg?width=600" },
+            { title: "Ver una carta de tréboles", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+            { title: "Ver una carta de picas", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.jpg?width=600" },
+            { title: "Ver cuatro reyes juntos", real: 100.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/King_playing_cards.jpg?width=600" },
+            { title: "Ver cuatro jotas juntas", real: 100.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Jack_playing_cards.jpg?width=600" },
+            { title: "Barajar una baraja de cartas", real: 100.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Man_playing_cards.jpg?width=600" },
+            { title: "Jugar una partida de cartas", real: 100.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Man_playing_cards.jpg?width=600" },
+            { title: "Encontrar dos cartas iguales en una baraja", real: 100.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+            { title: "Encontrar una pareja de cartas consecutivas", real: 20.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+
+            { title: "Sacar una carta exactamente determinada", real: 1.923, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.jpg?width=600" },
+            { title: "Sacar dos cartas del mismo color seguidas", real: 49.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.JPG?width=600" },
+            { title: "Sacar dos cartas del mismo palo seguidas", real: 23.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Pile_of_playing_cards.jpg?width=600" },
+            { title: "Sacar una figura de la baraja", real: 23.08, img: "https://commons.wikimedia.org/wiki/Special:FilePath/King_playing_cards.jpg?width=600" },
+            { title: "Sacar un rey de corazones", real: 1.923, img: "https://commons.wikimedia.org/wiki/Special:FilePath/King_playing_cards.jpg?width=600" },
+            { title: "Sacar una jota de picas", real: 1.923, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Jack_playing_cards.jpg?width=600" },
+            { title: "Sacar un as de picas", real: 1.923, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_cards.jpg?width=600" },
+            { title: "Sacar cinco cartas sin sacar ningún as", real: 65.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.JPG?width=600" },
+            { title: "Sacar dos cartas rojas seguidas", real: 24.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_Cards.jpg?width=600" },
+            { title: "Sacar dos cartas negras seguidas", real: 24.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Playing_cards.jpg?width=600" },
+
+            { title: "Que una moneda caiga cara tres veces seguidas", real: 12.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Que una moneda caiga cruz tres veces seguidas", real: 12.5, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Que una moneda salga cara cinco veces seguidas", real: 3.125, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_Toss_(3635981474).jpg?width=600" },
+            { title: "Que una moneda salga cruz cinco veces seguidas", real: 3.125, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_tossing.JPG?width=600" },
+            { title: "Conseguir cuatro caras seguidas", real: 6.25, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Conseguir cuatro cruces seguidas", real: 6.25, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Conseguir dos caras seguidas", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Conseguir dos cruces seguidas", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_coin.JPG?width=600" },
+            { title: "Que salga cara y después cruz", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+            { title: "Que salga cruz y después cara", real: 25.0, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Coin_flip_outcomes.png?width=600" },
+
+            { title: "Sacar exactamente un 1 con un dado", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar exactamente un 2 con un dado", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar exactamente un 3 con un dado", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar exactamente un 4 con un dado", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar exactamente un 5 con un dado", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar exactamente un 6 con un dado", real: 16.67, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice.jpg?width=600" },
+            { title: "Sacar al menos un 6 en tres lanzamientos", real: 42.13, img: "https://commons.wikimedia.org/wiki/Special:FilePath/A%26A_Dice.jpg?width=600" },
+            { title: "Sacar al menos un 1 en tres lanzamientos", real: 42.13, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dice-0.svg?width=600" },
+            { title: "Sacar tres números iguales con tres dados", real: 2.78, img: "https://commons.wikimedia.org/wiki/Special:FilePath/Dungeons_%26_Dragons_Dice.jpg?width=600" },
+            { title: "Sacar tres números diferentes con tres dados", real: 55.56, img: "https://commons.wikimedia.org/wiki/Special:FilePath/A%26A_Dice.jpg?width=600" }
         ];
 
         let currentRound = 1;
@@ -334,17 +736,15 @@
         const diffValueEl = document.getElementById('diff-value');
         const pointsEarnedEl = document.getElementById('points-earned');
         const realValueDisplay = document.getElementById('real-value-display');
+        const resultHeaderText = document.getElementById('result-header-text');
+        const actualCardBox = document.getElementById('actual-card-box');
 
-        // Mapeo logarítmico para que el fader sea muy preciso cerca del 0% y más amplio al final
-        // Slider va de 0 a 1000
         function sliderToPercentage(val) {
             let v = parseInt(val);
             if (v <= 500) {
-                // De 0 a 500 en el slider mapea de 0% a 1% (permite muchísima precisión en lo ultra raro)
                 return (v / 500) * 1.0;
             } else {
-                // De 500 a 1000 mapea de 1% a 100% con progresión cuadrática/exponencial suave
-                let normalized = (v - 500) / 500; // 0 a 1
+                let normalized = (v - 500) / 500;
                 return 1.0 + Math.pow(normalized, 2) * 99.0;
             }
         }
@@ -365,26 +765,60 @@
         function initGame() {
             currentRound = 1;
             totalScore = 0;
-            // Mezclar eventos
             currentGameEvents = [...eventsDB].sort(() => Math.random() - 0.5);
             loadRound();
         }
 
         function loadRound() {
             if (currentRound > 5) {
-                // Fin del juego
                 gameInterface.style.display = "none";
                 resultInterface.style.display = "block";
-                document.querySelector('.result-diff').textContent = "¡Partida Finalizada!";
+                
+                // --- PANTALLA FINAL MEJORADA Y LLAMATIVA ---
+                let tierTitle = "";
+                let tierIcon = "";
+                
+                if (totalScore >= 4500) {
+                    tierTitle = "Top 1% — ¡Mente matemática legendaria!";
+                    tierIcon = "fa-crown";
+                } else if (totalScore >= 3500) {
+                    tierTitle = "Top 5% — ¡Estadista de élite!";
+                    tierIcon = "fa-fire";
+                } else if (totalScore >= 2500) {
+                    tierTitle = "Top 20% — ¡Gran intuición!";
+                    tierIcon = "fa-chart-line";
+                } else if (totalScore >= 1500) {
+                    tierTitle = "Top 50% — Jugador promedio";
+                    tierIcon = "fa-user";
+                } else {
+                    tierTitle = "Top 99% — ¡Aún puedes mejorar!";
+                    tierIcon = "fa-seedling";
+                }
+
+                resultHeaderText.style.display = "none";
                 diffValueEl.parentElement.style.display = "none";
-                pointsEarnedEl.textContent = `Puntuación Total: ${totalScore} pts`;
-                realValueDisplay.parentElement.innerHTML = `¡Has completado el reto de probabilidades de HowRare?!`;
+                
+                pointsEarnedEl.innerHTML = `
+                    <div class="final-screen-badge">
+                        <i class="fa-solid ${tierIcon}"></i>
+                        <h3>Clasificación Global</h3>
+                        <div class="player-tier">${tierTitle}</div>
+                    </div>
+                    <div class="final-score-big">${totalScore} PTS</div>
+                    <div class="final-subtitle">Puntuación total acumulada en 5 rondas</div>
+                `;
+                
+                actualCardBox.innerHTML = `¡Has completado el reto de probabilidades de <b>HowRare?</b> con éxito!`;
+                
                 nextBtn.textContent = "JUGAR OTRA VEZ";
                 nextBtn.onclick = initGame;
                 return;
             }
 
-            document.querySelector('.result-diff').parentElement.style.display = "block";
+            resultHeaderText.style.display = "block";
+            resultHeaderText.textContent = "Tu respuesta se desvió un:";
+            diffValueEl.parentElement.style.display = "block";
+            actualCardBox.style.display = "block";
             gameInterface.style.display = "block";
             resultInterface.style.display = "none";
             
@@ -395,7 +829,6 @@
             eventTitle.textContent = activeEvent.title;
             eventImg.src = activeEvent.img;
 
-            // Resetear slider al centro
             slider.value = 500;
             slider.dispatchEvent(new Event('input'));
         }
@@ -404,36 +837,33 @@
             let userGuess = sliderToPercentage(slider.value);
             let actual = activeEvent.real;
 
-            // Calcular diferencia porcentual absoluta
             let diff = Math.abs(userGuess - actual);
             
-            // Sistema de puntuación basado en cercanía (máximo 1000 puntos por ronda)
-            // Si aciertas clavado o casi, da 1000. Cae según la desviación relativa/absoluta.
             let maxPoints = 1000;
-            let errorRatio = diff / Math.max(actual, 1); 
             let roundPoints = Math.max(0, Math.round(maxPoints * (1 - Math.min(diff / 10, 1))));
             
-            // Ajuste extra fino si el evento es ultra raro y acierta el margen milimétrico
             if (diff <= 0.005 && actual < 0.1) {
                 roundPoints = 1000;
             }
 
             totalScore += roundPoints;
 
-            // Mostrar resultados
             gameInterface.style.display = "none";
             resultInterface.style.display = "block";
             
+            resultHeaderText.style.display = "block";
+            resultHeaderText.textContent = "Tu respuesta se desvió un:";
+            diffValueEl.parentElement.style.display = "block";
             diffValueEl.textContent = diff < 0.01 ? diff.toFixed(4) + "%" : diff.toFixed(2) + "%";
             pointsEarnedEl.textContent = `+${roundPoints} PUNTOS`;
-            realValueDisplay.textContent = `${actual}%`;
+            
+            actualCardBox.innerHTML = `El porcentaje real era: <br><b>${actual}%</b>`;
 
             currentRound++;
             nextBtn.textContent = "SIGUIENTE CASO";
             nextBtn.onclick = loadRound;
         });
 
-        // Iniciar al cargar la página
         initGame();
     </script>
 </body>
