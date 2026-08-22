@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCN3CB1RMZ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -21,22 +21,65 @@
     </script>
     <style>
         body {
-            background-color: #fcfbf9;
-            color: #2c2825;
+            background-color: #1c1c1c;
+            color: #ff0000;
             font-family: Georgia, Cambria, "Times New Roman", Times, serif;
         }
         .classic-card {
-            background: #ffffff;
-            border: 1px solid #e6dfd5;
-            box-shadow: 0 10px 30px -10px rgba(80, 70, 60, 0.08);
+            background: #ff0000;
+            border: 2px solid #ff0000;
+            box-shadow: 0 10px 30px -10px rgba(255, 0, 0, 0.3);
         }
         .classic-badge {
-            background-color: #f4efe6;
-            color: #735d43;
-            border: 1px solid #e0d5c1;
+            background-color: #ffffff;
+            color: #ff0000;
+            border: 1px solid #ffffff;
         }
+
+        /* ESTILOS PERSONALIZADOS PARA EL FADER Y SU THUMB CIRCULAR */
         input[type=range] {
-            accent-color: #9c7c51;
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        input[type=range]:focus {
+            outline: none;
+        }
+        /* Track para Chrome/Safari/Edge */
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            background: #ff4d4d;
+            border-radius: 9999px;
+        }
+        /* Thumb para Chrome/Safari/Edge (Imagen fader.png circular y blanca) */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 36px;
+            width: 36px;
+            border-radius: 50%;
+            background: #ffffff url('aimprice/fader.png') center/cover no-repeat;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            margin-top: -14px;
+        }
+        /* Track para Firefox */
+        input[type=range]::-moz-range-track {
+            width: 100%;
+            height: 8px;
+            background: #ff4d4d;
+            border-radius: 9999px;
+        }
+        /* Thumb para Firefox */
+        input[type=range]::-moz-range-thumb {
+            height: 36px;
+            width: 36px;
+            border-radius: 50%;
+            background: #ffffff url('aimprice/fader.png') center/cover no-repeat;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
     </style>
 </head>
@@ -44,10 +87,10 @@
 
     <!-- BOTÓN VOLVER Y SELECTOR DE IDIOMA -->
     <div class="w-full max-w-xl flex justify-between items-center mb-6 relative z-20">
-        <a href="../" id="txt-volver" class="classic-badge text-xs font-semibold py-1.5 px-4 rounded-xl border border-[#e0d5c1] hover:bg-[#eae2d5] transition no-underline">
+        <a href="../" id="txt-volver" class="classic-badge text-xs font-semibold py-1.5 px-4 rounded-xl hover:bg-[#fff0f0] transition no-underline shadow-sm">
             ← Back to Menu
         </a>
-        <select id="select-idioma" onchange="cambiarIdioma(this.value)" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] focus:outline-none cursor-pointer shadow-sm">
+        <select id="select-idioma" onchange="cambiarIdioma(this.value)" class="bg-[#ff0000] text-[#ffffff] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#ffffff] focus:outline-none cursor-pointer shadow-sm">
             <option value="en">🇬🇧 EN</option>
             <option value="es">🇪🇸 ES</option>
             <option value="fr">🇫🇷 FR</option>
@@ -57,95 +100,101 @@
 
     <!-- CABECERA DEL JUEGO -->
     <header id="header-juego" class="text-center max-w-xl relative z-10 mb-6">
-        <div class="inline-block classic-badge text-[11px] font-semibold py-1 px-4 rounded-full uppercase tracking-widest mb-2">
+        <div class="inline-block classic-badge text-[11px] font-semibold py-1 px-4 rounded-full uppercase tracking-widest mb-2 shadow-sm">
             🏷️ AimPrice Arena
         </div>
-        <h1 class="text-2xl md:text-3xl font-bold tracking-wide text-[#3a3228] uppercase">
-            Guess the <span class="text-[#9c7c51] italic font-normal">Exact Price</span>
+        <h1 class="text-2xl md:text-3xl font-bold tracking-wide text-[#ffffff] uppercase">
+            Guess the <span class="text-[#ffe6e6] italic font-normal">Exact Price</span>
         </h1>
-        <p id="txt-instruccion" class="text-xs text-[#6b6257] mt-1 font-serif">
-            Precise logarithmic fader and perfectly verified product catalog!
+        <p id="txt-instruccion" class="text-xs text-[#ffffff] mt-1 font-serif">
+            Precise logarithmic fader and strictly restricted scoring!
         </p>
     </header>
 
     <!-- CONTENEDOR PRINCIPAL DEL JUEGO -->
-    <main class="max-w-xl w-full classic-card rounded-2xl p-6 relative z-10 flex flex-col items-center">
+    <main class="max-w-xl w-full classic-card rounded-2xl p-6 relative z-10 flex flex-col items-center text-white">
         
         <!-- INTENTOS Y RONDA -->
-        <div id="panel-marcadores" class="w-full flex justify-between items-center text-xs font-bold text-[#735d43] mb-4 pb-3 border-b border-[#f0ebe1]">
+        <div id="panel-marcadores" class="w-full flex justify-between items-center text-xs font-bold text-[#ffffff] mb-4 pb-3 border-b border-[#ff4d4d]">
             <span id="txt-ronda">Round 1 / 5</span>
-            <span id="txt-intentos" class="bg-[#f4efe6] px-3 py-1 rounded-full border border-[#e0d5c1]">Attempts: 0</span>
+            <span id="txt-intentos" class="bg-[#ffffff] text-[#ff0000] px-3 py-1 rounded-full border border-[#ffffff]">Attempts: 0</span>
         </div>
 
-        <!-- IMAGEN DEL PRODUCTO -->
-        <div id="contenedor-imagen" class="w-full h-56 sm:h-64 bg-[#fcfbf9] rounded-xl border border-[#e6dfd5] flex items-center justify-center overflow-hidden mb-4 relative shadow-inner p-2">
-            <img id="producto-img" src="" alt="Product" class="max-h-full max-w-full object-contain transition duration-300">
+        <!-- CONTENEDOR DE IMAGEN ADAPTATIVO CON ESTADO DE CARGA -->
+        <div id="contenedor-imagen" class="w-56 h-56 sm:w-64 sm:h-64 bg-[#ffffff] rounded-xl border border-[#ffffff] flex items-center justify-center overflow-hidden mb-4 relative shadow-inner p-2 transition-all duration-300">
+            <!-- SPINNER DE CARGA -->
+            <div id="loading-spinner" class="absolute inset-0 flex flex-col items-center justify-center bg-[#ffffff] z-10">
+                <div class="w-8 h-8 border-4 border-[#ff0000] border-t-transparent rounded-full animate-spin mb-2"></div>
+                <span class="text-[10px] font-bold text-[#ff0000] uppercase tracking-wider">Loading...</span>
+            </div>
+            <!-- IMAGEN DEL PRODUCTO -->
+            <img id="producto-img" src="" alt="Product" class="max-h-56 sm:max-h-64 max-w-full object-contain opacity-0 transition-opacity duration-300" onload="imagenCargada()" onerror="imagenError()">
         </div>
 
         <!-- NOMBRE DEL PRODUCTO -->
-        <h2 id="producto-nombre" class="text-base sm:text-lg font-bold text-[#2c2825] text-center mb-6 px-2">
+        <h2 id="producto-nombre" class="text-base sm:text-lg font-bold text-[#ffffff] text-center mb-6 px-2">
             Loading product...
         </h2>
 
         <!-- ÁREA DE APUESTA -->
-        <div id="panel-apuesta" class="w-full bg-[#fcfbf9] p-4 rounded-xl border border-[#e6dfd5] mb-6">
+        <div id="panel-apuesta" class="w-full bg-[#cc0000] p-4 rounded-xl border border-[#ff4d4d] mb-6">
             <div class="text-center mb-2">
-                <span class="text-xs font-semibold text-[#8c8275] uppercase tracking-wider" id="txt-label-apuesta">Your Bid:</span>
-                <div id="precio-usuario-display" class="text-2xl sm:text-3xl font-bold text-[#3a3228] my-1">0 €</div>
+                <span class="text-xs font-semibold text-[#ffe6e6] uppercase tracking-wider" id="txt-label-apuesta">Your Bid:</span>
+                <div id="precio-usuario-display" class="text-2xl sm:text-3xl font-bold text-[#ffffff] my-1">0 €</div>
             </div>
 
             <!-- FADER LOGARÍTMICO PURO (0 a 1000) -->
-            <input type="range" id="fader-precio" min="0" max="1000" step="1" value="0" oninput="actualizarPrecioFader(this.value)" class="w-full h-2 bg-[#e6dfd5] rounded-lg appearance-none cursor-pointer mb-4">
+            <input type="range" id="fader-precio" min="0" max="1000" step="1" value="0" oninput="actualizarPrecioFader(this.value)" class="w-full mb-4 cursor-pointer">
 
-            <!-- BOTONES DE PRECISIÓN: 3 FILAS DE 4 COLUMNAS (SIMÉTRICOS +/- POR VALOR) -->
+            <!-- BOTONES DE PRECISIÓN: 3 FILAS DE 4 COLUMNAS -->
             <div class="grid grid-cols-4 gap-1.5 mb-1.5">
-                <button onclick="modificarPrecioRelativo(-100000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">-100k</button>
-                <button onclick="modificarPrecioRelativo(100000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">+100k</button>
-                <button onclick="modificarPrecioRelativo(-10000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">-10k</button>
-                <button onclick="modificarPrecioRelativo(10000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">+10k</button>
+                <button onclick="modificarPrecioRelativo(-100000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">-100k</button>
+                <button onclick="modificarPrecioRelativo(100000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">+100k</button>
+                <button onclick="modificarPrecioRelativo(-10000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">-10k</button>
+                <button onclick="modificarPrecioRelativo(10000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">+10k</button>
             </div>
             <div class="grid grid-cols-4 gap-1.5 mb-1.5">
-                <button onclick="modificarPrecioRelativo(-1000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">-1k</button>
-                <button onclick="modificarPrecioRelativo(1000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">+1k</button>
-                <button onclick="modificarPrecioRelativo(-100)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">-100</button>
-                <button onclick="modificarPrecioRelativo(100)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">+100</button>
+                <button onclick="modificarPrecioRelativo(-1000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">-1k</button>
+                <button onclick="modificarPrecioRelativo(1000)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">+1k</button>
+                <button onclick="modificarPrecioRelativo(-100)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">-100</button>
+                <button onclick="modificarPrecioRelativo(100)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">+100</button>
             </div>
             <div class="grid grid-cols-4 gap-1.5">
-                <button onclick="modificarPrecioRelativo(-10)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">-10</button>
-                <button onclick="modificarPrecioRelativo(10)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">+10</button>
-                <button onclick="modificarPrecioRelativo(-1)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">-1</button>
-                <button onclick="modificarPrecioRelativo(1)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#eae2d5] transition">+1</button>
+                <button onclick="modificarPrecioRelativo(-10)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">-10</button>
+                <button onclick="modificarPrecioRelativo(10)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">+10</button>
+                <button onclick="modificarPrecioRelativo(-1)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">-1</button>
+                <button onclick="modificarPrecioRelativo(1)" class="classic-badge text-xs font-bold py-2 rounded-lg hover:bg-[#fff0f0] transition shadow-sm">+1</button>
             </div>
         </div>
 
         <!-- BOTÓN DE COMPROBAR INTENTO -->
-        <button id="btn-comprobar" onclick="comprobarIntento()" class="w-full bg-[#3a3228] text-white text-xs font-bold uppercase tracking-widest py-3.5 rounded-xl hover:bg-[#52473c] transition shadow-md">
+        <button id="btn-comprobar" onclick="comprobarIntento()" class="w-full bg-[#ffffff] text-[#ff0000] text-xs font-bold uppercase tracking-widest py-3.5 rounded-xl hover:bg-[#fff0f0] transition shadow-md border border-[#ffffff]">
             Check Price!
         </button>
 
         <!-- PISTA (MÁS ALTO / MÁS BAJO) -->
-        <div id="pista-container" class="w-full mt-4 p-3 rounded-xl bg-[#f4efe6] border border-[#e0d5c1] text-center hidden">
-            <p id="txt-pista" class="text-xs font-bold text-[#735d43]"></p>
+        <div id="pista-container" class="w-full mt-4 p-3 rounded-xl bg-[#cc0000] border border-[#ff4d4d] text-center hidden">
+            <p id="txt-pista" class="text-xs font-bold text-[#ffffff]"></p>
         </div>
 
         <!-- PANTALLA DE VICTORIA DE RONDA -->
-        <div id="victoria-container" class="w-full mt-4 p-5 rounded-xl bg-[#f4efe6] border border-[#e0d5c1] text-center hidden">
-            <h3 id="txt-vic-titulo" class="text-sm font-bold text-[#3a3228] uppercase mb-1">¡Exacto!</h3>
+        <div id="victoria-container" class="w-full mt-4 p-5 rounded-xl bg-[#cc0000] border border-[#ff4d4d] text-center hidden">
+            <h3 id="txt-vic-titulo" class="text-sm font-bold text-[#ffffff] uppercase mb-1">¡Exacto!</h3>
             <div id="medalla-display" class="text-4xl my-2">🥇</div>
-            <p id="txt-vic-detalles" class="text-xs text-[#6b6257] mb-4 font-sans"></p>
-            <button id="btn-siguiente" onclick="siguienteRonda()" class="classic-badge text-xs font-bold py-2.5 px-6 rounded-xl uppercase tracking-wider hover:bg-[#eae2d5] transition">
+            <p id="txt-vic-detalles" class="text-xs text-[#ffffff] mb-4 font-sans"></p>
+            <button id="btn-siguiente" onclick="siguienteRonda()" class="classic-badge text-xs font-bold py-2.5 px-6 rounded-xl uppercase tracking-wider hover:bg-[#fff0f0] transition shadow-sm">
                 Next Product →
             </button>
         </div>
 
         <!-- PANTALLA DE RESUMEN FINAL -->
         <div id="resumen-final-container" class="w-full mt-2 hidden text-left font-sans">
-            <h3 class="text-center text-lg font-bold text-[#3a3228] uppercase mb-3">📊 Sofa Championship Summary</h3>
+            <h3 class="text-center text-lg font-bold text-[#ffffff] uppercase mb-3">📊 Sofa Championship Summary</h3>
             <div id="lista-resumen-rondas" class="space-y-2 mb-4"></div>
-            <div class="bg-[#f4efe6] p-4 rounded-xl border border-[#e0d5c1] text-center">
-                <div id="nota-final-display" class="text-2xl font-bold text-[#3a3228] mb-1">Final Score: 10 / 10</div>
-                <p id="veredicto-final-texto" class="text-xs text-[#6b6257] mb-4 font-serif"></p>
-                <button onclick="reiniciarJuego()" class="classic-badge text-xs font-bold py-2.5 px-6 rounded-xl uppercase tracking-wider hover:bg-[#eae2d5] transition">
+            <div class="bg-[#cc0000] p-4 rounded-xl border border-[#ff4d4d] text-center">
+                <div id="nota-final-display" class="text-2xl font-bold text-[#ffffff] mb-1">Final Score: 10 / 10</div>
+                <p id="veredicto-final-texto" class="text-xs text-[#ffffff] mb-4 font-serif"></p>
+                <button onclick="reiniciarJuego()" class="classic-badge text-xs font-bold py-2.5 px-6 rounded-xl uppercase tracking-wider hover:bg-[#fff0f0] transition shadow-sm">
                     Play Again 🔄
                 </button>
             </div>
@@ -154,7 +203,7 @@
     </main>
 
     <!-- PIE -->
-    <footer class="mt-8 text-center text-[11px] text-[#8c8275] font-sans">
+    <footer class="mt-8 text-center text-[11px] text-[#ffffff] font-sans">
         © 2026 I Can Do It Better Than Them. AimPrice Arena.
     </footer>
 
@@ -346,29 +395,35 @@
 
             document.getElementById('producto-nombre').textContent = p.nombre[lang] || p.nombre.en;
             
-            const imgEl = document.getElementById('producto-img');
-            imgEl.src = p.img;
-            imgEl.onerror = () => {
-                imgEl.src = "https://images.unsplash.com/photo-1547996160-81f3a37525de?w=600&auto=format&fit=crop&q=80";
-            };
-
-            const fader = document.getElementById('fader-precio');
-            fader.value = 0;
-            precioActualUsuario = 0;
-            intentosActuales = 0;
-            juegoTerminado = false;
+            // Restablecer el contenedor a tamaño fijo cuadrado mientras carga
+            const contenedorImg = document.getElementById('contenedor-imagen');
+            contenedorImg.className = "w-56 h-56 sm:w-64 sm:h-64 bg-[#ffffff] rounded-xl border border-[#ffffff] flex items-center justify-center overflow-hidden mb-4 relative shadow-inner p-2 transition-all duration-300";
             
-            actualizarDisplayPrecio();
-            actualizarMarcadoresUI();
+            const spinner = document.getElementById('loading-spinner');
+            spinner.classList.remove('hidden');
 
-            document.getElementById('panel-marcadores').classList.remove('hidden');
-            document.getElementById('contenedor-imagen').classList.remove('hidden');
-            document.getElementById('producto-nombre').classList.remove('hidden');
-            document.getElementById('panel-apuesta').classList.remove('hidden');
-            document.getElementById('pista-container').classList.add('hidden');
-            document.getElementById('victoria-container').classList.add('hidden');
-            document.getElementById('resumen-final-container').classList.add('hidden');
-            document.getElementById('btn-comprobar').classList.remove('hidden');
+            const imgEl = document.getElementById('producto-img');
+            imgEl.classList.remove('opacity-100');
+            imgEl.classList.add('opacity-0');
+            imgEl.src = p.img;
+        }
+
+        function imagenCargada() {
+            const spinner = document.getElementById('loading-spinner');
+            spinner.classList.add('hidden');
+
+            const imgEl = document.getElementById('producto-img');
+            imgEl.classList.remove('opacity-0');
+            imgEl.classList.add('opacity-100');
+
+            // Una vez cargada, quitar tamaño fijo para que se ajuste perfectamente a la imagen
+            const contenedorImg = document.getElementById('contenedor-imagen');
+            contenedorImg.className = "w-auto max-w-full bg-[#ffffff] rounded-xl border border-[#ffffff] flex items-center justify-center overflow-hidden mb-4 relative shadow-inner p-2 transition-all duration-300";
+        }
+
+        function imagenError() {
+            const imgEl = document.getElementById('producto-img');
+            imgEl.src = "https://images.unsplash.com/photo-1547996160-81f3a37525de?w=600&auto=format&fit=crop&q=80";
         }
 
         function actualizarPrecioFader(valFader) {
@@ -434,7 +489,7 @@
                 });
 
                 document.getElementById('medalla-display').textContent = medallaEmoji;
-                document.getElementById('txt-vic-detalles').innerHTML = `${t.resumenIntentos} <b>${intentosActuales}</b><br><span class="text-[#8a6840] font-semibold mt-1 inline-block">${textoMedallaExtra}</span> (Real: ${precioReal.toLocaleString()} €)`;
+                document.getElementById('txt-vic-detalles').innerHTML = `${t.resumenIntentos} <b>${intentosActuales}</b><br><span class="text-[#ffe6e6] font-semibold mt-1 inline-block">${textoMedallaExtra}</span> (Real: ${precioReal.toLocaleString()} €)`;
                 document.getElementById('victoria-container').classList.remove('hidden');
 
             } else if (precioActualUsuario < precioReal) {
@@ -461,18 +516,15 @@
             document.getElementById('victoria-container').classList.add('hidden');
             document.getElementById('header-juego').classList.add('hidden');
 
-            // REGLA RESTRICTIVA: Comprobamos si todas las rondas tienen 5 intentos o menos (Medalla de Oro 🥇)
             let todasOro = historialPartida.every(h => h.intentos <= 5);
             let nota = 0;
 
             if (todasOro) {
                 nota = 10;
             } else {
-                // Si no son todas de oro, calculamos una nota estricta basada en el promedio de intentos de las rondas
                 let totalIntentos = historialPartida.reduce((acc, curr) => acc + curr.intentos, 0);
                 let mediaIntentos = totalIntentos / 5;
                 
-                // Escala estricta: bajamos drásticamente por cada intento extra de media
                 nota = 9 - Math.floor((mediaIntentos - 5.01) / 3);
                 if (nota < 1) nota = 1;
             }
@@ -482,9 +534,9 @@
             listaEl.innerHTML = "";
             historialPartida.forEach((h, idx) => {
                 listaEl.innerHTML += `
-                    <div class="flex justify-between items-center text-xs bg-[#f9f7f2] p-2.5 rounded-lg border border-[#e6dfd5]">
-                        <span class="font-bold text-[#3a3228]">#${idx + 1} ${h.producto}</span>
-                        <span class="text-[#6b6257]">${h.intentos} attempts ${h.medalla}</span>
+                    <div class="flex justify-between items-center text-xs bg-[#cc0000] p-2.5 rounded-lg border border-[#ff4d4d] text-white">
+                        <span class="font-bold">#${idx + 1} ${h.producto}</span>
+                        <span class="text-[#ffe6e6]">${h.intentos} attempts ${h.medalla}</span>
                     </div>
                 `;
             });
