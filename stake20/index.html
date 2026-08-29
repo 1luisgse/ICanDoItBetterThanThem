@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCN3CB1RMZ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -14,11 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Stake20 | TV Sofa Challenge</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuente moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #fcfbf9;
-            color: #2c2825;
-            font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+            background-color: #0b0b0e;
+            color: #f3f4f6;
+            font-family: 'Outfit', sans-serif;
             overflow-x: hidden;
             touch-action: manipulation;
         }
@@ -26,15 +28,15 @@
             touch-action: manipulation;
         }
         .classic-card {
-            background: #ffffff;
-            border: 1px solid #e6dfd5;
-            box-shadow: 0 10px 30px -10px rgba(80, 70, 60, 0.08);
+            background: #141419;
+            border: 1px solid #272730;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
         }
         .classic-badge {
-            background-color: #f4efe6;
-            color: #735d43;
-            border: 1px solid #e0d5c1;
+            background-color: #1f1f28;
+            color: #ef4444;
+            border: 1px solid #3f3f4e;
         }
         .coin-icon {
             display: inline-flex;
@@ -42,13 +44,13 @@
             justify-content: center;
             width: 22px;
             height: 22px;
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-            border: 1px solid #d4af37;
+            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+            border: 1px solid #fca5a5;
             border-radius: 50%;
             font-size: 10px;
             font-weight: bold;
-            color: #744210;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(239,68,68,0.3);
             transition: transform 0.3s ease;
         }
         @keyframes flyCoin {
@@ -70,36 +72,36 @@
             display: inline-block;
         }
         @keyframes pulseGreen {
-            0%, 100% { border-color: #22c55e; background-color: #f0fdf4; }
-            50% { border-color: #16a34a; background-color: #dcfce7; }
+            0%, 100% { border-color: #22c55e; background-color: #052e16; }
+            50% { border-color: #16a34a; background-color: #064e3b; }
         }
         @keyframes pulseRed {
-            0%, 100% { border-color: #ef4444; background-color: #fef2f2; }
-            50% { border-color: #dc2626; background-color: #fee2e2; }
+            0%, 100% { border-color: #ef4444; background-color: #450a0a; }
+            50% { border-color: #dc2626; background-color: #7f1d1d; }
         }
         .resaltar-verde {
             animation: pulseGreen 0.8s ease infinite;
             border-color: #22c55e !important;
-            background-color: #f0fdf4 !important;
+            background-color: #052e16 !important;
         }
         .resaltar-rojo {
             animation: pulseRed 0.8s ease infinite;
             border-color: #ef4444 !important;
-            background-color: #fee2e2 !important;
+            background-color: #450a0a !important;
         }
         .card-resultado-exito {
             border: 2px solid #22c55e !important;
-            background: linear-gradient(to bottom, #ffffff, #f0fdf4);
+            background: linear-gradient(to bottom, #141419, #052e16);
             box-shadow: 0 15px 35px -10px rgba(34, 197, 94, 0.2);
         }
         .card-resultado-perfecto {
-            border: 2px solid #1e3a8a !important;
-            background: linear-gradient(to bottom, #ffffff, #eff6ff);
-            box-shadow: 0 15px 35px -10px rgba(30, 58, 138, 0.35);
+            border: 2px solid #3b82f6 !important;
+            background: linear-gradient(to bottom, #141419, #1e3a8a);
+            box-shadow: 0 15px 35px -10px rgba(59, 130, 246, 0.35);
         }
         .card-resultado-fallo {
             border: 2px solid #ef4444 !important;
-            background: linear-gradient(to bottom, #ffffff, #fef2f2);
+            background: linear-gradient(to bottom, #141419, #450a0a);
             box-shadow: 0 15px 35px -10px rgba(239, 68, 68, 0.2);
         }
     </style>
@@ -107,13 +109,13 @@
 <body class="min-h-screen flex flex-col items-center justify-between py-10 px-4 select-none relative">
 
     <div class="absolute top-6 left-6 z-20">
-        <a href="../" id="btn-volver" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] hover:bg-[#eae2d5] transition shadow-sm no-underline">
+        <a href="../" id="btn-volver" class="bg-[#1f1f28] text-gray-200 text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#3f3f4e] hover:bg-[#272730] hover:text-white transition shadow-sm no-underline">
             ← Home
         </a>
     </div>
 
     <div class="absolute top-6 right-6 z-25">
-        <select id="select-idioma" onchange="cambiarIdioma(this.value)" class="bg-[#f4efe6] text-[#735d43] text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#e0d5c1] focus:outline-none cursor-pointer shadow-sm">
+        <select id="select-idioma" onchange="cambiarIdioma(this.value)" class="bg-[#1f1f28] text-gray-200 text-xs font-semibold py-1.5 px-3 rounded-xl border border-[#3f3f4e] focus:outline-none cursor-pointer shadow-sm">
             <option value="en">🇬🇧 EN</option>
             <option value="es">🇪🇸 ES</option>
             <option value="fr">🇫🇷 FR</option>
@@ -122,135 +124,135 @@
     </div>
 
     <header class="w-full max-w-xl mx-auto text-center relative z-10 mb-6 mt-4">
-        <h1 class="text-2xl sm:text-3xl font-bold tracking-wide text-[#3a3228] uppercase">
-            Stake<span class="text-[#9c7c51] italic font-normal">20</span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wider text-white uppercase">
+            Stake<span class="text-red-500 italic font-bold">20</span>
         </h1>
-        <p id="txt-sub" class="text-xs sm:text-sm text-[#6b6257] font-serif mt-2">
+        <p id="txt-sub" class="text-xs sm:text-sm text-gray-400 mt-2">
             Distribute all your available chips across the options. No chips left behind!
         </p>
     </header>
 
-    <main id="main-container" class="max-w-xl w-full classic-card rounded-2xl p-6 sm:p-8 relative z-10 my-auto shadow-xl">
+    <main id="main-container" class="max-w-xl w-full classic-card rounded-2xl p-6 sm:p-8 relative z-10 my-auto shadow-2xl">
         
         <div id="pantalla-inicio" class="text-center py-6">
-            <div class="text-4xl mb-4">🪙</div>
-            <h2 id="txt-inicio-titulo" class="text-lg font-bold text-[#2c2825] uppercase tracking-wide mb-2">Are you ready to risk it all?</h2>
-            <p id="txt-inicio-desc" class="text-xs sm:text-sm text-[#6b6257] font-sans mb-6 leading-relaxed">
+            <div class="text-5xl mb-4 animate-pulse">🪙</div>
+            <h2 id="txt-inicio-titulo" class="text-xl font-bold text-white uppercase tracking-wider mb-2">Are you ready to risk it all?</h2>
+            <p id="txt-inicio-desc" class="text-xs sm:text-sm text-gray-400 mb-6 leading-relaxed">
                 You start with 20 chips. In each round, you must distribute your current chips across the 3 options. What you lose is gone forever!
             </p>
-            <button onpointerdown="comenzarPartida()" id="btn-comenzar" class="classic-badge text-xs font-bold py-3 px-8 rounded-xl uppercase tracking-widest hover:bg-[#eae2d5] transition cursor-pointer">
+            <button onpointerdown="comenzarPartida()" id="btn-comenzar" class="bg-red-600 hover:bg-red-700 text-white text-xs font-extrabold py-3.5 px-8 rounded-xl uppercase tracking-widest transition cursor-pointer shadow-lg shadow-red-900/40">
                 Start Game (20 Chips)
             </button>
         </div>
 
         <div id="pantalla-juego" class="hidden">
-            <div class="flex justify-between items-center pb-4 border-b border-[#f0ebe1] text-xs font-semibold mb-6">
-                <span id="label-pregunta-num" class="text-[#735d43] uppercase tracking-wider">Question 1 / 10</span>
-                <span id="contador-fichas-header" class="classic-badge px-3 py-1 rounded-full uppercase tracking-wider text-[11px] flex items-center gap-1.5 font-bold">
-                    🪙 <span id="val-fichas-disp">20</span> <span id="txt-chips-label">Fichas disponibles</span>
+            <div class="flex justify-between items-center pb-4 border-b border-[#272730] text-xs font-semibold mb-6">
+                <span id="label-pregunta-num" class="text-red-400 uppercase tracking-wider font-bold">Question 1 / 10</span>
+                <span id="contador-fichas-header" class="classic-badge px-3 py-1.5 rounded-full uppercase tracking-wider text-[11px] flex items-center gap-1.5 font-bold">
+                    🪙 <span id="val-fichas-disp" class="text-white">20</span> <span id="txt-chips-label">Fichas disponibles</span>
                 </span>
             </div>
 
             <div class="flex justify-between items-center mb-3">
-                <span id="badge-categoria" class="text-[10px] uppercase font-bold tracking-widest text-[#9c7c51] bg-[#f9f7f2] px-2.5 py-1 rounded-md border border-[#e6dfd5]">Category</span>
-                <span id="badge-dificultad" class="text-[10px] uppercase font-bold tracking-widest text-[#6b6257]">Normal</span>
+                <span id="badge-categoria" class="text-[10px] uppercase font-bold tracking-widest text-red-400 bg-[#1f1f28] px-2.5 py-1 rounded-md border border-[#3f3f4e]">Category</span>
+                <span id="badge-dificultad" class="text-[10px] uppercase font-bold tracking-widest text-gray-400">Normal</span>
             </div>
 
-            <h3 id="texto-pregunta" class="text-sm sm:text-base font-bold text-[#2c2825] mb-6 leading-relaxed">
+            <h3 id="texto-pregunta" class="text-sm sm:text-base font-bold text-white mb-6 leading-relaxed">
                 Pregunta...
             </h3>
 
             <div class="space-y-4 mb-6">
-                <div id="box-opcion-A" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
+                <div id="box-opcion-A" class="p-3.5 rounded-xl border border-[#272730] bg-[#1a1a22] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
                     <div class="flex items-center gap-3 w-full sm:w-1/2">
-                        <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">A</span>
-                        <span id="texto-opcion-a" class="text-xs sm:text-sm text-[#2c2825] font-sans">Respuesta A</span>
+                        <span class="font-extrabold text-xs text-red-500 px-2 py-1 bg-[#141419] rounded border border-[#3f3f4e]">A</span>
+                        <span id="texto-opcion-a" class="text-xs sm:text-sm text-gray-200">Respuesta A</span>
                     </div>
                     <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
                         <div id="monedas-visual-A" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
                         <div class="flex items-center gap-2">
-                            <button onpointerdown="modificarApuesta('A', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
-                            <span id="apuesta-a" class="w-6 text-center text-xs font-bold">0</span>
-                            <button onpointerdown="modificarApuesta('A', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
-                            <button onpointerdown="ponerTodas('A')" id="btn-max-a" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                            <button onpointerdown="modificarApuesta('A', -1)" class="w-7 h-7 bg-[#141419] border border-[#3f3f4e] text-gray-300 rounded-lg font-bold hover:bg-[#272730] transition">-</button>
+                            <span id="apuesta-a" class="w-6 text-center text-xs font-bold text-white">0</span>
+                            <button onpointerdown="modificarApuesta('A', 1)" class="w-7 h-7 bg-[#141419] border border-[#3f3f4e] text-gray-300 rounded-lg font-bold hover:bg-[#272730] transition">+</button>
+                            <button onpointerdown="ponerTodas('A')" id="btn-max-a" class="text-[10px] uppercase font-bold text-red-400 underline ml-1 cursor-pointer hover:text-red-300">Max</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="box-opcion-B" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
+                <div id="box-opcion-B" class="p-3.5 rounded-xl border border-[#272730] bg-[#1a1a22] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
                     <div class="flex items-center gap-3 w-full sm:w-1/2">
-                        <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">B</span>
-                        <span id="texto-opcion-b" class="text-xs sm:text-sm text-[#2c2825] font-sans">Respuesta B</span>
+                        <span class="font-extrabold text-xs text-red-500 px-2 py-1 bg-[#141419] rounded border border-[#3f3f4e]">B</span>
+                        <span id="texto-opcion-b" class="text-xs sm:text-sm text-gray-200">Respuesta B</span>
                     </div>
                     <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
                         <div id="monedas-visual-B" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
                         <div class="flex items-center gap-2">
-                            <button onpointerdown="modificarApuesta('B', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
-                            <span id="apuesta-b" class="w-6 text-center text-xs font-bold">0</span>
-                            <button onpointerdown="modificarApuesta('B', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
-                            <button onpointerdown="ponerTodas('B')" id="btn-max-b" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                            <button onpointerdown="modificarApuesta('B', -1)" class="w-7 h-7 bg-[#141419] border border-[#3f3f4e] text-gray-300 rounded-lg font-bold hover:bg-[#272730] transition">-</button>
+                            <span id="apuesta-b" class="w-6 text-center text-xs font-bold text-white">0</span>
+                            <button onpointerdown="modificarApuesta('B', 1)" class="w-7 h-7 bg-[#141419] border border-[#3f3f4e] text-gray-300 rounded-lg font-bold hover:bg-[#272730] transition">+</button>
+                            <button onpointerdown="ponerTodas('B')" id="btn-max-b" class="text-[10px] uppercase font-bold text-red-400 underline ml-1 cursor-pointer hover:text-red-300">Max</button>
                         </div>
                     </div>
                 </div>
 
-                <div id="box-opcion-C" class="p-3.5 rounded-xl border border-[#e6dfd5] bg-[#faf8f5] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
+                <div id="box-opcion-C" class="p-3.5 rounded-xl border border-[#272730] bg-[#1a1a22] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition">
                     <div class="flex items-center gap-3 w-full sm:w-1/2">
-                        <span class="font-bold text-xs text-[#9c7c51] px-2 py-1 bg-white rounded border border-[#e0d5c1]">C</span>
-                        <span id="texto-opcion-c" class="text-xs sm:text-sm text-[#2c2825] font-sans">Respuesta C</span>
+                        <span class="font-extrabold text-xs text-red-500 px-2 py-1 bg-[#141419] rounded border border-[#3f3f4e]">C</span>
+                        <span id="texto-opcion-c" class="text-xs sm:text-sm text-gray-200">Respuesta C</span>
                     </div>
                     <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-1/2">
                         <div id="monedas-visual-C" class="flex flex-wrap gap-1 max-w-[110px] items-center min-h-[24px] overflow-hidden"></div>
                         <div class="flex items-center gap-2">
-                            <button onpointerdown="modificarApuesta('C', -1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">-</button>
-                            <span id="apuesta-c" class="w-6 text-center text-xs font-bold">0</span>
-                            <button onpointerdown="modificarApuesta('C', 1)" class="w-7 h-7 bg-white border border-[#e0d5c1] text-[#735d43] rounded-lg font-bold hover:bg-[#f4efe6] transition">+</button>
-                            <button onpointerdown="ponerTodas('C')" id="btn-max-c" class="text-[10px] uppercase font-semibold text-[#735d43] underline ml-1 cursor-pointer">Max</button>
+                            <button onpointerdown="modificarApuesta('C', -1)" class="w-7 h-7 bg-[#141419] border border-[#3f3f4e] text-gray-300 rounded-lg font-bold hover:bg-[#272730] transition">-</button>
+                            <span id="apuesta-c" class="w-6 text-center text-xs font-bold text-white">0</span>
+                            <button onpointerdown="modificarApuesta('C', 1)" class="w-7 h-7 bg-[#141419] border border-[#3f3f4e] text-gray-300 rounded-lg font-bold hover:bg-[#272730] transition">+</button>
+                            <button onpointerdown="ponerTodas('C')" id="btn-max-c" class="text-[10px] uppercase font-bold text-red-400 underline ml-1 cursor-pointer hover:text-red-300">Max</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="aviso-reparto" class="text-center text-xs text-[#9c7c51] mb-6 font-bold font-sans">
+            <div id="aviso-reparto" class="text-center text-xs text-red-400 mb-6 font-bold">
                 ⚠️ <span id="txt-aviso-reparto">Debes repartir todas tus fichas disponibles antes de confirmar.</span>
             </div>
 
-            <button onpointerdown="manejarBotonPrincipal()" id="btn-confirmar" disabled class="w-full classic-badge text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest opacity-50 cursor-not-allowed transition">
+            <button onpointerdown="manejarBotonPrincipal()" id="btn-confirmar" disabled class="w-full bg-red-600 text-white text-xs font-extrabold py-3.5 rounded-xl uppercase tracking-widest opacity-50 cursor-not-allowed transition shadow-lg shadow-red-900/20">
                 Confirm Distribution
             </button>
         </div>
 
         <div id="pantalla-fin" class="hidden text-center py-2">
             <div id="fin-icono-trofeo" class="text-5xl mb-2 animate-bounce">🏆</div>
-            <h3 id="txt-fin-titulo" class="text-xl font-bold uppercase tracking-wider text-[#3a3228] mb-1">Game Over</h3>
+            <h3 id="txt-fin-titulo" class="text-xl font-extrabold uppercase tracking-wider text-white mb-1">Game Over</h3>
             
             <div id="contenedor-calificacion" class="my-3 py-2 px-4 rounded-xl border inline-block shadow-sm">
                 <p id="txt-calificacion" class="text-xs sm:text-sm font-bold uppercase tracking-wider m-0">Resultado</p>
             </div>
 
-            <div id="tarjeta-desglose-fin" class="bg-[#f9f7f2] border border-[#e6dfd5] rounded-2xl p-5 mb-6 space-y-3 font-sans text-xs shadow-inner">
-                <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
-                    <span id="txt-fin-finalchips" class="text-[#6b6257] font-semibold">Final Chips:</span>
-                    <strong id="fin-fichas-totales" class="text-sm font-bold px-2.5 py-0.5 rounded-md">13 / 20</strong>
+            <div id="tarjeta-desglose-fin" class="bg-[#1a1a22] border border-[#272730] rounded-2xl p-5 mb-6 space-y-3 text-xs shadow-inner">
+                <div class="flex justify-between items-center pb-2 border-b border-[#272730]">
+                    <span id="txt-fin-finalchips" class="text-gray-400 font-semibold">Final Chips:</span>
+                    <strong id="fin-fichas-totales" class="text-sm font-bold px-2.5 py-0.5 rounded-md text-white">13 / 20</strong>
                 </div>
-                <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
-                    <span id="txt-fin-lostchips" class="text-[#6b6257] font-semibold">Chips Lost:</span>
-                    <strong id="fin-fichas-perdidas" class="text-xs font-bold text-[#ef4444] px-2 py-0.5 bg-[#fee2e2] rounded-md">-7 🪙</strong>
+                <div class="flex justify-between items-center pb-2 border-b border-[#272730]">
+                    <span id="txt-fin-lostchips" class="text-gray-400 font-semibold">Chips Lost:</span>
+                    <strong id="fin-fichas-perdidas" class="text-xs font-bold text-red-400 px-2 py-0.5 bg-red-950/40 rounded-md">-7 🪙</strong>
                 </div>
-                <div class="flex justify-between items-center pb-2 border-b border-[#eedecc]">
-                    <span id="txt-fin-streak" class="text-[#6b6257] font-semibold">Best Streak:</span>
-                    <strong id="fin-mejor-racha" class="text-xs font-bold text-[#22c55e] px-2 py-0.5 bg-[#f0fdf4] rounded-md">3 consecutive</strong>
+                <div class="flex justify-between items-center pb-2 border-b border-[#272730]">
+                    <span id="txt-fin-streak" class="text-gray-400 font-semibold">Best Streak:</span>
+                    <strong id="fin-mejor-racha" class="text-xs font-bold text-green-400 px-2 py-0.5 bg-green-950/40 rounded-md">3 consecutive</strong>
                 </div>
                 <div class="flex justify-between items-center">
-                    <span id="txt-fin-accuracy" class="text-[#6b6257] font-semibold">Success Rate:</span>
-                    <strong id="fin-precision-porcentaje" class="text-xs font-bold px-2 py-0.5 rounded-md">65%</strong>
+                    <span id="txt-fin-accuracy" class="text-gray-400 font-semibold">Success Rate:</span>
+                    <strong id="fin-precision-porcentaje" class="text-xs font-bold px-2 py-0.5 rounded-md text-white">65%</strong>
                 </div>
             </div>
 
             <div class="space-y-2.5">
-                <button onpointerdown="reiniciarJuego()" id="btn-reiniciar" class="w-full bg-[#3a3228] text-white hover:bg-[#52473a] text-xs font-bold py-3.5 rounded-xl uppercase tracking-widest transition cursor-pointer shadow-md">
+                <button onpointerdown="reiniciarJuego()" id="btn-reiniciar" class="w-full bg-red-600 hover:bg-red-700 text-white text-xs font-extrabold py-3.5 rounded-xl uppercase tracking-widest transition cursor-pointer shadow-lg shadow-red-900/40">
                     Play Again & Beat Score
                 </button>
-                <a href="../" id="btn-volver-menu" class="w-full inline-block classic-badge text-xs font-bold py-3 rounded-xl uppercase tracking-widest hover:bg-[#eae2d5] transition no-underline">
+                <a href="../" id="btn-volver-menu" class="w-full inline-block bg-[#1f1f28] hover:bg-[#272730] text-gray-200 text-xs font-bold py-3 rounded-xl uppercase tracking-widest transition no-underline border border-[#3f3f4e]">
                     Back to Game Arena
                 </a>
             </div>
@@ -258,7 +260,7 @@
 
     </main>
 
-    <footer class="mt-8 text-center text-xs text-[#7c7265] font-sans">
+    <footer class="mt-8 text-center text-xs text-gray-500">
         <p>© 2026 icandoit. All rights reserved.</p>
     </footer>
 
@@ -852,183 +854,156 @@
         let preguntaActualIdx = 0;
         let preguntasPartida = [];
         let apuestas = { A: 0, B: 0, C: 0 };
-        let apuestasEnTransito = { A: 0, B: 0, C: 0 }; 
-        let opcionesActualesMezcladas = [];
-        let respuestaCorrectaLetra = 'A';
+        let fichasDisponibles = 20;
         let rachaActual = 0;
         let mejorRacha = 0;
-        let estadoFase = 'repartiendo'; 
+        let totalPreguntasRespondidas = 0;
+        let totalPreguntasAcertadas = 0;
+        let fichasPerdidasTotal = 0;
 
         const traducciones = {
             en: {
                 home: "← Home",
                 sub: "Distribute all your available chips across the options. No chips left behind!",
-                startBtn: "Start Game (20 Chips)",
-                startTitle: "Are you ready to risk it all?",
-                startDesc: "You start with 20 chips. In each round, you must distribute your current chips across the 3 options. What you lose is gone forever!",
-                chipsLabel: "Chips available",
-                avisoReparto: "You must distribute all available chips before confirming.",
-                confirmBtn: "Confirm Distribution",
-                nextBtn: "Next Question",
-                gameOverTitle: "Game Over",
-                finalChipsLbl: "Final Chips:",
-                lostChipsLbl: "Chips Lost:",
-                bestStreakLbl: "Best Streak:",
-                accuracyLbl: "Success Rate:",
-                playAgainBtn: "Play Again & Beat Score",
-                backMenuBtn: "Back to Game Arena",
-                diffs: { Easy: "Easy", Medium: "Medium", Hard: "Hard" },
-                ratings: {
-                    notBad: { text: "Not Bad", icon: "⚖️" },
-                    thatsOkay: { text: "That's Okay", icon: "👏" },
-                    wellDone: { text: "Well Done", icon: "🌟" },
-                    perfect: { text: "Perfect", icon: "👑" },
-                    eliminated: { text: "Game Over", icon: "💸" }
-                }
+                inicioTitulo: "Are you ready to risk it all?",
+                inicioDesc: "You start with 20 chips. In each round, you must distribute your current chips across the 3 options. What you lose is gone forever!",
+                btnComenzar: "Start Game (20 Chips)",
+                preguntaNum: "Question",
+                chipsLabel: "Available chips",
+                avisoReparto: "You must distribute all your available chips before confirming.",
+                btnConfirmar: "Confirm Distribution",
+                gameOver: "Game Over",
+                finalChips: "Final Chips:",
+                chipsLost: "Chips Lost:",
+                bestStreak: "Best Streak:",
+                successRate: "Success Rate:",
+                btnReiniciar: "Play Again & Beat Score",
+                btnVolverMenu: "Back to Game Arena",
+                max: "Max",
+                footer: "© 2026 icandoit. All rights reserved.",
+                dificultades: { Easy: "Easy", Medium: "Medium", Hard: "Hard" }
             },
             es: {
-                home: "← Inicio",
-                sub: "Distribuye todas tus fichas disponibles entre las opciones. ¡Lo que pierdas no vuelve!",
-                startBtn: "Comenzar Partida (20 Fichas)",
-                startTitle: "¿Estás listo para arriesgarlo todo?",
-                startDesc: "Empiezas con 20 fichas. En cada ronda debes repartir tus fichas actuales entre las 3 opciones. ¡Las que falles desaparecen!",
+                home: "← Volver",
+                sub: "Distribuye todas tus fichas disponibles entre las opciones. ¡No dejes ninguna atrás!",
+                inicioTitulo: "¿Estás listo para arriesgarlo todo?",
+                inicioDesc: "Empiezas con 20 fichas. En cada ronda, debes repartir tus fichas actuales entre las 3 opciones. ¡Lo que pierdas se irá para siempre!",
+                btnComenzar: "Empezar Juego (20 Fichas)",
+                preguntaNum: "Pregunta",
                 chipsLabel: "Fichas disponibles",
                 avisoReparto: "Debes repartir todas tus fichas disponibles antes de confirmar.",
-                confirmBtn: "Confirmar Distribución",
-                nextBtn: "Siguiente Pregunta",
-                gameOverTitle: "Game Over",
-                finalChipsLbl: "Fichas Finales:",
-                lostChipsLbl: "Fichas Perdidas:",
-                bestStreakLbl: "Mejor Racha:",
-                accuracyLbl: "Tasa de Acierto:",
-                playAgainBtn: "Jugar de Nuevo y Mejorar",
-                backMenuBtn: "Volver al Menú de Juegos",
-                diffs: { Easy: "Fácil", Medium: "Media", Hard: "Difícil" },
-                ratings: {
-                    notBad: { text: "No está mal", icon: "⚖️" },
-                    thatsOkay: { text: "Así se hace", icon: "👏" },
-                    wellDone: { text: "Bien hecho", icon: "🌟" },
-                    perfect: { text: "Perfecto", icon: "👑" },
-                    eliminated: { text: "Game Over", icon: "💸" }
-                }
+                btnConfirmar: "Confirmar Reparto",
+                gameOver: "Fin del Juego",
+                finalChips: "Fichas Finales:",
+                chipsLost: "Fichas Perdidas:",
+                bestStreak: "Mejor Racha:",
+                successRate: "Tasa de acierto:",
+                btnReiniciar: "Jugar de nuevo",
+                btnVolverMenu: "Volver a la Arena",
+                max: "Máx",
+                footer: "© 2026 icandoit. Todos los derechos reservados.",
+                dificultades: { Easy: "Fácil", Medium: "Normal", Hard: "Difícil" }
             },
             fr: {
                 home: "← Accueil",
-                sub: "Distribuez tous vos jetons disponibles. Ce qui est perdu ne revient pas !",
-                startBtn: "Commencer (20 Jetons)",
-                startTitle: "Êtes-vous prêt à tout risquer ?",
-                startDesc: "Vous commencez avec 20 jetons. Placez vos jetons sur les 3 options à chaque tour.",
+                sub: "Répartissez tous vos jetons disponibles entre les options. N'en laissez aucun derrière !",
+                inicioTitulo: "Êtes-vous prêt à tout risquer ?",
+                inicioDesc: "Vous commencez avec 20 jetons. À chaque tour, vous devez répartir vos jetons actuels entre les 3 options. Ce que vous perdez est définitivement perdu !",
+                btnComenzar: "Commencer (20 Jetons)",
+                preguntaNum: "Question",
                 chipsLabel: "Jetons disponibles",
-                avisoReparto: "Vous devez distribuer tous vos jetons disponibles avant de confirmer.",
-                confirmBtn: "Confirmer la distribution",
-                nextBtn: "Question Suivante",
-                gameOverTitle: "Game Over",
-                finalChipsLbl: "Jetons Finaux :",
-                lostChipsLbl: "Jetons Perdus :",
-                bestStreakLbl: "Meilleure Série :",
-                accuracyLbl: "Taux de Réussite :",
-                playAgainBtn: "Rejouer pour Améliorer",
-                backMenuBtn: "Retour aux Jeux",
-                diffs: { Easy: "Facile", Medium: "Moyen", Hard: "Difficile" },
-                ratings: {
-                    notBad: { text: "Pas mal", icon: "⚖️" },
-                    thatsOkay: { text: "C'est bien", icon: "👏" },
-                    wellDone: { text: "Bien joué", icon: "🌟" },
-                    perfect: { text: "Parfait", icon: "👑" },
-                    eliminated: { text: "Game Over", icon: "💸" }
-                }
+                avisoReparto: "Vous devez répartir tous vos jetons disponibles avant de confirmer.",
+                btnConfirmar: "Confirmer la répartition",
+                gameOver: "Partie Terminée",
+                finalChips: "Jetons finaux :",
+                chipsLost: "Jetons perdus :",
+                bestStreak: "Meilleure série :",
+                successRate: "Taux de réussite :",
+                btnReiniciar: "Rejouer",
+                btnVolverMenu: "Retour à l'Arena",
+                max: "Max",
+                footer: "© 2026 icandoit. Tous droits réservés.",
+                dificultades: { Easy: "Facile", Medium: "Moyen", Hard: "Difficile" }
             },
             de: {
                 home: "← Startseite",
-                sub: "Verteile all deine verfügbaren Chips. Was verloren geht, kommt nicht zurück!",
-                startBtn: "Spiel starten (20 Chips)",
-                startTitle: "Bist du bereit, alles zu riskieren?",
-                startDesc: "Du beginnst mit 20 Chips. Setze sie in jeder Runde auf die 3 Optionen auf.",
+                sub: "Verteilen Sie alle verfügbaren Chips auf die Optionen. Lassen Sie keine Chips übrig!",
+                inicioTitulo: "Sind Sie bereit, alles zu riskieren?",
+                inicioDesc: "Sie beginnen mit 20 Chips. In jeder Runde müssen Sie Ihre aktuellen Chips auf die 3 Optionen verteilen. Was Sie verlieren, ist für immer weg!",
+                btnComenzar: "Spiel starten (20 Chips)",
+                preguntaNum: "Frage",
                 chipsLabel: "Verfügbare Chips",
-                avisoReparto: "Du musst alle verfügbaren Chips verteilen, bevor du bestätigst.",
-                confirmBtn: "Verteilung bestätigen",
-                nextBtn: "Nächste Frage",
-                gameOverTitle: "Spiel Vorbei",
-                finalChipsLbl: "Endergebnis Chips:",
-                lostChipsLbl: "Verlorene Chips:",
-                bestStreakLbl: "Beste Serie:",
-                accuracyLbl: "Erfolgsquote:",
-                playAgainBtn: "Nochmal spielen & Rekord brechen",
-                backMenuBtn: "Zurück zur Spieleübersicht",
-                diffs: { Easy: "Einfach", Medium: "Mittel", Hard: "Schwer" },
-                ratings: {
-                    notBad: { text: "Nicht schlecht", icon: "⚖️" },
-                    thatsOkay: { text: "Das ist okay", icon: "👏" },
-                    wellDone: { text: "Gut gemacht", icon: "🌟" },
-                    perfect: { text: "Perfekt", icon: "👑" },
-                    eliminated: { text: "Game Over", icon: "💸" }
-                }
+                avisoReparto: "Sie müssen alle verfügbaren Chips verteilen, bevor Sie bestätigen.",
+                btnConfirmar: "Verteilung bestätigen",
+                gameOver: "Spiel Beendet",
+                finalChips: "Endergebnis Chips:",
+                chipsLost: "Verlorene Chips:",
+                bestStreak: "Beste Serie:",
+                successRate: "Erfolgsquote:",
+                btnReiniciar: "Nochmal spielen",
+                btnVolverMenu: "Zurück zur Arena",
+                max: "Max",
+                footer: "© 2026 icandoit. Alle Rechte vorbehalten.",
+                dificultades: { Easy: "Einfach", Medium: "Mittel", Hard: "Schwer" }
             }
         };
 
-        function cambiarIdioma(lang) {
-            idiomaActual = lang;
-            localStorage.setItem('whenwastimeline_idioma', lang);
-            document.getElementById('select-idioma').value = lang;
+        function cambiarIdioma(nuevoIdioma) {
+            idiomaActual = nuevoIdioma;
+            localStorage.setItem('whenwastimeline_idioma', nuevoIdioma);
+            document.getElementById('select-idioma').value = nuevoIdioma;
             actualizarTextosUI();
-            if (estadoFase === 'repartiendo' || estadoFase === 'resultado') {
-                actualizarTextosPreguntaActual();
+            if(preguntasPartida.length > 0 && preguntaActualIdx < preguntasPartida.length) {
+                mostrarPreguntaActual();
             }
         }
 
         function actualizarTextosUI() {
-            const t = traducciones[idiomaActual] || traducciones.en;
-            document.getElementById('btn-volver').textContent = t.home;
-            document.getElementById('txt-sub').textContent = t.sub;
-            document.getElementById('btn-comenzar').textContent = t.startBtn;
-            document.getElementById('txt-inicio-titulo').textContent = t.startTitle;
-            document.getElementById('txt-inicio-desc').textContent = t.startDesc;
-            document.getElementById('txt-chips-label').textContent = t.chipsLabel;
-            document.getElementById('txt-aviso-reparto').textContent = t.avisoReparto;
-            if (estadoFase === 'repartiendo') {
-                document.getElementById('btn-confirmar').textContent = t.confirmBtn;
-            } else {
-                document.getElementById('btn-confirmar').textContent = t.nextBtn;
-            }
-            document.getElementById('txt-fin-finalchips').textContent = t.finalChipsLbl;
-            document.getElementById('txt-fin-lostchips').textContent = t.lostChipsLbl;
-            document.getElementById('txt-fin-streak').textContent = t.bestStreakLbl;
-            document.getElementById('txt-fin-accuracy').textContent = t.accuracyLbl;
-            document.getElementById('btn-reiniciar').textContent = t.playAgainBtn;
-            document.getElementById('btn-volver-menu').textContent = t.backMenuBtn;
+            const t = traducciones[idiomaActual];
+            document.getElementById('btn-volver').innerText = t.home;
+            document.getElementById('txt-sub').innerText = t.sub;
+            document.getElementById('txt-inicio-titulo').innerText = t.inicioTitulo;
+            document.getElementById('txt-inicio-desc').innerText = t.inicioDesc;
+            document.getElementById('btn-comenzar').innerText = t.btnComenzar;
+            document.getElementById('txt-chips-label').innerText = t.chipsLabel;
+            document.getElementById('txt-aviso-reparto').innerText = t.avisoReparto;
+            document.getElementById('btn-confirmar').innerText = t.btnConfirmar;
+            document.getElementById('txt-fin-titulo').innerText = t.gameOver;
+            document.getElementById('txt-fin-finalchips').innerText = t.finalChips;
+            document.getElementById('txt-fin-lostchips').innerText = t.chipsLost;
+            document.getElementById('txt-fin-streak').innerText = t.bestStreak;
+            document.getElementById('txt-fin-accuracy').innerText = t.successRate;
+            document.getElementById('btn-reiniciar').innerText = t.btnReiniciar;
+            document.getElementById('btn-volver-menu').innerText = t.btnVolverMenu;
+            document.querySelector('footer p').innerText = t.footer;
+            document.getElementById('btn-max-a').innerText = t.max;
+            document.getElementById('btn-max-b').innerText = t.max;
+            document.getElementById('btn-max-c').innerText = t.max;
         }
 
-        function actualizarTextosPreguntaActual() {
-            if (preguntaActualIdx < 0 || preguntaActualIdx >= preguntasPartida.length) return;
-            const p = preguntasPartida[preguntaActualIdx];
-            const t = traducciones[idiomaActual] || traducciones.en;
-
-            document.getElementById('badge-categoria').textContent = p.cat[idiomaActual] || p.cat.en;
-            document.getElementById('badge-dificultad').textContent = t.diffs[p.diff] || p.diff;
-            document.getElementById('texto-pregunta').textContent = p.q[idiomaActual] || p.q.en;
-
-            document.getElementById('texto-opcion-a').textContent = opcionesActualesMezcladas[0].textoObj[idiomaActual] || opcionesActualesMezcladas[0].textoObj.en;
-            document.getElementById('texto-opcion-b').textContent = opcionesActualesMezcladas[1].textoObj[idiomaActual] || opcionesActualesMezcladas[1].textoObj.en;
-            document.getElementById('texto-opcion-c').textContent = opcionesActualesMezcladas[2].textoObj[idiomaActual] || opcionesActualesMezcladas[2].textoObj.en;
+        function barajarArreglo(array) {
+            let currentIndex = array.length, randomIndex;
+            while (currentIndex != 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+            }
+            return array;
         }
 
         function comenzarPartida() {
-            totalFichasRonda = 20;
+            let copiaBanco = JSON.parse(JSON.stringify(bancoPreguntas));
+            barajarArreglo(copiaBanco);
+            preguntasPartida = copiaBanco.slice(0, 10);
+            
             preguntaActualIdx = 0;
+            totalFichasRonda = 20;
+            fichasDisponibles = 20;
             rachaActual = 0;
             mejorRacha = 0;
-            estadoFase = 'repartiendo';
-            apuestasEnTransito = { A: 0, B: 0, C: 0 };
-            
-            let bancoCopia = [...bancoPreguntas];
-            for (let i = bancoCopia.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [bancoCopia[i], bancoCopia[j]] = [bancoCopia[j], bancoCopia[i]];
-            }
-            preguntasPartida = bancoCopia.slice(0, 10);
-
-            const mainCard = document.getElementById('main-container');
-            mainCard.classList.remove('card-resultado-exito', 'card-resultado-perfecto', 'card-resultado-fallo');
+            totalPreguntasRespondidas = 0;
+            totalPreguntasAcertadas = 0;
+            fichasPerdidasTotal = 0;
 
             document.getElementById('pantalla-inicio').classList.add('hidden');
             document.getElementById('pantalla-fin').classList.add('hidden');
@@ -1038,322 +1013,204 @@
         }
 
         function cargarPregunta() {
-            if (totalFichasRonda <= 0 || preguntaActualIdx >= 10) {
-                finalizarPartida();
-                return;
-            }
-
             apuestas = { A: 0, B: 0, C: 0 };
-            apuestasEnTransito = { A: 0, B: 0, C: 0 };
-            estadoFase = 'repartiendo';
+            fichasDisponibles = totalFichasRonda;
+
+            const pObj = preguntasPartida[preguntaActualIdx];
             
-            const p = preguntasPartida[preguntaActualIdx];
+            document.getElementById('label-pregunta-num').innerText = `${traducciones[idiomaActual].preguntaNum} ${preguntaActualIdx + 1} / 10`;
+            document.getElementById('badge-categoria').innerText = pObj.cat[idiomaActual] || pObj.cat.en;
+            
+            const diffTrad = traducciones[idiomaActual].dificultades[pObj.diff] || pObj.diff;
+            document.getElementById('badge-dificultad').innerText = diffTrad;
+            
+            document.getElementById('texto-pregunta').innerText = pObj.q[idiomaActual] || pObj.q.en;
 
-            document.getElementById('label-pregunta-num').textContent = `Question ${preguntaActualIdx + 1} / 10`;
+            let optsClon = pObj.opts.map((opt, idx) => ({ texto: opt[idiomaActual] || opt.en, originalIdx: idx }));
+            barajarArreglo(optsClon);
 
-            let opcionesObj = [
-                { textoObj: p.opts[0], esCorrecta: true },
-                { textoObj: p.opts[1], esCorrecta: false },
-                { textoObj: p.opts[2], esCorrecta: false }
-            ];
-            for (let i = opcionesObj.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [opcionesObj[i], opcionesObj[j]] = [opcionesObj[j], opcionesObj[i]];
-            }
+            pObj.optsMezcladas = optsClon;
+            pObj.nuevoCorrectoIdx = optsClon.findIndex(o => o.originalIdx === pObj.correct);
 
-            opcionesActualesMezcladas = opcionesObj;
+            document.getElementById('texto-opcion-a').innerText = optsClon[0].texto;
+            document.getElementById('texto-opcion-b').innerText = optsClon[1].texto;
+            document.getElementById('texto-opcion-c').innerText = optsClon[2].texto;
 
-            if (opcionesObj[0].esCorrecta) respuestaCorrectaLetra = 'A';
-            else if (opcionesObj[1].esCorrecta) respuestaCorrectaLetra = 'B';
-            else respuestaCorrectaLetra = 'C';
+            resetearEstilosCajas();
+            actualizarUIFichas();
+        }
 
-            actualizarTextosPreguntaActual();
-
-            ['A', 'B', 'C'].forEach(opt => {
-                const caja = document.getElementById(`box-opcion-${opt}`);
-                caja.classList.remove('resaltar-verde', 'resaltar-rojo');
+        function resetearEstilosCajas() {
+            ['A', 'B', 'C'].forEach(op => {
+                let box = document.getElementById(`box-opcion-${op}`);
+                box.className = "p-3.5 rounded-xl border border-[#272730] bg-[#1a1a22] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 transition";
             });
-
-            actualizarVistaApuestas();
         }
 
-        function animarMonedaTrayectoria(origenId, destinoId, alTerminar) {
-            const origenEl = document.getElementById(origenId);
-            const destinoEl = document.getElementById(destinoId);
-            if (!origenEl || !destinoEl) {
-                if (alTerminar) alTerminar();
-                return;
+        function modificarApuesta(op, delta) {
+            if (delta > 0 && fichasDisponibles >= delta) {
+                apuestas[op] += delta;
+                fichasDisponibles -= delta;
+            } else if (delta < 0 && apuestas[op] >= Math.abs(delta)) {
+                apuestas[op] += delta;
+                fichasDisponibles -= delta;
             }
-
-            const oRect = origenEl.getBoundingClientRect();
-            const dRect = destinoEl.getBoundingClientRect();
-
-            const moneda = document.createElement('div');
-            moneda.className = 'coin-icon flying-coin';
-            moneda.textContent = '🪙';
-            moneda.style.left = `${oRect.left + oRect.width / 2 - 11}px`;
-            moneda.style.top = `${oRect.top + oRect.height / 2 - 11}px`;
-
-            const deltaX = (dRect.left + dRect.width / 2) - (oRect.left + oRect.width / 2);
-            const deltaY = (dRect.top + dRect.height / 2) - (oRect.top + oRect.height / 2);
-
-            moneda.style.setProperty('--deltaX', `${deltaX}px`);
-            moneda.style.setProperty('--deltaY', `${deltaY}px`);
-
-            document.body.appendChild(moneda);
-
-            setTimeout(() => {
-                moneda.remove();
-                if (alTerminar) alTerminar();
-            }, 400);
+            actualizarUIFichas();
         }
 
-        function modificarApuesta(opcion, cambio) {
-            if (estadoFase !== 'repartiendo') return;
-
-            let totalApostadoReal = apuestas.A + apuestas.B + apuestas.C;
-            let totalEnTransitoReal = apuestasEnTransito.A + apuestasEnTransito.B + apuestasEnTransito.C;
-            let fichasDisponiblesReales = totalFichasRonda - (totalApostadoReal + totalEnTransitoReal);
-
-            if (cambio > 0 && fichasDisponiblesReales > 0) {
-                apuestasEnTransito[opcion]++;
-                actualizarVistaApuestas();
-
-                const contenedor = document.getElementById(`monedas-visual-${opcion}`);
-                const tempM = document.createElement('div');
-                tempM.className = 'coin-icon';
-                tempM.style.visibility = 'hidden';
-                tempM.textContent = '🪙';
-                contenedor.appendChild(tempM);
-                const tempId = 'temp-coin-dest-' + Math.random();
-                tempM.id = tempId;
-
-                animarMonedaTrayectoria('contador-fichas-header', tempId, () => {
-                    tempM.remove();
-                    apuestasEnTransito[opcion]--;
-                    apuestas[opcion]++;
-                    actualizarVistaApuestas();
-                });
-
-            } else if (cambio < 0 && apuestas[opcion] > 0) {
-                apuestas[opcion]--;
-                apuestasEnTransito[opcion]--; 
-                actualizarVistaApuestas();
-
-                const contenedor = document.getElementById(`monedas-visual-${opcion}`);
-                const ultimaMoneda = contenedor.lastElementChild;
-                if (ultimaMoneda) {
-                    const origenId = 'temp-coin-orig-' + Math.random();
-                    ultimaMoneda.id = origenId;
-
-                    animarMonedaTrayectoria(origenId, 'contador-fichas-header', () => {
-                        apuestasEnTransito[opcion]++; 
-                        actualizarVistaApuestas();
-                    });
-                } else {
-                    apuestasEnTransito[opcion]++;
-                    actualizarVistaApuestas();
-                }
+        function ponerTodas(op) {
+            if (fichasDisponibles > 0) {
+                apuestas[op] += fichasDisponibles;
+                fichasDisponibles = 0;
+                actualizarUIFichas();
             }
         }
 
-        function ponerTodas(opcion) {
-            if (estadoFase !== 'repartiendo') return;
+        function actualizarUIFichas() {
+            document.getElementById('val-fichas-disp').innerText = fichasDisponibles;
+            document.getElementById('apuesta-a').innerText = apuestas.A;
+            document.getElementById('apuesta-b').innerText = apuestas.B;
+            document.getElementById('apuesta-c').innerText = apuestas.C;
 
-            let totalApostadoReal = apuestas.A + apuestas.B + apuestas.C;
-            let totalEnTransitoReal = apuestasEnTransito.A + apuestasEnTransito.B + apuestasEnTransito.C;
-            let fichasDisponiblesReales = totalFichasRonda - (totalApostadoReal + totalEnTransitoReal);
+            actualizarMonedasVisuales('A', apuestas.A);
+            actualizarMonedasVisuales('B', apuestas.B);
+            actualizarMonedasVisuales('C', apuestas.C);
 
-            let totalApostadoOtras = Object.keys(apuestas)
-                .filter(k => k !== opcion)
-                .reduce((acc, k) => acc + apuestas[k] + apuestasEnTransito[k], 0);
-            
-            let cantidadAAdd = totalFichasRonda - totalApostadoOtras - apuestas[opcion];
-            
-            if (cantidadAAdd > 0) {
-                apuestasEnTransito[opcion] += cantidadAAdd;
-                actualizarVistaApuestas();
-
-                const contenedor = document.getElementById(`monedas-visual-${opcion}`);
-                let completados = 0;
-
-                for (let i = 0; i < cantidadAAdd; i++) {
-                    const tempM = document.createElement('div');
-                    tempM.className = 'coin-icon';
-                    tempM.style.visibility = 'hidden';
-                    tempM.textContent = '🪙';
-                    contenedor.appendChild(tempM);
-                    const tempId = 'temp-coin-max-' + Math.random() + '-' + i;
-                    tempM.id = tempId;
-
-                    setTimeout(() => {
-                        animarMonedaTrayectoria('contador-fichas-header', tempId, () => {
-                            tempM.remove();
-                            apuestasEnTransito[opcion]--;
-                            apuestas[opcion]++;
-                            completados++;
-                            if (completados === cantidadAAdd) {
-                                actualizarVistaApuestas();
-                            }
-                        });
-                    }, i * 60);
-                }
-            }
-        }
-
-        function actualizarVistaApuestas() {
-            if (estadoFase !== 'repartiendo') return;
-
-            let totalApostado = apuestas.A + apuestas.B + apuestas.C;
-            let totalEnTransito = apuestasEnTransito.A + apuestasEnTransito.B + apuestasEnTransito.C;
-            let fichasDisponibles = totalFichasRonda - (totalApostado + totalEnTransito);
-
-            if (fichasDisponibles < 0) fichasDisponibles = 0;
-
-            document.getElementById('apuesta-a').textContent = apuestas.A;
-            document.getElementById('apuesta-b').textContent = apuestas.B;
-            document.getElementById('apuesta-c').textContent = apuestas.C;
-            
-            document.getElementById('val-fichas-disp').textContent = fichasDisponibles;
-
-            ['A', 'B', 'C'].forEach(opt => {
-                const contenedor = document.getElementById(`monedas-visual-${opt}`);
-                contenedor.innerHTML = '';
-                for (let i = 0; i < apuestas[opt]; i++) {
-                    const m = document.createElement('div');
-                    m.className = 'coin-icon';
-                    m.textContent = '🪙';
-                    contenedor.appendChild(m);
-                }
-            });
-
-            const btnConf = document.getElementById('btn-confirmar');
+            const btnConfirmar = document.getElementById('btn-confirmar');
             const aviso = document.getElementById('aviso-reparto');
-            if (fichasDisponibles === 0 && totalApostado > 0 && totalEnTransito === 0) {
-                btnConf.disabled = false;
-                btnConf.classList.remove('opacity-50', 'cursor-not-allowed');
+
+            if (fichasDisponibles === 0 && totalFichasRonda > 0) {
+                btnConfirmar.disabled = false;
+                btnConfirmar.classList.remove('opacity-50', 'cursor-not-allowed');
                 aviso.classList.add('hidden');
             } else {
-                btnConf.disabled = true;
-                btnConf.classList.add('opacity-50', 'cursor-not-allowed');
+                btnConfirmar.disabled = true;
+                btnConfirmar.classList.add('opacity-50', 'cursor-not-allowed');
                 aviso.classList.remove('hidden');
             }
         }
 
-        function manejarBotonPrincipal() {
-            if (estadoFase === 'repartiendo') {
-                estadoFase = 'resultado';
-
-                let fichasCorrectasApostadas = apuestas[respuestaCorrectaLetra];
-
-                ['A', 'B', 'C'].forEach(opt => {
-                    const caja = document.getElementById(`box-opcion-${opt}`);
-                    const contenedorMonedas = document.getElementById(`monedas-visual-${opt}`);
-
-                    if (opt === respuestaCorrectaLetra) {
-                        caja.classList.add('resaltar-verde');
-                    } else {
-                        caja.classList.add('resaltar-rojo');
-                        if (apuestas[opt] > 0) {
-                            const monedasHijas = contenedorMonedas.children;
-                            Array.from(monedasHijas).forEach((m, idx) => {
-                                m.classList.add('falling-coin-item');
-                                m.style.animationDelay = `${idx * 0.05}s`;
-                            });
-                        }
-                    }
-                });
-
-                if (fichasCorrectasApostadas > 0) {
-                    rachaActual++;
-                    if (rachaActual > mejorRacha) mejorRacha = rachaActual;
-                } else {
-                    rachaActual = 0;
-                }
-
-                totalFichasRonda = fichasCorrectasApostadas;
-
-                const t = traducciones[idiomaActual] || traducciones.en;
-                const btnConf = document.getElementById('btn-confirmar');
-                btnConf.textContent = t.nextBtn;
-                btnConf.disabled = false;
-                btnConf.classList.remove('opacity-50', 'cursor-not-allowed');
-                document.getElementById('aviso-reparto').classList.add('hidden');
-
-            } else {
-                preguntaActualIdx++;
-                if (totalFichasRonda <= 0 || preguntaActualIdx >= 10) {
-                    finalizarPartida();
-                } else {
-                    cargarPregunta();
-                }
+        function actualizarMonedasVisuales(op, cantidad) {
+            let contenedor = document.getElementById(`monedas-visual-${op}`);
+            contenedor.innerHTML = '';
+            let mostrarCount = Math.min(cantidad, 12);
+            for (let i = 0; i < mostrarCount; i++) {
+                let span = document.createElement('span');
+                span.className = 'coin-icon';
+                span.innerText = '🪙';
+                contenedor.appendChild(span);
             }
+            if (cantidad > 12) {
+                let mas = document.createElement('span');
+                mas.className = 'text-[10px] font-bold text-gray-400 ml-1';
+                mas.innerText = `+${cantidad - 12}`;
+                contenedor.appendChild(mas);
+            }
+        }
+
+        function manejarBotonPrincipal() {
+            const btn = document.getElementById('btn-confirmar');
+            if(btn.disabled) return;
+            evaluarRespuesta();
+        }
+
+        function evaluarRespuesta() {
+            const pObj = preguntasPartida[preguntaActualIdx];
+            const correctoIdx = pObj.nuevoCorrectoIdx;
+            const letras = ['A', 'B', 'C'];
+            const letraCorrecta = letras[correctoIdx];
+
+            totalPreguntasRespondidas++;
+
+            let fichasGanadas = 0;
+            let perdioAlgo = false;
+
+            letras.forEach((letra, idx) => {
+                let box = document.getElementById(`box-opcion-${letra}`);
+                if (idx === correctoIdx) {
+                    box.classList.add('resaltar-verde');
+                    fichasGanadas += apuestas[letra];
+                } else {
+                    box.classList.add('resaltar-rojo');
+                    if (apuestas[letra] > 0) {
+                        perdioAlgo = true;
+                        fichasPerdidasTotal += apuestas[letra];
+                    }
+                }
+            });
+
+            if (apuestas[letraCorrecta] > 0 && !perdioAlgo) {
+                totalPreguntasAcertadas++;
+                rachaActual++;
+                if (rachaActual > mejorRacha) mejorRacha = rachaActual;
+            } else {
+                rachaActual = 0;
+            }
+
+            totalFichasRonda = fichasGanadas;
+
+            document.getElementById('btn-confirmar').disabled = true;
+            document.getElementById('btn-confirmar').classList.add('opacity-50', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                preguntaActualIdx++;
+                if (preguntaActualIdx < preguntasPartida.length && totalFichasRonda > 0) {
+                    cargarPregunta();
+                } else {
+                    finalizarPartida();
+                }
+            }, 2500);
         }
 
         function finalizarPartida() {
             document.getElementById('pantalla-juego').classList.add('hidden');
             document.getElementById('pantalla-fin').classList.remove('hidden');
 
-            let fichasPerdidas = 20 - totalFichasRonda;
-            let porcentajePrecision = Math.round((totalFichasRonda / 20) * 100);
+            document.getElementById('fin-fichas-totales').innerText = `${totalFichasRonda} / 20`;
+            document.getElementById('fin-fichas-perdidas').innerText = `-${fichasPerdidasTotal} 🪙`;
+            document.getElementById('fin-mejor-racha').innerText = `${mejorRacha} consecutive`;
+            
+            let porcentaje = totalPreguntasRespondidas > 0 ? Math.round((totalPreguntasAcertadas / totalPreguntasRespondidas) * 100) : 0;
+            document.getElementById('fin-precision-porcentaje').innerText = `${porcentaje}%`;
 
-            document.getElementById('fin-fichas-totales').textContent = `${totalFichasRonda} / 20 🪙`;
-            document.getElementById('fin-fichas-perdidas').textContent = `-${fichasPerdidas} 🪙`;
-            document.getElementById('fin-mejor-racha').textContent = `${mejorRacha} streak`;
-            document.getElementById('fin-precision-porcentaje').textContent = `${porcentajePrecision}%`;
+            let contenedorCal = document.getElementById('contenedor-calificacion');
+            let txtCal = document.getElementById('txt-calificacion');
+            let tarjetaFin = document.getElementById('tarjeta-desglose-fin');
+            let trofeo = document.getElementById('fin-icono-trofeo');
 
-            const mainCard = document.getElementById('main-container');
-            const badgeCalif = document.getElementById('contenedor-calificacion');
-            const txtCalif = document.getElementById('txt-calificacion');
-            const iconoTrofeo = document.getElementById('fin-icono-trofeo');
-            const badgeFichas = document.getElementById('fin-fichas-totales');
-            const txtFinTitulo = document.getElementById('txt-fin-titulo');
+            tarjetaFin.className = "bg-[#1a1a22] border border-[#272730] rounded-2xl p-5 mb-6 space-y-3 font-sans text-xs shadow-inner";
 
-            mainCard.classList.remove('card-resultado-exito', 'card-resultado-perfecto', 'card-resultado-fallo');
-
-            let califKey = "notBad";
-            const t = traducciones[idiomaActual] || traducciones.en;
-            const ratings = t.ratings;
-            txtFinTitulo.textContent = "Score Summary";
-
-            if (totalFichasRonda <= 0) {
-                califKey = "eliminated";
-                txtFinTitulo.textContent = "Game Over";
-                mainCard.classList.add('card-resultado-fallo');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#ef4444] bg-[#fef2f2] text-[#dc2626] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#dc2626] bg-[#fef2f2] px-2.5 py-0.5 rounded-md border border-[#ef4444]";
-            } else if (totalFichasRonda === 20) {
-                califKey = "perfect";
-                mainCard.classList.add('card-resultado-perfecto');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#1e3a8a] bg-[#eff6ff] text-[#1e3a8a] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#1e3a8a] bg-[#eff6ff] px-2.5 py-0.5 rounded-md border border-[#1e3a8a]";
-            } else if (totalFichasRonda >= 14) {
-                califKey = "wellDone";
-                mainCard.classList.add('card-resultado-exito');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#22c55e] bg-[#f0fdf4] text-[#16a34a] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#16a34a] bg-[#f0fdf4] px-2.5 py-0.5 rounded-md border border-[#22c55e]";
-            } else if (totalFichasRonda >= 8) {
-                califKey = "thatsOkay";
-                mainCard.classList.add('card-resultado-exito');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#84cc16] bg-[#f7fee7] text-[#65a30d] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#65a30d] bg-[#f7fee7] px-2.5 py-0.5 rounded-md border border-[#84cc16]";
+            if (totalFichasRonda >= 18) {
+                trofeo.innerText = "👑";
+                contenedorCal.className = "my-3 py-2 px-4 rounded-xl border border-blue-500 bg-blue-950/40 inline-block shadow-sm";
+                txtCal.innerText = idiomaActual === 'es' ? "¡Mente brillante / Legendario!" : "Brilliant mind / Legendary!";
+                txtCal.className = "text-xs sm:text-sm font-extrabold uppercase tracking-wider text-blue-400 m-0";
+                tarjetaFin.classList.add('card-resultado-perfecto');
+            } else if (totalFichasRonda >= 10) {
+                trofeo.innerText = "🏆";
+                contenedorCal.className = "my-3 py-2 px-4 rounded-xl border border-green-500 bg-green-950/40 inline-block shadow-sm";
+                txtCal.innerText = idiomaActual === 'es' ? "¡Gran estratega del sofá!" : "Great sofa strategist!";
+                txtCal.className = "text-xs sm:text-sm font-extrabold uppercase tracking-wider text-green-400 m-0";
+                tarjetaFin.classList.add('card-resultado-exito');
+            } else if (totalFichasRonda > 0) {
+                trofeo.innerText = "🪙";
+                contenedorCal.className = "my-3 py-2 px-4 rounded-xl border border-yellow-500 bg-yellow-950/40 inline-block shadow-sm";
+                txtCal.innerText = idiomaActual === 'es' ? "¡Superviviente apurado!" : "Narrow survivor!";
+                txtCal.className = "text-xs sm:text-sm font-extrabold uppercase tracking-wider text-yellow-400 m-0";
             } else {
-                califKey = "notBad";
-                mainCard.classList.add('card-resultado-exito');
-                badgeCalif.className = "my-3 py-2 px-4 rounded-xl border border-[#eab308] bg-[#fefce8] text-[#ca8a04] inline-block shadow-sm";
-                badgeFichas.className = "text-sm font-bold text-[#ca8a04] bg-[#fefce8] px-2.5 py-0.5 rounded-md border border-[#eab308]";
+                trofeo.innerText = "💀";
+                contenedorCal.className = "my-3 py-2 px-4 rounded-xl border border-red-500 bg-red-950/40 inline-block shadow-sm";
+                txtCal.innerText = idiomaActual === 'es' ? "¡Bancarrota total!" : "Total Bankruptcy!";
+                txtCal.className = "text-xs sm:text-sm font-extrabold uppercase tracking-wider text-red-400 m-0";
+                tarjetaFin.classList.add('card-resultado-fallo');
             }
-
-            const dataRating = ratings[califKey];
-            txtCalif.textContent = `${dataRating.icon} ${dataRating.text}`;
-            iconoTrofeo.textContent = dataRating.icon;
         }
 
         function reiniciarJuego() {
             comenzarPartida();
         }
 
-        window.onload = () => {
+        window.onload = function() {
             document.getElementById('select-idioma').value = idiomaActual;
             actualizarTextosUI();
         };
